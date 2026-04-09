@@ -56,7 +56,7 @@ log = logging.getLogger("generate_questions")
 QUESTIONS_DIR = Path(__file__).parent.parent / "data" / "questions"
 QUESTIONS_DIR.mkdir(parents=True, exist_ok=True)
 
-DEFAULT_MODEL_OLLAMA    = "qwen3:4b"
+DEFAULT_MODEL_OLLAMA    = "qwen3.5:4b"
 DEFAULT_MODEL_ANTHROPIC = "claude-haiku-4-5-20251001"
 
 PROMPT_TEMPLATE = """\
