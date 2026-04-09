@@ -70,25 +70,25 @@ if !errorlevel! neq 0 (
 )
 echo [OK]    Dependencies installed.
 
-:: ── Token check — env var takes priority (Railway / CI), .env for local ───────
-if defined DISCORD_TOKEN (
-    echo [OK]    DISCORD_TOKEN found in environment.
-    goto :token_ok
-)
+@REM :: ── Token check — env var takes priority (Railway / CI), .env for local ───────
+@REM if defined DISCORD_TOKEN (
+@REM     echo [OK]    DISCORD_TOKEN found in environment.
+@REM     goto :token_ok
+@REM )
 
-if not exist "%ROOT%.env" (
-    echo [ERROR] .env not found and DISCORD_TOKEN env var is not set.
-    echo         Copy .env.example to .env and set DISCORD_TOKEN.
-    exit /b 1
-)
+@REM if not exist "%ROOT%.env" (
+@REM     echo [ERROR] .env not found and DISCORD_TOKEN env var is not set.
+@REM     echo         Copy .env.example to .env and set DISCORD_TOKEN.
+@REM     exit /b 1
+@REM )
 
-findstr /r "^DISCORD_TOKEN=." "%ROOT%.env" >nul 2>&1
-if !errorlevel! neq 0 (
-    echo [ERROR] DISCORD_TOKEN is empty in .env!
-    echo         Open .env and paste your bot token.
-    exit /b 1
-)
-echo [OK]    DISCORD_TOKEN found in .env.
+@REM findstr /r "^DISCORD_TOKEN=." "%ROOT%.env" >nul 2>&1
+@REM if !errorlevel! neq 0 (
+@REM     echo [ERROR] DISCORD_TOKEN is empty in .env!
+@REM     echo         Open .env and paste your bot token.
+@REM     exit /b 1
+@REM )
+@REM echo [OK]    DISCORD_TOKEN found in .env.
 
 :token_ok
 
