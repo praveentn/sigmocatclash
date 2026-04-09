@@ -70,9 +70,14 @@ if !errorlevel! neq 0 (
 )
 echo [OK]    Dependencies installed.
 
-:: ── .env check ────────────────────────────────────────────────
+:: ── Token check — env var takes priority (Railway / CI), .env for local ───────
+if defined DISCORD_TOKEN (
+    echo [OK]    DISCORD_TOKEN found in environment.
+    goto :token_ok
+)
+
 if not exist "%ROOT%.env" (
-    echo [ERROR] .env not found.
+    echo [ERROR] .env not found and DISCORD_TOKEN env var is not set.
     echo         Copy .env.example to .env and set DISCORD_TOKEN.
     exit /b 1
 )
@@ -83,7 +88,9 @@ if !errorlevel! neq 0 (
     echo         Open .env and paste your bot token.
     exit /b 1
 )
-echo [OK]    DISCORD_TOKEN found.
+echo [OK]    DISCORD_TOKEN found in .env.
+
+:token_ok
 
 :: ── Launch ────────────────────────────────────────────────────
 echo.
