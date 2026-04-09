@@ -141,10 +141,4 @@ if __name__ == "__main__":
     bot.load_extension("cogs.game")
     log.info("Game cog loaded.")
 
-    try:
-        bot.run(TOKEN)
-    except discord.LoginFailure:
-        log.critical("Invalid DISCORD_TOKEN — check your .env file.")
-        sys.exit(1)
-    except KeyboardInterrupt:
-        log.info("Shutting down — goodbye!")
+
