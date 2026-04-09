@@ -138,6 +138,9 @@ celerybeat.pid
 .env
 .envrc
 .venv
+
+# Bot logs (keep the directory, not the files)
+logs/*.log
 env/
 venv/
 ENV/

@@ -1,0 +1,21 @@
+id,category,letter,answers,difficulty,time_limit,hint
+201,Chemical elements,C,Carbon|Calcium|Chlorine|Copper|Cobalt|Chromium|Caesium|Cerium|Curium,hard,60,Periodic table!
+202,Ancient civilisations,M,Mesopotamia|Maya|Minoan|Macedonian|Mauryan|Ming,hard,60,
+203,Types of logical fallacy,S,Straw man|Slippery slope|Special pleading|Survivorship bias|Sunk cost,hard,60,Debate class!
+204,Philosophical concepts,E,Existentialism|Empiricism|Epistemology|Ethics|Essentialism|Emergence,hard,60,
+205,Programming languages,H,Haskell|HTML|Hack|Harbour|HLASM,hard,60,
+206,Bones in the human body,F,Femur|Fibula|Frontal bone|Falx|Fornix,hard,60,Anatomy time!
+207,Classical music composers,B,Bach|Beethoven|Brahms|Bizet|Bartok|Bruckner|Berlioz,hard,60,
+208,World capitals,K,Kabul|Kathmandu|Kampala|Kingston|Kuala Lumpur|Kuwait City|Kigali,hard,60,
+209,Types of logical operator,X,XOR,hard,60,Computer science
+210,Scientific units,T,Tesla|Torr|Therm|Terawatt|Tonne,hard,60,Named after scientists!
+211,Architectural styles,B,Baroque|Byzantine|Brutalism|Bauhaus|Beaux-Arts,hard,60,
+212,Literary genres,M,Mystery|Magical realism|Metafiction|Memoir|Mythology,hard,60,
+213,Nobel Prize winners,F,Fleming|Feynman|Fermi|Faulkner|Frisch,hard,60,Any Nobel category!
+214,Types of cloud,C,Cumulus|Cumulonimbus|Cirrus|Cirrostratus|Cirrocumulus,hard,60,
+215,Mathematical concepts,T,Topology|Trigonometry|Theorem|Tensor|Transcendental,hard,60,
+216,Currencies,K,Krona|Krone|Kip|Kwanza|Koruna,hard,60,World currencies!
+217,Dinosaurs,P,Pterodactyl|Parasaurolophus|Pachycephalosaurus|Protoceratops|Psittacosaurus,hard,60,
+218,Types of logical gate,N,NAND|NOR|NOT,hard,10,Digital circuits
+219,Opera works,R,Rigoletto|Ring Cycle|Rosenkavalier|Romeo et Juliette,hard,60,Classical opera
+220,Economic theories,K,Keynesianism|Kinked demand|Kuznets curve,hard,60,

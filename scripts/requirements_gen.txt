@@ -1,0 +1,11 @@
+# Requirements for the question-generator script ONLY
+# Install with: pip install -r scripts/requirements_gen.txt
+
+# Anthropic API (skip if using Ollama only)
+anthropic>=0.40.0
+
+# Ollama Python client (skip if using Anthropic API only)
+ollama>=0.2.0
+
+# Already in main requirements.txt — listed here for completeness
+python-dotenv>=1.0.0

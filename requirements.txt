@@ -1,0 +1,5 @@
+py-cord>=2.6.0
+python-dotenv>=1.0.0
+aiohttp>=3.9.0
+# audioop was removed in Python 3.13 — this backport restores it for py-cord's voice player
+audioop-lts>=0.2.1
