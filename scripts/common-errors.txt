@@ -1,0 +1,25 @@
+
+1. File "C:\Users\prave\explore\sigmocatclash\.venv\Lib\site-packages\discord\player.py", line 29, in <module>
+    import audioop
+ModuleNotFoundError: No module named 'audioop'
+
+
+2.  File "C:\Users\prave\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\events.py", line 715, in get_event_loop
+    raise RuntimeError('There is no current event loop in thread %r.'
+                       % threading.current_thread().name)
+RuntimeError: There is no current event loop in thread 'MainThread'.
+
+3. 2026-04-09 19:45:27  [INFO    ]  discord.gateway: Shard ID None has connected to Gateway: ["gateway-prd-arm-us-east1-d-ftdk"....
+Ignoring exception in on_connect
+
+
+  File "C:\Users\prave\explore\sigmocatclash\.venv\Lib\site-packages\discord\bot.py", line 538, in register_commands
+    prefetched_commands = await self._bot.http.get_guild_commands(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self._bot.user.id, guild_id
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\prave\explore\sigmocatclash\.venv\Lib\site-packages\discord\http.py", line 368, in request
+    raise Forbidden(response, data)
+discord.errors.Forbidden: 403 Forbidden (error code: 50001): Missing Access
