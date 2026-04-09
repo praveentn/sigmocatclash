@@ -42,12 +42,6 @@ TOKEN    = os.getenv("DISCORD_TOKEN", "").strip()
 GUILD_ID = os.getenv("DISCORD_GUILD_ID", "").strip()
 PORT     = int(os.getenv("PORT", "8080"))
 
-if not TOKEN:
-    log.critical(
-        "DISCORD_TOKEN is not set!  "
-        "Copy .env.example → .env and paste your bot token."
-    )
-    sys.exit(1)
 
 debug_guilds = [int(GUILD_ID)] if GUILD_ID.isdigit() else None
 if debug_guilds:
