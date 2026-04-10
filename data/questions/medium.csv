@@ -99,3 +99,53 @@ id,category,letter,answers,difficulty,time_limit,hint
 198,Winter sports,B,Bobsled|Biathlon|Broom curling|Bandy|Backcountry skiing|Boardercross|Bullet sledding,medium,60,Sports typically played in cold or snowy conditions
 199,Famous painters,P,Picasso|Pollock|Pissarro|Perugino|Pontormo|Poussin|Peale|Petrov-Vodkin|Preti|Pannini,medium,60,Renowned artists known for their paintings
 200,Musical instruments,B,Bass guitar|Banjo|Bassoon|Bugle|Bongo drums|Balalaika|Baritone horn|Bodhrán|Bouzouki|Bell,medium,60,Instruments used to make music
+201,Countries in Europe,F,France|Finland|Faroe Islands|Flanders,medium,60,Think of European nations starting with F
+202,Countries in Africa,T,Tanzania|Togo|Tunisia|Tunisia|Tunisia,medium,60,
+203,Famous Scientists,E,Einstein|Edison|Euler|Eddington|Ehrlich|Eratosthenes|Empedocles,medium,60,Scientists whose last name starts with E
+204,Types of Pasta,P,Penne|Pappardelle|Paccheri|Perciatelli|Pizzoccheri|Pipe rigate|Pastina|Pillus,medium,60,Italian pasta shapes starting with P
+205,Musical Instruments,C,Cello|Clarinet|Cornet|Conga|Cowbell|Cittern|Celesta|Clavichord|Castanets|Chapman stick|Crumhorn,medium,60,Instruments of all kinds starting with C
+206,Board Games,T,Trivial Pursuit|Taboo|Ticket to Ride|Trouble|Tsuro|The Game of Life|Thunderbirds|Takenoko,medium,60,Classic and modern board games starting with T
+207,Movies Set in Space,G,Gravity|Guardians of the Galaxy|Galaxy Quest|Galaxis,medium,60,Films taking place in outer space starting with G
+208,Cooking Techniques,P,Poaching|Pan-frying|Pickling|Pressing|Pureeing|Parboiling|Proofing|Pounding|Plancha grilling,medium,60,Ways to prepare or cook food starting with P
+209,Things at an Airport,C,Check-in counter|Conveyor belt|Customs|Carousel|Cockpit|Crew|Cart|Canteen|Currency exchange|Corridor|Cafe,medium,60,Items or places you find at an airport starting with C
+210,Scientific Fields,C,Chemistry|Cosmology|Climatology|Cybernetics|Cardiology|Crystallography|Cytology|Criminology|Chronobiology,medium,60,Branches of science or study starting with C
+211,Geography Terms,M,Mountain|Marsh|Mesa|Moraine|Meander|Massif|Moor|Mudflat|Mangrove|Mouth,medium,60,Geographical features or landforms starting with M
+212,Types of Cheese,M,Mozzarella|Manchego|Muenster|Monterey Jack|Maasdam|Mimolette|Morbier|Mahon|Mascarpone,medium,60,Varieties of cheese starting with M
+213,TV Shows,H,House|Heroes|Homeland|How I Met Your Mother|Halt and Catch Fire|Hannibal|Hawaii Five-O|Hacks|Hawkeye|Hell's Kitchen,medium,60,Television series starting with H
+214,Famous Movies,D,Django Unchained|Die Hard|Dunkirk|Drive|Doctor Strange|Dune|Donnie Darko|District 9|Dirty Harry|Dead Poets Society,medium,60,Well-known films starting with D
+215,Dog Breeds,S,Samoyed|Shih Tzu|Siberian Husky|Saluki|Setter|Schnauzer|Shar Pei|Spaniel|Spitz|Sloughi|Schipperke,medium,60,Breeds of dog starting with S
+216,Things in a Science Lab,F,Flask|Forceps|Filter paper|Funnel|Fume hood|Fluid|Fluorescent light|Formulae chart|Freezer|Flow meter,medium,60,Equipment or items found in a science lab starting with F
+217,Types of Weather,S,Snow|Sleet|Storm|Sunshine|Showers|Squall|Smog|Sandstorm|Slush|Sprinkle,medium,60,Weather conditions or phenomena starting with S
+218,Winter Sports,F,Figure skating|Freestyle skiing|Four-man bobsled|Freeride snowboarding|Fat biking on snow,medium,60,Sports typically played or performed in winter starting with F
+219,Superheroes,B,Batman|Black Panther|Black Widow|Batgirl|Beast|Bishop|Blue Beetle|Booster Gold|Bumblebee|Banshee,medium,60,Comic book or movie superheroes starting with B
+220,Things at a Concert,T,Ticket|T-shirt|Turntable|Tour bus|Tambourine|Treble|Tripod|Trombone on stage|Tarp|Torch light,medium,60,Things you might see or use at a live concert starting with T
+221,Things in a Gym,D,Dumbbell|Deadlift bar|Dumbell rack|Drinking fountain|Dip bar|Dip station|Display screen|Door|Dumbell weights,medium,60,Equipment or objects found in a gym starting with D
+222,Social Media Platforms,F,Facebook|Flickr|Foursquare|Finsta|Flipboard,medium,60,Online social networks or platforms starting with F
+223,Famous Painters,C,Caravaggio|Cezanne|Constable|Courbet|Chagall|Cassatt|Claude Monet|Correggio,medium,60,Renowned painters starting with C
+224,Natural Disasters,F,Flood|Fire|Flash flood|Forest fire|Famine|Frost event|Funnel cloud,medium,60,Destructive natural events starting with F
+225,European Capitals,M,Madrid|Moscow|Minsk|Monaco|Malmö,medium,60,Capital cities of European countries starting with M
+226,Things in a Library,M,Magazine|Map|Manuscript|Microfiche|Monitor|Memoir|Manual|Microfilm reader|Mystery novel,medium,60,Items or things you find in a library starting with M
+227,Things in a Bathroom,M,Mirror|Mat|Mouthwash|Medicine cabinet|Moisture cream|Makeup|Mop|Mounting hook,medium,60,Objects or products found in a bathroom starting with M
+228,Famous Inventors,B,Bell|Baird|Babbage|Benz|Braille|Bessemer|Bunsen|Brothers Wright,medium,60,Inventors known by their last name starting with B
+229,Things in a Toolbox,S,Screwdriver|Saw|Sandpaper|Staple gun|Socket wrench|Square|Stud finder|Set screw|Safety goggles|Snips,medium,60,Tools or accessories found in a toolbox starting with S
+230,Dance Styles,B,Ballet|Breakdancing|Ballroom|Bachata|Bharatanatyam|Bolero|Burlesque|Belly dancing,medium,60,Types or styles of dance starting with B
+231,Types of Music Genre,B,Blues|Bluegrass|Baroque|Bossa nova|Bhangra|Big band|Bebop|Black metal|Britpop|Bubblegum pop,medium,60,Musical genres starting with B
+232,Video Game Consoles,N,Nintendo Switch|Nintendo 64|NES|Neo Geo,medium,60,Gaming consoles starting with N
+233,Famous Video Games,H,Halo|Hollow Knight|Horizon Zero Dawn|Half-Life|Hitman|Heavy Rain|Hotline Miami|Hunt Showdown|Heroes of the Storm,medium,60,Well-known video game titles starting with H
+234,Space-Related Things,N,Nebula|Neutron star|NASA|Navigation system|Night sky|Nucleus|Nova|Nozzle of a rocket,medium,60,Things related to space or astronomy starting with N
+235,Things in a Garden,R,Rose|Rake|Robin|Rockery|Root|Runner bean|Rosemary|Rain gauge|Rhubarb|Rock,medium,60,Things you find in a garden starting with R
+236,Things in a Hospital,B,Bed|Bandage|Blood pressure cuff|Biopsy needle|Basin|Blanket|Breathing mask|Blood bag|Bulletin board,medium,60,Items or places found in a hospital starting with B
+237,Things in a Movie Theater,S,Screen|Seat|Soda|Snacks|Subtitles|Sound system|Spotlight|Stairs|Surround sound speaker,medium,60,Things you find in a movie theater starting with S
+238,Things You Do on Vacation,E,Explore|Eat out|Excursion|Enjoy the beach|Experience culture|Exchange currency|Escape the city|Embark on hikes,medium,60,Activities or things you do on vacation starting with E
+239,Things in a Bedroom,L,Lamp|Linen|Locker|Luggage|Laundry basket|Ledger|Leather pillow|Light switch|Lace curtain,medium,60,Furniture or objects found in a bedroom starting with L
+240,Things in a Pharmacy,C,Cough syrup|Capsule|Cream|Cotton balls|Compress|Cold medicine|Crutches|Contraceptive|Clearasil,medium,60,Items sold or found in a pharmacy starting with C
+241,Things That Are Round,W,Wheel|Watch face|Wafer|Watermelon|Wedding ring|Wok|Wreath|Washer,medium,60,Circular or round objects starting with W
+242,Kitchen Appliances,B,Blender|Bread maker|Boiler|Broiler|Bar fridge|Bottle opener|Burner,medium,60,Appliances or gadgets found in a kitchen starting with B
+243,Animals with Spots,D,Dalmatian|Deer|Dotterel|Dace fish|Desert monitor|Dugong,medium,60,Animals that have spots on their body starting with D
+244,Countries in Europe,N,Norway|Netherlands|North Macedonia|Northern Ireland,medium,60,European countries starting with N
+245,Countries in Africa,S,Sudan|Somalia|Senegal|Sierra Leone|South Africa|South Sudan|Swaziland,medium,60,African nations starting with S
+246,Famous Scientists,G,Galileo|Gauss|Goodall|Geiger|Gell-Mann|Galvani|Galen,medium,60,Renowned scientists whose name starts with G
+247,Cooking Techniques,G,Grilling|Glazing|Gratinating|Garnishing|Grinding|Griddling|Grating,medium,60,Methods of preparing or cooking food starting with G
+248,Types of Music Genres,H,Hip-hop|House|Heavy metal|Hardcore|Highlife|Honky-tonk|Hymn|Hyperpop,medium,60,Music genres starting with H
+249,Countries in Europe,G,Germany|Greece|Georgia|Gibraltar|Guernsey,medium,60,Think of nations on the European continent
+250,Types of pasta,L,Linguine|Lasagne|Lasagna|Lumache|Linguini|Lanterne|Lagane|Lasagnette,medium,60,Italian noodle dishes

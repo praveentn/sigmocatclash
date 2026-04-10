@@ -99,3 +99,53 @@ id,category,letter,answers,difficulty,time_limit,hint
 98,Musical instruments,F,Flute|Fiddle|French horn|Flugelhorn|Fife|Fingerboard|Five-string banjo|Flageolet|Floor tom|Fretless bass,easy,60,Instruments you play in music
 99,Ocean creatures,O,Octopus|Oyster|Orca|Ocean sunfish|Oarfish|Olive sea snake|Opah|Orange roughy|Oystercatcher|Olive ridley turtle,easy,60,Creatures living in the sea
 100,Colors,R,Red|Rose|Ruby|Russet|Royal blue|Raspberry|Rust|Robin egg|Rosy brown|Rum raisin|Raw sienna|Rich black,easy,60,Shades and hues you might see in a crayon box
+101,Things in a kitchen,P,Pan|Pot|Plate|Peeler|Pitcher|Pantry|Pepper|Pasta|Potholder|Plastic wrap|Pressure cooker|Paper towel,easy,60,"Cooking tools, food, and storage items"
+102,Things in a kitchen,C,Cup|Colander|Cutting board|Can opener|Cupboard|Casserole dish|Canister|Coffee maker|Chopsticks|Cheese grater|Counter|Corkscrew,easy,60,"Tools, appliances, and storage"
+103,Animals,C,Cat|Cow|Camel|Cheetah|Chipmunk|Cobra|Crane|Crab|Crocodile|Coyote|Condor|Clam|Cricket,easy,60,Any animal that starts with this letter
+104,Animals,D,Dog|Deer|Duck|Dolphin|Donkey|Dragonfly|Dingo|Dove|Dodo|Dalmatian|Dugong|Dormouse,easy,60,Any animal that starts with this letter
+105,Things you wear,B,Belt|Boots|Blouse|Blazer|Beanie|Bow tie|Bikini|Boxer shorts|Beret|Bracelet|Bra|Backpack,easy,60,Clothing and accessories
+106,Things you wear,J,Jeans|Jacket|Jumper|Jersey|Jewelry|Joggers|Jodhpurs|Jumpsuit,easy,60,Clothing and accessories
+107,Fruits,A,Apple|Apricot|Avocado|Acai|Ackee|Asian pear,easy,60,Things that grow on trees or vines and are sweet
+108,Fruits,C,Cherry|Cantaloupe|Coconut|Clementine|Cranberry|Currant|Custard apple|Cactus fruit|Cape gooseberry,easy,60,Juicy and sweet natural snacks
+109,Vegetables,A,Artichoke|Asparagus|Arugula|Aubergine|Avocado|Amaranth,easy,60,Things you might find in a salad or side dish
+110,Vegetables,L,Lettuce|Leek|Lentil|Lima bean|Lotus root|Lambs lettuce,easy,60,Greens and other garden veggies
+111,Sports and games,F,Football|Frisbee|Fencing|Field hockey|Figure skating|Foosball|Flag football|Freestyle skiing|Fishing,easy,60,Outdoor and indoor activities
+112,Sports and games,T,Tennis|Tag|Triathlon|Table tennis|Tug of war|Track|Trampoline|Tee ball|Tetherball|Touch rugby,easy,60,Physical activities and fun games
+113,Things at school,C,Chalk|Chair|Calculator|Clock|Crayon|Clipboard|Cafeteria|Classroom|Compass|Colored pencils|Certificate,easy,60,Items and places you find at school
+114,Things at school,D,Desk|Dictionary|Drawing|Drama class|Diploma|Door|Drill|Detention,easy,60,Items and places you find at school
+115,Colors,O,Orange|Olive|Ochre|Onyx,easy,30,Shades and hues
+116,Colors,T,Turquoise|Teal|Tan|Taupe|Tomato red|Thistle,easy,60,Shades and hues
+117,Things at the beach,C,Crab|Coral|Coconut|Chair|Cooler|Clam|Cliff|Canopy|Catamaran|Castles made of sand,easy,60,What you see or bring to the beach
+118,Things at the beach,F,Fish|Flip flops|Frisbee|Foam|Flag|Fins|Floatie|Fishing rod|Flamingo float,easy,60,What you see or bring to the beach
+119,Things at a party,D,Decorations|Drinks|Disco ball|DJ|Dancing|Dessert|Dip|Dress|Door prizes,easy,60,Things you find or do at a party
+120,Things at a party,M,Music|Mic|Mocktail|Muffin|Masks|Memorabilia|Mints|Merch,easy,60,Things you find or do at a party
+121,Musical instruments,C,Cello|Clarinet|Cornet|Conga|Cymbal|Castanets|Clavichord|Contrabass|Cowbell,easy,60,Instruments you play in a band or orchestra
+122,Musical instruments,D,Drum|Dulcimer|Didgeridoo|Double bass|Djembe,easy,60,Instruments you play in a band or orchestra
+123,Jobs and professions,C,Chef|Carpenter|Cashier|Coach|Chemist|Counselor|Courier|Custodian|Cartoonist|Conductor|Cop,easy,60,What people do for work
+124,Jobs and professions,B,Baker|Barber|Builder|Banker|Bus driver|Biologist|Butcher|Babysitter|Bartender|Bodyguard|Botanist,easy,60,What people do for work
+125,Things in a bathroom,B,Brush|Bath mat|Body wash|Basin|Bathtub|Bins|Bobby pin|Blush,easy,60,Items you find in a bathroom
+126,Things in a bathroom,C,Comb|Cotton balls|Cup|Cabinet|Conditioner|Curtain|Cleaner|Cologne,easy,60,Items you find in a bathroom
+127,Things in a bedroom,C,Clock|Curtains|Closet|Chair|Carpet|Comforter|Clothes|Candle|Coat hanger,easy,60,Items you find in a bedroom
+128,Things in a bedroom,L,Lamp|Linen|Laundry basket|Lights,easy,30,Items you find in a bedroom
+129,Things in a living room,B,Bookshelf|Blinds|Blanket|Bookcase|Blu-ray player|Basket|Beanbag,easy,60,Items you find in a living room
+130,Things in a living room,P,Pillow|Plant|Painting|Photo frame|Projector|Puzzle|Pouffe,easy,60,Items you find in a living room
+131,Things in a garden,B,Bush|Bee|Bird feeder|Bench|Bulb|Border|Bark|Birdbath|Butterfly,easy,60,Things you might see or use in a garden
+132,Things in a garden,H,Hedge|Hoe|Hose|Herbs|Honeybee|Hydrangea,easy,60,Things you might see or use in a garden
+133,Ocean creatures,C,Crab|Clownfish|Clam|Cod|Coral|Cuttlefish|Conch|Cowfish|Catshark,easy,60,Animals that live in the sea
+134,Ocean creatures,M,Manatee|Manta ray|Mackerel|Moray eel|Mantis shrimp|Marlin|Moonfish|Mullet,easy,60,Animals that live in the sea
+135,Things that fly,P,Plane|Parrot|Pelican|Parachute|Pigeon|Pterodactyl|Penguin (no)|Paper airplane|Paraglider|Pollen,easy,60,Things that move through the air
+136,Things that fly,R,Rocket|Robin|Raven|Remote-controlled plane|Rooster (briefly),easy,60,Things that move through the air
+137,Foods you eat for breakfast,C,Cereal|Croissant|Coffee cake|Crepes|Cottage cheese|Cantaloupe|Cinnamon roll|Crackers,easy,60,Morning meal foods
+138,Foods you eat for breakfast,M,Muffin|Milk|Melon|Mushrooms|Marmalade|Maple syrup|Muesli,easy,60,Morning meal foods
+139,Foods you eat for lunch,B,Burger|BLT|Burrito|Bread|Bean soup|Bagel|Baguette|Bologna sandwich|Broccoli soup,easy,60,Midday meal foods
+140,Foods you eat for lunch,W,Wrap|Waffle|Wedge salad|White rice|Wonton soup,easy,60,Midday meal foods
+141,Things you drink,L,Lemonade|Latte|Lime juice|Lychee juice|Lassi|Lager,easy,60,Beverages of all kinds
+142,Things you drink,T,Tea|Tonic water|Tomato juice|Tropical punch|Turmeric latte,easy,60,Beverages of all kinds
+143,Things made of wood,D,Door|Desk|Drawer|Drum|Deck|Doll|Dominos|Dugout canoe,easy,60,Objects crafted from wood
+144,Things made of wood,S,Shelf|Stool|Spoon|Staircase|Shed|Sled|Signpost|Sawhorse,easy,60,Objects crafted from wood
+145,Common pets,B,Bunny|Bird|Beagle|Budgie|Bulldog|Ball python|Box turtle,easy,60,Animals people keep at home
+146,Common pets,F,Fish|Ferret|Frog|French bulldog,easy,60,Animals people keep at home
+147,Countries in Europe,A,Austria|Albania|Andorra|Armenia|Azerbaijan,easy,60,Nations on the European continent
+148,Dance styles,H,Hip hop|Hula|Highland dance|Hora,easy,60,Ways people dance around the world
+149,Desserts and sweet treats,P,Pie|Pudding|Panna cotta|Praline|Pavlova|Peach cobbler|Profiterole|Peppermint candy,easy,60,Sweet foods and treats
+150,Things you wear,T,T-shirt|Tuxedo|Tights|Tie|Trousers|Trainers|Turban|Tank top|Tutu|Trench coat|Tracksuit,easy,60,Clothing and accessories
