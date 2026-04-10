@@ -16,6 +16,7 @@ from typing import Optional
 import discord
 from discord.ext import commands
 
+from game.leaderboard import get_overall_leaderboard, record_game_results
 from game.questions import get_random_questions
 from game.session import GameSession
 
@@ -205,20 +206,64 @@ class SigmoCatClash(commands.Cog):
                 "2️⃣  Type words from that category starting with that letter in chat.\n"
                 "3️⃣  Use **commas** for multiple answers at once: `Bowl, Bread, Butter`\n"
                 "4️⃣  **First** to claim a valid answer gets **+1 point** — no one else can take it!\n"
-                "5️⃣  Answers must start with the given letter and be at least 3 characters.\n"
+                "5️⃣  Answers must be real items in the category (typos are OK — fuzzy matching is on!).\n"
                 "6️⃣  You have **60 seconds** — be quick!\n\n"
                 "**Scoring:**\n"
                 "• +1 pt per unique valid answer you claim first\n"
+                "• ✅ Reaction = claimed! Points added.\n"
                 "• 🔁 Reaction = already taken by someone else\n"
-                "• ✅ Reaction = claimed! Points added.\n\n"
+                "• ❌ Reaction = not a valid answer for this category\n\n"
                 "**Commands:**\n"
                 "`/play [rounds] [difficulty]` — Start a game\n"
-                "`/scores` — Check live leaderboard\n"
+                "`/scores` — Check live game scores\n"
+                "`/leaderboard` — Show all-time leaderboard\n"
                 "`/stop` — End game (host / mods only)\n"
                 "`/rules` — Show this message"
             ),
             color=COL_START,
         )
+        await ctx.respond(embed=embed)
+
+    # ──────────────────────────────────────────────────────────────────────────
+
+    @commands.slash_command(name="leaderboard", description="🏆 Show the all-time overall leaderboard")
+    async def leaderboard(self, ctx: discord.ApplicationContext) -> None:
+        entries = get_overall_leaderboard(top_n=15)
+
+        if not entries:
+            embed = discord.Embed(
+                title="🏆  SigmoCatClash — All-Time Leaderboard",
+                description="No completed games yet! Use `/play` to start one.",
+                color=COL_FINAL,
+            )
+            await ctx.respond(embed=embed)
+            return
+
+        lines = []
+        prev_score: Optional[int] = None
+        rank = 0
+        for i, entry in enumerate(entries):
+            score = entry.get("total_score", 0)
+            if score != prev_score:
+                rank = i + 1
+                prev_score = score
+            medal = MEDALS[rank - 1] if rank <= 3 else f"**#{rank}**"
+            name = entry.get("name", "Unknown")
+            games = entry.get("games_played", 0)
+            best = entry.get("best_score", 0)
+            suffix = "pt" if score == 1 else "pts"
+            game_str = "game" if games == 1 else "games"
+            lines.append(
+                f"{medal} **{name}** — {score} {suffix} total"
+                f"  *(best: {best} pts, {games} {game_str})*"
+            )
+
+        embed = discord.Embed(
+            title="🏆  SigmoCatClash — All-Time Leaderboard",
+            description="\n".join(lines),
+            color=COL_FINAL,
+        )
+        embed.set_footer(text="Scores accumulate across all completed games  •  Play again with /play!")
         await ctx.respond(embed=embed)
 
     # ── Message listener ───────────────────────────────────────────────────────
@@ -473,6 +518,13 @@ class SigmoCatClash(commands.Cog):
     # ──────────────────────────────────────────────────────────────────────────
 
     async def _post_final(self, channel: discord.TextChannel, session: GameSession) -> None:
+        # Persist scores to the overall leaderboard before displaying
+        player_scores = {
+            pid: (session.player_names.get(pid, "Unknown"), score)
+            for pid, score in session.scores.items()
+        }
+        record_game_results(player_scores)
+
         lb = session.get_leaderboard()
 
         embed = discord.Embed(title="🏆  SIGMOCATCLASH — GAME OVER!", color=COL_FINAL)

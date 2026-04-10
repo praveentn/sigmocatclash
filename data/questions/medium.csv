@@ -1,21 +1,101 @@
 id,category,letter,answers,difficulty,time_limit,hint
-101,Things at an airport,B,Baggage|Boarding pass|Backpack|Baggage carousel|Bench|Bar|Bookstore|Belt|Boarding gate,medium,60,
+101,Things at an airport,B,Baggage|Boarding pass|Backpack|Baggage carousel|Bench|Bar|Bookstore|Belt|Boarding gate|Baggage claim,medium,60,
 102,Countries in Asia,I,India|Indonesia|Iran|Iraq|Israel,medium,60,
-103,Types of pasta,S,Spaghetti|Shells|Strozzapreti|Spirali|Stelline|Sacchetini,medium,60,
-104,Famous scientists,N,Newton|Nobel|Nightingale|Nash|Niels Bohr,medium,60,
-105,Things in a hospital,S,Stethoscope|Scalpel|Syringe|Stretcher|Surgeon|Splint|Scrubs|Scan|Suture|Saline,medium,60,
-106,Cooking methods,B,Baking|Broiling|Braising|Blanching|Browning|Boiling|Barbecuing|Basting,medium,60,Think techniques!
-107,Types of music genre,R,Rock|Rap|Reggae|Rhythm and blues|Rumba|Rockabilly|Ragtime,medium,60,
-108,Things in a gym,T,Treadmill|Towel|Timer|Track|Trainer|Tights,medium,60,
-109,Board games,S,Scrabble|Sorry|Stratego|Sequence|Scotland Yard|Splendor,medium,60,
-110,Famous movies,T,Titanic|Toy Story|The Lion King|The Godfather|The Matrix|Thor|Top Gun,medium,60,
-111,Things you do on vacation,S,Swimming|Sightseeing|Shopping|Snorkeling|Sunbathing|Skiing|Sailing|Surfing,medium,60,
-112,Superheroes,S,Spider-Man|Superman|Storm|Scarlet Witch|She-Hulk|Silver Surfer|Shazam|Sentry,medium,60,
-113,Things that are round,B,Ball|Balloon|Button|Bagel|Bowl|Bubble|Badge|Barrel,medium,60,
-114,Space-related things,S,Star|Sun|Saturn|Satellite|Spacecraft|Supernova|Solar system|Shooting star,medium,60,
-115,Types of cheese,B,Brie|Bleu|Bocconcini|Burrata|Beaufort|Brick,medium,60,
-116,Things in a toolbox,W,Wrench|Wire|Washer|Wood glue|Wire cutters|Wire stripper,medium,60,
-117,Animals with spots,L,Leopard|Ladybug|Lynx|Llama|Lizard,medium,60,
-118,TV shows,F,Friends|Family Guy|Frasier|Flash|Firefly|Fringe|Futurama,medium,60,
-119,Famous painters,R,Rembrandt|Raphael|Rubens|Renoir|Rivera|Rousseau,medium,60,
-120,Things in a bedroom,P,Pillow|Pillowtop|Poster|Plant|Phone|Pajamas|Pen,medium,60,
+103,Types of pasta,S,Spaghetti|Shells|Strozzapreti|Spirali|Stelline|Sacchetini|Stracci|Stringozzi,medium,60,
+104,Famous scientists,N,Newton|Nobel|Nightingale|Nash|Niels Bohr|Noether|Nikola Tesla|Neil deGrasse Tyson,medium,60,
+105,Things in a hospital,S,Stethoscope|Scalpel|Syringe|Stretcher|Surgeon|Splint|Scrubs|Scan|Suture|Saline|Specialist|Scan machine,medium,60,
+106,Cooking methods,B,Baking|Broiling|Braising|Blanching|Browning|Boiling|Barbecuing|Basting|Butterflying,medium,60,Think techniques!
+107,Types of music genre,R,Rock|Rap|Reggae|Rhythm and blues|Rumba|Rockabilly|Ragtime|Rave|R&B,medium,60,
+108,Things in a gym,T,Treadmill|Towel|Timer|Track|Trainer|Tights|Training bench|Tape,medium,60,
+109,Board games,S,Scrabble|Sorry|Stratego|Sequence|Scotland Yard|Splendor|Settlers of Catan,medium,60,
+110,Famous movies,T,Titanic|Toy Story|The Lion King|The Godfather|The Matrix|Thor|Top Gun|Tenet|Terminator,medium,60,
+111,Things you do on vacation,S,Swimming|Sightseeing|Shopping|Snorkeling|Sunbathing|Skiing|Sailing|Surfing|Sampling food,medium,60,
+112,Superheroes,S,Spider-Man|Superman|Storm|Scarlet Witch|She-Hulk|Silver Surfer|Shazam|Sentry|Squirrel Girl,medium,60,
+113,Things that are round,B,Ball|Balloon|Button|Bagel|Bowl|Bubble|Badge|Barrel|Bearing,medium,60,
+114,Space-related things,S,Star|Sun|Saturn|Satellite|Spacecraft|Supernova|Solar system|Shooting star|Solar wind|Sunspot,medium,60,
+115,Types of cheese,B,Brie|Bleu|Bocconcini|Burrata|Beaufort|Brick|Brillat-Savarin,medium,60,
+116,Things in a toolbox,W,Wrench|Wire|Washer|Wood glue|Wire cutters|Wire stripper|Work gloves,medium,60,
+117,Animals with spots,L,Leopard|Ladybug|Lynx|Llama|Lizard|Liger|Loon,medium,60,
+118,TV shows,F,Friends|Family Guy|Frasier|Flash|Firefly|Fringe|Futurama|Fallout|Fleabag,medium,60,
+119,Famous painters,R,Rembrandt|Raphael|Rubens|Renoir|Rivera|Rousseau|Rockwell,medium,60,
+120,Things in a bedroom,P,Pillow|Pillowtop|Poster|Plant|Phone|Pajamas|Pen|Picture frame|Perfume,medium,60,
+121,Dance styles,S,Salsa|Samba|Swing|Street dance|Shuffle|Sirtaki|Slow dance|Stomping,medium,60,
+122,Things in a bathroom,T,Toilet|Towel|Tap|Toothbrush|Toothpaste|Tile|Tub|Toiletries|Toilet paper,medium,60,
+123,Famous inventors,E,Edison|Einstein|Eratosthenes|Euler|Elias Howe|Engelbart,medium,60,Think tech and science!
+124,European capitals,L,London|Lisbon|Ljubljana|Luxembourg City,medium,60,
+125,Winter sports,S,Skiing|Snowboarding|Skating|Slalom|Sledding|Speed skating|Ski jumping|Snowshoeing,medium,60,
+126,Dog breeds,G,Golden Retriever|German Shepherd|Greyhound|Goldendoodle|Great Dane|Great Pyrenees|Galgo,medium,60,
+127,Natural disasters,E,Earthquake|Eruption|Epidemic|Extreme weather,medium,60,
+128,Kitchen appliances,M,Microwave|Mixer|Meat grinder|Mandoline|Moka pot|Meat thermometer,medium,60,
+129,Social media platforms,T,Twitter|TikTok|Tumblr|Twitch|Telegram|Threads,medium,60,
+130,Things in a pharmacy,P,Prescription|Pill|Plaster|Painkiller|Pharmacist|Powder|Pump|Palliative,medium,60,
+131,Famous video games,M,Mario|Minecraft|Metal Gear|Mortal Kombat|Mass Effect|Mega Man|Metroid,medium,60,
+132,Scientific fields,N,Neuroscience|Nanotechnology|Nuclear physics|Nutrition|Nematology|Nephrology,medium,60,
+133,Things in a library,B,Book|Bookshelf|Barcode|Bookmark|Beanbag|Bulletin board|Bibliography,medium,60,
+134,Countries in Africa,M,Morocco|Mozambique|Madagascar|Malawi|Mali|Mauritania|Mauritius,medium,60,
+135,Types of weather,T,Thunder|Tornado|Typhoon|Thunderstorm|Tropical storm|Thaw,medium,60,
+136,Countries in Europe,S,Spain|Sweden|Switzerland|Slovakia|Slovenia|Serbia|Scotland|San Marino|Sardinia|Scandinavia,medium,60,Think of nations on the European continent
+137,Types of pasta,F,Farfalle|Fettuccine|Fusilli|Fiori|Filini|Fregola|Funghini|Ferrazzuoli|Fagioloni|Foglie,medium,60,Italian noodle shapes and varieties
+138,Famous movies,G,Gladiator|Ghostbusters|Grease|Gravity|Goodfellas|Get Out|Gandhi|Grease|Gone Girl|Guardians of the Galaxy|Gran Torino|Glory,medium,60,Well-known films from any era
+139,Musical instruments,T,Trumpet|Trombone|Tuba|Triangle|Tambourine|Timpani|Theorbo|Theremin|Tabor|Tin whistle|Tenor saxophone|Taiko,medium,60,Instruments you might find in a band or orchestra
+140,Things in a science lab,B,Beaker|Bunsen burner|Burette|Bottle|Buffer solution|Balance scale|Brush|Boiling flask|Bungs|Binocular microscope|Base|Bench,medium,60,Equipment or materials found in a chemistry or biology lab
+141,Geography terms,P,Peninsula|Plateau|Plain|Pole|Prairie|Pass|Peak|Permafrost|Pond|Precipice|Promontory|Province|Polder,medium,60,Words used to describe landforms or geographic features
+142,Types of music genres,C,Classical|Country|Celtic|Christian|Cumbia|Calypso|Chiptune|Compas|Crunk|Chamber music|Carnatic|Corrido,medium,60,Styles and categories of music
+143,TV shows,B,Breaking Bad|Black Mirror|Brooklyn Nine-Nine|Buffy the Vampire Slayer|Battlestar Galactica|Band of Brothers|Bones|Bridgerton|Billions|Black Books|Better Call Saul,medium,60,Popular television series
+144,Countries in South America,C,Colombia|Chile|Cuba|Costa Rica|Curacao|Cayman Islands,medium,60,Nations found on the South American continent or nearby
+145,Things at a concert,S,Stage|Speaker|Spotlight|Smoke machine|Setlist|Screens|Security|Seats|Soundboard|Strobe lights|Selfie|Swag,medium,60,Things you see or experience at a live music event
+146,Board games,C,Chess|Checkers|Clue|Cranium|Catan|Candy Land|Codenames|Coup|Carcassonne|Crokinole|Chinatown,medium,60,Tabletop games you play with friends or family
+147,European capitals,B,Berlin|Brussels|Bratislava|Bucharest|Belgrade|Bern|Budapest|Baku|Belmopan,medium,60,Capital cities of European countries
+148,Cooking techniques,S,Sauteing|Steaming|Searing|Simmering|Smoking|Stir-frying|Scalding|Slow cooking|Skewering|Spatchcocking|Sweating|Scorching,medium,60,Methods used to prepare food
+149,Famous scientists,C,Copernicus|Curie|Carl Sagan|Charles Darwin|Celsius|Cauchy|Cavendish|Craig Venter|Coulomb|Crick,medium,60,Scientists who made major contributions to human knowledge
+150,Video game consoles,P,PlayStation|PlayStation 2|PlayStation 3|PlayStation 4|PlayStation 5|PlayStation Portable|PlayStation Vita|Pong console|PC Engine,medium,60,Hardware devices used to play video games
+151,Things in a movie theater,P,Popcorn|Projector|Poster|Previews|Popcorn bucket|Parking lot|Prices|Program|Plush seats|Passes|Pretzels,medium,60,Items or features found at a cinema
+152,Dog breeds,B,Beagle|Bulldog|Border Collie|Boxer|Bichon Frise|Basenji|Bernese Mountain Dog|Belgian Malinois|Bloodhound|Boston Terrier|Brittany Spaniel,medium,60,Recognized purebred dog breeds
+153,Things in a garden,F,Flowers|Fence|Fork|Fertilizer|Fountain|Fruit|Flagstone|Ferns|Fireflies|Fig tree|Foxglove,medium,60,Things you might find in an outdoor garden
+154,Countries in Africa,G,Ghana|Guinea|Gabon|Gambia|Guinea-Bissau|Grenada,medium,60,Nations located on the African continent
+155,Space-related things,C,Comet|Cosmos|Crater|Constellation|Corona|Cosmonaut|Cosmic ray|Cassini|Capsule|Celestial body|Crescent moon,medium,60,Anything related to outer space or astronomy
+156,Famous painters,M,Monet|Michelangelo|Manet|Matisse|Munch|Mondrian|Murillo|Magritte|Marc Chagall|Mary Cassatt|Millais,medium,60,Well-known artists throughout history
+157,Social media platforms,S,Snapchat|Skype|Slack|Spotify|Steam|Substack|Stumbleupon|Sina Weibo|Signal,medium,60,Apps or websites where people connect and share content
+158,Things in a toolbox,H,Hammer|Hacksaw|Hand drill|Hex key|Hook|Handle|Hinge|Hard hat|Heat gun|Hole saw|Hardware bolts,medium,60,Tools or items stored in a toolbox
+159,Types of cheese,C,Cheddar|Camembert|Colby|Cotija|Comté|Cream cheese|Cantal|Cashel Blue|Castelmagno|Caciocavallo,medium,60,Varieties of cheese from around the world
+160,Things in a bathroom,S,Soap|Shampoo|Sink|Shower|Shaving cream|Sponge|Scale|Shelf|Stopper|Stool|Sanitizer,medium,60,Items or fixtures found in a bathroom
+161,Winter sports,C,Curling|Cross-country skiing|Cliff diving on ice|Cresta Run|Competitive sledding|Coldwater swimming|Carving,medium,60,Sports typically played or performed in cold or snowy conditions
+162,Things at an airport,T,Terminal|Ticket|Tarmac|Trolley|Tower|Takeoff|Tax refund desk|Travel pillow|Transit lounge|Turbulence sign,medium,60,Things you encounter at an airport
+163,Superheroes,C,Captain America|Cyclops|Captain Marvel|Colossus|Constantine|Crimson Dynamo|Captain Atom|Cloak|Cyborg|Catwoman|Cable,medium,60,Fictional heroes with special powers
+164,Natural disasters,T,Tornado|Tsunami|Typhoon|Thunder storm|Tremor|Tropical storm|Tidal wave|Toxic flood|Torrent,medium,60,Catastrophic natural events
+165,Kitchen appliances,T,Toaster|Toaster oven|Tea kettle|Thermometer|Timer|Trash compactor|Turntable microwave|Tilt mixer,medium,60,Electric or mechanical devices used in the kitchen
+166,Things in a pharmacy,A,Aspirin|Antacid|Antibiotic|Antihistamine|Antiseptic|Ace bandage|Allergy medicine|Alcohol wipes|Ache relief cream|Adhesive bandage,medium,60,Items you might find or buy at a drugstore
+167,Things in a library,C,Catalog|Chair|Computer|Copy machine|Collection|Cubicle|Checkout desk|Children's section|Card|Curtains|Comics,medium,60,Items or areas found in a public library
+168,Things in a gym,B,Barbell|Bench|Ball|Bench press|Battle ropes|Boxing gloves|Balance board|Belt|Bag|Bicycle machine|Bars,medium,60,Equipment or features found in a fitness gym
+169,Things in a hospital,M,Monitor|Medicine|MRI machine|Mask|Mattress|Morphine|Medical chart|Microscope|Mop|Medical gloves|Medication tray,medium,60,Items or things you find in a hospital setting
+170,Famous inventors,T,Tesla|Thomas Edison|Tim Berners-Lee|Thomas Newcomen|Torricelli|Trevor Baylis|Thomas Savery,medium,60,People known for creating or inventing something important
+171,Scientific fields,B,Biology|Biochemistry|Botany|Biophysics|Biostatistics|Behavioral science|Biomechanics|Biosystematics|Biogeography|Biotechnology,medium,60,Branches or disciplines of science
+172,Dance styles,T,Tango|Tap|Twist|Two-step|Turf dancing|Tutting|Traditional folk|Tribal fusion|Techno dance,medium,60,Forms or styles of dance
+173,Animals with spots,C,Cheetah|Cow|Cuttlefish|Clouded leopard|Coral grouper|Common toad|Calico cat|Crested gecko|Chinchilla,medium,60,Animals that have spots or spotted patterns
+174,Famous video games,C,Call of Duty|Counter-Strike|Civilization|Candy Crush|Crash Bandicoot|Cuphead|Contra|Cyberpunk 2077|Control|Chrono Trigger|Castlevania,medium,60,Well-known or iconic video game titles
+175,Things you do on vacation,H,Hiking|Hotel stay|Horseback riding|Hot spring bathing|Hang gliding|Harbor tours|History museum visit|Haggling at markets|Helicopter tours|Hostel hopping,medium,60,Activities or experiences people enjoy while traveling
+176,Things that are round,C,Circle|Coin|Clock|Cookie|Cap|Compass|Cylinder|Crown top|Cog|Cauldron|Carousel,medium,60,Objects or things that are circular or round in shape
+177,Types of weather,H,Hail|Hurricane|Haze|Heat wave|High pressure|Heavy rain|Hot spell|Humid conditions|Hoarfrost,medium,60,Weather phenomena or conditions
+178,Things in a bedroom,C,Clock|Curtains|Carpet|Chair|Closet|Comforter|Candle|Cabinet|Charger|Cover|Cushion,medium,60,Objects typically found in a bedroom
+179,Types of pasta,R,Rigatoni|Ravioli|Rotini|Ricciolini|Radiatori|Rigatini|Rossini|Ruote|Risoni,medium,60,Italian noodle shapes or varieties
+180,Things at an airport,G,Gate|Ground crew|Gangway|Gift shop|Grounded flight|Guard|GPS system|Garage|Glider hanger|Ground transportation,medium,60,Things encountered at a major airport
+181,Famous movies,I,Inception|Interstellar|Iron Man|It|Indiana Jones|Inside Out|Inglourious Basterds|Inferno|In the Mood for Love|Identity,medium,60,Well-known films from any era
+182,TV shows,S,Seinfeld|Stranger Things|Sherlock|Succession|Scrubs|Suits|Star Trek|Six Feet Under|Severance|Squid Game|Smallville,medium,60,Popular television series
+183,Board games,M,Monopoly|Mastermind|Mouse Trap|Mancala|Magic Maze|Mysterium|Marvel Champions|Machi Koro|Mississippi Queen,medium,60,"Tabletop games played with boards, cards, or pieces"
+184,Things in a science lab,P,Pipette|Petri dish|Periodic table|Pressure gauge|Probe|Powder|Pen|Protective goggles|pH strips|Pump|Precipitation flask,medium,60,Equipment or materials found in a science laboratory
+185,Musical instruments,G,Guitar|Grand piano|Glockenspiel|Gamelan|Guiro|Guzheng|Gong|Gut string violin|Glass harmonica|Guitarron,medium,60,Instruments used to make music around the world
+186,Geography terms,V,Valley|Volcano|Veld|Vista|Viaduct|Vale|Vegetation|Vent|Vertical zone|Villager settlement|Void,medium,60,"Think landforms, features, and physical geography words"
+187,Types of music genres,J,Jazz|J-pop|Jungle|Jive|Jam band|Japanese rock|Jump blues,medium,60,Musical styles and sounds
+188,Countries in Europe,P,Portugal|Poland|Portugal|Prussia (historical),medium,60,Nations on the European continent
+189,Famous scientists,D,Darwin|Dawkins|Dirac|Doppler|Davy|De Broglie|Diesel|Djerassi|Drake|Dumas,medium,60,Renowned figures in science history
+190,Movies set in space,A,Alien|Apollo 13|Armageddon|Ad Astra|Arrival|Annihilation|Avatar|Andromeda Strain|Aniara|Alita Battle Angel,medium,60,Films featuring outer space or sci-fi settings
+191,Cooking techniques,R,Roasting|Reduction|Resting|Rendering|Rolling|Rubbing|Refreshing|Ricing|Rimming|Rising,medium,60,Methods used to prepare food
+192,Countries in Asia,M,Malaysia|Mongolia|Myanmar|Maldives|Macau|Mauritius,medium,60,Nations located on the Asian continent
+193,TV shows,G,Game of Thrones|Glee|Grey's Anatomy|Gossip Girl|Gilmore Girls|Gotham|Good Place|Gravity Falls|Good Omens|Gavin and Stacey,medium,60,Popular television series
+194,Types of cheese,G,Gouda|Gruyere|Gorgonzola|Gloucester|Goat cheese|Grana Padano|Graviera|Graddost|Gubbeen,medium,60,Varieties of cheese from around the world
+195,Scientific fields,G,Geology|Genetics|Geophysics|Geochemistry|Glaciology|Gerontology|Gastroenterology|Gynecology|Geobiology|Geochronology,medium,60,Branches and disciplines of science
+196,Board games,R,Risk|Rummikub|Reversi|Robo Rally|Railroad Ink|Resistance|Ra|Reef|Reibach,medium,60,Games you play on a table with a board or cards
+197,Things at a concert,M,Microphone|Merchandise|Mosh pit|Monitor speaker|Mixing board|Musician|Mosh pit barrier|Music stand|Marquee|Merch table,medium,60,What you see or experience at a live music event
+198,Winter sports,B,Bobsled|Biathlon|Broom curling|Bandy|Backcountry skiing|Boardercross|Bullet sledding,medium,60,Sports typically played in cold or snowy conditions
+199,Famous painters,P,Picasso|Pollock|Pissarro|Perugino|Pontormo|Poussin|Peale|Petrov-Vodkin|Preti|Pannini,medium,60,Renowned artists known for their paintings
+200,Musical instruments,B,Bass guitar|Banjo|Bassoon|Bugle|Bongo drums|Balalaika|Baritone horn|Bodhrán|Bouzouki|Bell,medium,60,Instruments used to make music

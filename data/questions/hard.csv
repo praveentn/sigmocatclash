@@ -1,21 +1,101 @@
 id,category,letter,answers,difficulty,time_limit,hint
-201,Chemical elements,C,Carbon|Calcium|Chlorine|Copper|Cobalt|Chromium|Caesium|Cerium|Curium,hard,60,Periodic table!
-202,Ancient civilisations,M,Mesopotamia|Maya|Minoan|Macedonian|Mauryan|Ming,hard,60,
-203,Types of logical fallacy,S,Straw man|Slippery slope|Special pleading|Survivorship bias|Sunk cost,hard,60,Debate class!
-204,Philosophical concepts,E,Existentialism|Empiricism|Epistemology|Ethics|Essentialism|Emergence,hard,60,
-205,Programming languages,H,Haskell|HTML|Hack|Harbour|HLASM,hard,60,
-206,Bones in the human body,F,Femur|Fibula|Frontal bone|Falx|Fornix,hard,60,Anatomy time!
-207,Classical music composers,B,Bach|Beethoven|Brahms|Bizet|Bartok|Bruckner|Berlioz,hard,60,
-208,World capitals,K,Kabul|Kathmandu|Kampala|Kingston|Kuala Lumpur|Kuwait City|Kigali,hard,60,
+201,Chemical elements,C,Carbon|Calcium|Chlorine|Copper|Cobalt|Chromium|Caesium|Cerium|Curium|Cadmium|Californium,hard,60,Periodic table!
+202,Ancient civilisations,M,Mesopotamia|Maya|Minoan|Macedonian|Mauryan|Ming|Mycenaean,hard,60,
+203,Types of logical fallacy,S,Straw man|Slippery slope|Special pleading|Survivorship bias|Sunk cost|Shifting the burden,hard,60,Debate class!
+204,Philosophical concepts,E,Existentialism|Empiricism|Epistemology|Ethics|Essentialism|Emergence|Eternalism,hard,60,
+205,Programming languages,H,Haskell|HTML|Hack|Harbour|HLASM|Hy,hard,60,
+206,Bones in the human body,F,Femur|Fibula|Frontal bone|Falx|Fornix|Facial bone,hard,60,Anatomy time!
+207,Classical music composers,B,Bach|Beethoven|Brahms|Bizet|Bartok|Bruckner|Berlioz|Balakirev,hard,60,
+208,World capitals,K,Kabul|Kathmandu|Kampala|Kingston|Kuala Lumpur|Kuwait City|Kigali|Kingstown,hard,60,
 209,Types of logical operator,X,XOR,hard,60,Computer science
-210,Scientific units,T,Tesla|Torr|Therm|Terawatt|Tonne,hard,60,Named after scientists!
-211,Architectural styles,B,Baroque|Byzantine|Brutalism|Bauhaus|Beaux-Arts,hard,60,
-212,Literary genres,M,Mystery|Magical realism|Metafiction|Memoir|Mythology,hard,60,
-213,Nobel Prize winners,F,Fleming|Feynman|Fermi|Faulkner|Frisch,hard,60,Any Nobel category!
-214,Types of cloud,C,Cumulus|Cumulonimbus|Cirrus|Cirrostratus|Cirrocumulus,hard,60,
-215,Mathematical concepts,T,Topology|Trigonometry|Theorem|Tensor|Transcendental,hard,60,
-216,Currencies,K,Krona|Krone|Kip|Kwanza|Koruna,hard,60,World currencies!
-217,Dinosaurs,P,Pterodactyl|Parasaurolophus|Pachycephalosaurus|Protoceratops|Psittacosaurus,hard,60,
-218,Types of logical gate,N,NAND|NOR|NOT,hard,10,Digital circuits
+210,Scientific units,T,Tesla|Torr|Therm|Terawatt|Tonne|Terameter,hard,60,Named after scientists!
+211,Architectural styles,B,Baroque|Byzantine|Brutalism|Bauhaus|Beaux-Arts|Biomorphic,hard,60,
+212,Literary genres,M,Mystery|Magical realism|Metafiction|Memoir|Mythology|Modernism,hard,60,
+213,Nobel Prize winners,F,Fleming|Feynman|Fermi|Faulkner|Frisch|Friedman,hard,60,Any Nobel category!
+214,Types of cloud,C,Cumulus|Cumulonimbus|Cirrus|Cirrostratus|Cirrocumulus|Contrail,hard,60,
+215,Mathematical concepts,T,Topology|Trigonometry|Theorem|Tensor|Transcendental|Topos theory,hard,60,
+216,Currencies,K,Krona|Krone|Kip|Kwanza|Koruna|Kyat,hard,60,World currencies!
+217,Dinosaurs,P,Pterodactyl|Parasaurolophus|Pachycephalosaurus|Protoceratops|Psittacosaurus|Pentaceratops,hard,60,
+218,Types of logic gate,N,NAND|NOR|NOT,hard,10,Digital circuits
 219,Opera works,R,Rigoletto|Ring Cycle|Rosenkavalier|Romeo et Juliette,hard,60,Classical opera
 220,Economic theories,K,Keynesianism|Kinked demand|Kuznets curve,hard,60,
+221,Neuroscience terms,D,Dendrite|Dopamine|Default mode network|Dorsal stream|Dyslexia|Dysphasia|Dopaminergic,hard,60,Brain science!
+222,Quantum physics concepts,E,Entanglement|Eigenvalue|Energy level|Electron|Excited state|Exclusion principle,hard,60,
+223,Ancient Greek philosophers,P,Plato|Pythagoras|Parmenides|Plotinus|Philo|Protagoras|Porphyry,hard,60,
+224,African countries,M,Morocco|Mozambique|Madagascar|Malawi|Mali|Mauritania|Mauritius,hard,60,
+225,Geologic time periods,C,Cambrian|Carboniferous|Cretaceous|Cenozoic|Cryogenian|Carnian,hard,60,Earth history!
+226,Advanced mathematics,G,Gradient|Graph theory|Group theory|Galois theory|Gaussian distribution|Geodesic,hard,60,
+227,International organisations,U,United Nations|UNESCO|UNICEF|UNHCR|Universal Postal Union|UNAIDS,hard,60,
+228,Mythological figures,A,Achilles|Athena|Apollo|Aphrodite|Ares|Artemis|Adonis|Arjuna|Anubis,hard,60,Greek Norse Hindu Egyptian all count!
+229,Chemistry concepts,R,Reaction|Redox|Reduction|Radical|Reagent|Rutherford model|Resonance,hard,60,
+230,Rare diseases,H,Huntington's disease|Hemophilia|Hutchinson-Gilford progeria|Harlequin ichthyosis|Hyper IgM syndrome,hard,60,Medical rarity!
+231,Advanced programming concepts,P,Polymorphism|Parallelism|Prototype pattern|Pub-sub|Parser combinator|Persistent data structure,hard,60,CS deep dive!
+232,Economic concepts,M,Monetarism|Microeconomics|Marginal utility|Market failure|Monopoly|Multiplier effect,hard,60,
+233,Famous literary works,D,Don Quixote|Dune|Dracula|David Copperfield|Dead Souls|Dubliners,hard,60,Books across centuries!
+234,Linguistics concepts,M,Morphology|Metonymy|Morpheme|Meiosis|Modal verb|Metaphor|Minimalism,hard,60,
+235,Philosophy of mind,C,Consciousness|Compatibilism|Computationalism|Connectionism|Cognitive science|Causation,hard,60,
+236,Chemical elements,S,Sulfur|Silicon|Silver|Sodium|Strontium|Scandium|Selenium|Samarium|Seaborgium,hard,60,"Tin starts with S in Latin: Stannum... wait, check the symbol! Focus on element names starting with S"
+237,Philosophical concepts,D,Determinism|Dualism|Dialectic|Deontology|Deconstruction|Dogmatism|Defeasibility|Deism|Dystheism|Distributive justice|Disjunctivism|Doxastic,hard,60,"Think ethics, metaphysics, epistemology"
+238,Medical anatomy terms,P,Patella|Phalanges|Pancreas|Pituitary|Periosteum|Pleura|Pericardium|Peristalsis|Peroneus|Pharynx|Pons|Pubis|Platysma,hard,60,Body parts and tissues
+239,Programming languages,S,Swift|Scala|Scheme|Smalltalk|SQL|Solidity|Scratch|SNOBOL|Squeak|Standard ML|Simula|Stata,hard,60,Languages used to write code
+240,Economic theories,M,Mercantilism|Monetarism|Marxism|Modern Monetary Theory|Mechanism design|Marginal utility theory|Moral hazard theory|Multiplier theory|Market socialism|Microeconomics,hard,60,Schools of thought in economics
+241,Rare animal species,V,Vaquita|Visayan warty pig|Vancouver Island marmot|Vogelkop bowerbird|Visayan leopard cat|Vontsira|Vietnamese pheasant|Visayan tarictic hornbill|Volcano rabbit|Vieillot's black weaver,hard,60,Critically endangered or very uncommon animals
+242,Linguistic terms,P,Phoneme|Pragmatics|Polysemy|Prosody|Paraphrase|Predicate|Polyphony|Palatalization|Pidgin|Protolanguage|Parsing|Periphrasis,hard,60,Terms used in the study of language
+243,Mathematical concepts,H,Hyperbola|Homeomorphism|Homotopy|Harmonic series|Hilbert space|Holomorphic function|Hyperplane|Hausdorff space|Homomorphism|Hermitian matrix|Hypercube,hard,60,Advanced math terminology
+244,Opera works,T,Tosca|Turandot|The Magic Flute|Tristan und Isolde|The Barber of Seville|The Marriage of Figaro|Tannhäuser|The Tales of Hoffmann|The Merry Widow|Thais,hard,60,Famous operas
+245,Chemical elements,B,Boron|Barium|Beryllium|Bismuth|Bromine|Bohrium|Berkelium|Barium,hard,60,Elements on the periodic table starting with B
+246,Neuroscience terms,S,Synapse|Serotonin|Somatosensory|Striatum|Substantia nigra|Sympathetic nervous system|Schwann cell|Sulcus|Soma|Signal transduction|Spinocerebellar,hard,60,Brain and nervous system terminology
+247,Ancient civilisations,P,Phoenician|Parthian|Persian|Ptolemaic|Phrygian|Polynesian|Philistine|Punic|Palmyrene|Paleo-Indian,hard,60,Civilisations from the ancient world
+248,Geologic time periods,P,Paleocene|Pleistocene|Permian|Pliocene|Pennsylvanian|Paleogene|Proterozoic|Paleozoic|Phanerozoic,hard,60,Divisions of Earth's geological timeline
+249,Famous philosophers,K,Kant|Kierkegaard|Kripke|Karl Marx|Karl Popper|Kuhn,hard,60,Thinkers in philosophy and related fields
+250,Scientific units of measurement,M,Meter|Millibar|Mole|Millisecond|Megawatt|Megahertz|Millimeter|Megapascal|Millimole|Microsecond|Megajoule,hard,60,Units used in science and physics
+251,Types of logical fallacy,A,Ad hominem|Appeal to authority|Appeal to emotion|Ambiguity fallacy|Ad populum|Appeal to nature|Appeal to tradition|Affirming the consequent|Ad ignorantiam,hard,60,Errors in reasoning and argumentation
+252,Advanced programming concepts,C,Concurrency|Currying|Closure|Covariance|Coroutine|Cache coherence|Continuation|Compositional programming|Call stack|Context switching|Compile-time evaluation,hard,60,Computer science and software engineering topics
+253,World capitals,B,Baghdad|Bangkok|Beijing|Beirut|Belgrade|Berlin|Bern|Bogota|Bratislava|Brazzaville|Brussels|Bucharest|Budapest|Buenos Aires|Baku,hard,60,Capital cities of the world
+254,Rare diseases,P,Progeria|Pemphigus|Paraneoplastic syndrome|Porphyria|Prion disease|Pompe disease|Pelizaeus-Merzbacher disease|Prolidase deficiency|Pure autonomic failure,hard,60,Uncommon medical conditions
+255,Quantum physics concepts,S,Superposition|Spin|Schrödinger equation|String theory|Symmetry breaking|Squeezed state|Spontaneous emission|S-matrix|Spacetime curvature|Standard model,hard,60,Concepts from quantum and theoretical physics
+256,African countries,S,Senegal|Sierra Leone|Somalia|South Africa|South Sudan|Sudan|Swaziland|São Tomé and Príncipe|Seychelles,hard,60,Nations on the African continent
+257,Classical music composers,S,Schubert|Schumann|Shostakovich|Sibelius|Stravinsky|Saint-Saëns|Satie|Scriabin|Scarlatti|Salieri|Smetana,hard,60,Composers of orchestral and chamber music
+258,Bones in the human body,T,Tibia|Talus|Tarsals|Temporal bone|Trapezium|Trapezoid|Triquetrum|Thoracic vertebrae,hard,60,Named bones from anatomy
+259,Literary genres,P,Poetry|Prose|Parody|Pastoral|Picaresque|Postcolonial fiction|Psychological thriller|Pulp fiction|Political satire|Philosophical fiction,hard,60,Categories and styles of literature
+260,Architectural styles,G,Gothic|Georgian|Greco-Roman|Googie|Gingerbread|Geodesic|Gothic Revival|Grand Romanesque,hard,60,Styles and movements in architecture
+261,Dinosaur genera,A,Ankylosaurus|Allosaurus|Apatosaurus|Albertosaurus|Abelisaurus|Avaceratops|Anchiceratops|Archaeopteryx|Amargasaurus|Altirhinus|Animantarx,hard,60,Genera of dinosaurs from the fossil record
+262,International organisations,N,NATO|NAFTA|NASDAQ|Nordic Council|Non-Aligned Movement|Nuclear Suppliers Group|Nile Basin Initiative|New Development Bank,hard,60,Global or multinational institutions
+263,Nobel Prize winners in Physics,R,Röntgen|Rutherford|Raman|Rainwater|Richter|Rubbia|Richardson,hard,60,Scientists awarded the Nobel Prize in Physics
+264,Currencies of the world,L,Lira|Leu|Lek|Loti|Lilangeni|Leone|Lempira|Latvian lats|Lebanese pound,hard,60,Monetary units used around the world
+265,Types of cloud formations,A,Altostratus|Altocumulus|Arcus|Asperitas|Anvil cloud|Altocumulonimbus,hard,60,Meteorological cloud types
+266,Famous literary works,M,Middlemarch|Moby Dick|Macbeth|Metamorphosis|Midsummer Night's Dream|Medea|Much Ado About Nothing|My Brilliant Friend|Mansfield Park|Madame Bovary,hard,60,"Novels, plays, and literary classics"
+267,Economic concepts,E,Elasticity|Externality|Equilibrium|Efficiency|Endowment effect|Exchange rate|Economies of scale|Equity|Excess demand|Export,hard,60,Terms from economics and finance
+268,Chemistry concepts,C,Covalent bond|Catalyst|Condensation|Concentration|Chromatography|Calorimetry|Carbonyl|Cation|Chelation|Chirality|Combustion,hard,60,Concepts and terms from chemistry
+269,Advanced mathematics concepts,T,Topology|Tensor|Transcendental number|Taylor series|Topological space|Torus|Turing machine|Transformation|Trigonometric identity|Theorema Egregium,hard,60,Higher-level mathematical ideas
+270,Ancient Greek philosophers,S,Socrates|Sophocles|Stoics|Speusippus|Strato of Lampsacus|Sextus Empiricus,hard,60,Thinkers from ancient Greece
+271,Programming languages,R,Ruby|Rust|R|Raku|REXX|RPG|Racket|Reason|Ring,hard,60,Languages used in software development
+272,Mythological figures,P,Prometheus|Perseus|Poseidon|Persephone|Pan|Pegasus|Pollux|Proteus|Penelope|Phoebus|Pluto,hard,60,"Figures from Greek, Roman, or other mythologies"
+273,Rare species of plants,W,Welwitschia|Western Prairie Fringed Orchid|White Skipper flower|Wollemi pine|Wyoming Toadflax|Water Elm|White birds-in-a-nest,hard,60,Uncommon or endangered plant species
+274,Medical conditions and diseases,A,Amyloidosis|Acromegaly|Ankylosing spondylitis|Ataxia|Agranulocytosis|Aplastic anemia|Addison's disease|Arteriovenous malformation|Achondroplasia|Arachnoiditis,hard,60,Medical diagnoses and conditions
+275,Famous economists,F,Friedman|Fisher|Fama|Ferguson|Findlay|Fogel,hard,60,Notable names in economic history and theory
+276,Philosophical schools of thought,S,Stoicism|Skepticism|Structuralism|Sophism|Solipsism|Syncretism|Social contract theory|Semiotics|Subjectivism|Scientism,hard,60,Traditions and movements in philosophy
+277,Anatomy and physiology terms,H,Hypothalamus|Hippocampus|Hemoglobin|Homeostasis|Hypertension|Histology|Humeral|Hematopoiesis|Hypoxia|Hormone|Hepatic,hard,60,Terms from biology and medicine
+278,World capitals,A,Accra|Addis Ababa|Algiers|Amman|Amsterdam|Ankara|Antananarivo|Apia|Ashgabat|Asmara|Astana|Asuncion|Athens|Abudhabi,hard,60,Capital cities from around the world
+279,Chemical elements,N,Nitrogen|Neon|Nickel|Niobium|Neptunium|Nobelium|Neodymium|Nihonium,hard,60,Elements from the periodic table
+280,Advanced programming concepts,M,Monad|Mutex|Memory leak|Memoization|Marshalling|Message passing|Microservices|Macro|Middleware,hard,60,Software engineering and computer science concepts
+281,Linguistic concepts,S,Semantics|Syntax|Syllable|Syncope|Subordination|Suprasegmental|Suffix|Sibilant|Sociolinguistics|Speech act|Scope,hard,60,Terms from the study of language and grammar
+282,Rare bird species,K,Kakapo|Kagu|Kiwi|Kokako|Keel-billed motmot|Kori bustard|Kaempfer's tody-tyrant|Kauaʻi ʻōʻō,hard,60,Uncommon or endangered bird species
+283,Chemical elements,P,Phosphorus|Platinum|Plutonium|Polonium|Potassium|Praseodymium|Promethium|Protactinium|Palladium|Praesodymium,hard,60,Elements from the periodic table
+284,Philosophical concepts,A,Absurdism|Altruism|Anarchism|Anthropocentrism|Aporia|A priori|Aesthetics|Alienation|Analytic philosophy|Axiom|Autonomy|Agnosticism,hard,60,Abstract ideas studied in philosophy
+285,Medical conditions and diseases,C,Cirrhosis|Crohn's disease|Carcinoma|Cellulitis|Cholera|Chlamydia|Cushing's syndrome|Cystic fibrosis|Cerebral palsy|Conjunctivitis|Coeliac disease|Cytomegalovirus,hard,60,Illnesses and medical diagnoses
+286,Programming languages,C,C++|C#|Clojure|COBOL|CoffeeScript|Crystal|Cython|Chapel|Curl|Cayenne|Clean|Cobra,hard,60,Languages used to write software
+287,Bones in the human body,S,Sternum|Scapula|Sacrum|Skull|Stapes|Sphenoid|Scaphoid|Sesamoid|Subscapularis|Styloid,hard,60,Parts of the human skeleton
+288,Economic theories,N,Neoclassical economics|Neo-Keynesian economics|Neo-Marxism|New institutional economics|Neoliberalism|Normative economics|New classical macroeconomics|Natural rate theory,hard,60,Schools or theories in economics
+289,Ancient Greek philosophers,A,Aristotle|Anaxagoras|Anaximander|Anaximenes|Antiphon|Antisthenes|Archelaus|Arcesilaus|Aristippus|Alcmaeon,hard,60,Thinkers from ancient Greece
+290,Opera works,D,Don Giovanni|Don Pasquale|Der Rosenkavalier|Die Walkure|Das Rheingold|Don Carlos|Dialogues of the Carmelites|Die Fledermaus|Dido and Aeneas|Der Freischutz,hard,60,Famous operas
+291,Rare animal species,S,Saola|Siamese crocodile|Spix's macaw|Sumatran rhino|Snow leopard|Solenodon|Shortnose sturgeon|Staghorn coral|Swift fox|Siberian tiger|Slender-snouted crocodile,hard,60,Endangered or rare animals
+292,Linguistic terms,M,Morpheme|Morphology|Metonymy|Metaphor|Minimal pair|Modal verb|Monophthong|Morphosyntax|Metathesis|Multilingualism|Markedness,hard,60,Terms used in the study of language
+293,Neuroscience terms,N,Neurotransmitter|Neuroplasticity|Nucleus accumbens|Nociceptor|Neocortex|Neurogenesis|Neuropeptide|Neuroinflammation|Neuroglia|Node of Ranvier|Norepinephrine,hard,60,Terms from brain and nervous system science
+294,Quantum physics concepts,W,Wave function|Wave-particle duality|Wavefunction collapse|Weak force|Wigner's friend|Weak measurement|Wien's law|Wave packet,hard,60,Concepts in quantum mechanics
+295,Famous economists,M,Milton Friedman|Malthus|Marshall|Marx|Minsky|Modigliani|Mundell|Meade|Mirrlees|Myrdal,hard,60,Influential figures in economics
+296,Classical music composers,M,Mozart|Mahler|Mendelssohn|Monteverdi|Massenet|Mussorgsky|Medtner|Martinů|Messiaen|MacDowell|Myslivecek,hard,60,Composers of classical or orchestral music
+297,Types of logical fallacy,C,Circular reasoning|Cherry picking|Correlation implies causation|Composition fallacy|Continuum fallacy|Cum hoc ergo propter hoc|Complex question|Confirmation bias,hard,60,Errors in reasoning and argument
+298,Nobel Prize winners in physics,B,Bardeen|Becquerel|Bethe|Blackett|Bloembergen|Bohr|Born|Bose|Brattain|Broglie,hard,60,Physicists who won the Nobel Prize
+299,Rare diseases,F,Fibrodysplasia ossificans progressiva|Familial Mediterranean fever|Fanconi anemia|Fatal familial insomnia|Fabry disease|Farber disease|Foix-Alajouanine syndrome|Friedreich's ataxia,hard,60,Uncommon or orphan medical conditions
+300,Architectural styles,R,Romanesque|Renaissance|Rococo|Revivalism|Regionalism|Rationalism|Rustic|Ribbon windows style|Romantic|Roman,hard,60,Distinct styles in architecture history
