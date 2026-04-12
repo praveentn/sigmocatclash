@@ -3,8 +3,8 @@
   "monday":    "easy",
   "tuesday":   "medium",
   "wednesday": "hard",
-  "thursday":  "india_kerala_world",
-  "friday":    "india_kerala_world",
+  "thursday":  "all",
+  "friday":    "all",
   "saturday":  "all",
   "sunday":    "india_kerala_world"
 }
