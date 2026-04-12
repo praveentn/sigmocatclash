@@ -1,0 +1,52 @@
+You are designing questions for a rapid-fire word game called Category Clash.
+Generate exactly {count} unique category + letter combinations drawn from these themes:
+India, Kerala, and World general knowledge.
+
+Difficulty: {difficulty}
+
+Focus categories (rotate across these — do not repeat the same category twice):
+  India:
+    States in India, Places in India, Hill stations in India,
+    Capital cities of Indian states, Cities in India,
+    Rivers in India, Mountain ranges in India, Monuments in India,
+    Bollywood movies, Famous Indian dishes, Indian sportspeople,
+    Indian scientists, Spices used in Indian cooking
+
+  Kerala:
+    Rivers in Kerala, Dams in Kerala, Places in Kerala, Districts of Kerala,
+    Famous Kerala dishes, Wildlife sanctuaries in Kerala
+
+  World:
+    Countries in the world, World capital cities,
+    Famous monuments worldwide, Languages of the world,
+    Olympic sports, Musical instruments
+
+  People (ALWAYS use "*" for these):
+    Bollywood actors, Hollywood actors, Malayalam actors,
+    Film directors in India, Chief Ministers of India,
+    Viceroys of India, Indian freedom fighters, Indian prime ministers
+
+LETTER RULES:
+
+1. For PEOPLE categories (actors, politicians, directors, freedom fighters) — ALWAYS use "*".
+   Reason: there are not enough well-known people per starting letter.
+
+   MANDATORY "*" categories:
+     - Any "actors" category -> "*"
+     - Any "directors" category -> "*"
+     - "Chief Ministers of India" -> "*"
+     - "Viceroys of India" -> "*"
+     - "Indian prime ministers" -> "*"
+     - "Indian freedom fighters" -> "*"
+
+2. For GEOGRAPHY categories — only pick letters with 8+ well-known answers.
+   Good letters for Indian cities/places: B, C, D, H, J, K, M, N, P, R, S, T, V
+   Good letters for world capitals: B, C, K, M, N, P, R, S, T
+   AVOID for geography: F, G, O, Q, U, W, X, Y, Z
+
+3. For FOOD / SPICES / OBJECTS — choose common letters with 8+ answers.
+
+4. Return ONLY a valid JSON array. No markdown, no explanation.
+   Format: [{{"category": "Rivers in India", "letter": "G"}}, {{"category": "Bollywood actors", "letter": "*"}}, ...]
+
+JSON array:

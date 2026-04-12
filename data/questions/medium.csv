@@ -149,3 +149,184 @@ id,category,letter,answers,difficulty,time_limit,hint
 248,Types of Music Genres,H,Hip-hop|House|Heavy metal|Hardcore|Highlife|Honky-tonk|Hymn|Hyperpop,medium,60,Music genres starting with H
 249,Countries in Europe,G,Germany|Greece|Georgia|Gibraltar|Guernsey,medium,60,Think of nations on the European continent
 250,Types of pasta,L,Linguine|Lasagne|Lasagna|Lumache|Linguini|Lanterne|Lagane|Lasagnette,medium,60,Italian noodle dishes
+251,Rivers in India,G,Ganges|Godavari|Ghaghara|Gomti|Gandak|Ghaggar|Ganga|Girna,medium,60,Sacred and mighty rivers of the subcontinent
+252,Chief Ministers of India,*,Narendra Modi|Arvind Kejriwal|Mamata Banerjee|Yogi Adityanath|Nitish Kumar|Pinarayi Vijayan|Siddaramaiah|Hemant Soren|Bhupesh Baghel|Shivraj Chouhan,medium,60,Past and present Chief Ministers across Indian states
+253,Hill stations in India,M,Munnar|Mahabaleshwar|Manali|Mussoorie|Matheran|Mount Abu|Mcleod Ganj,medium,60,Cool retreats in the mountains
+254,States in India,M,Maharashtra|Madhya Pradesh|Manipur|Meghalaya|Mizoram,medium,60,Indian states starting with M
+255,Places in India,A,Agra|Amritsar|Ahmedabad|Allahabad|Ajmer|Aurangabad|Almora|Aligarh|Ayodhya,medium,60,Famous cities and tourist spots in India
+256,Capital cities in India,B,Bhopal|Bengaluru|Bhubaneswar|Bhuntar|Bangalore,medium,60,State capitals of India
+257,Mountain ranges in India,*,Himalayas|Aravalli|Vindhya|Satpura|Western Ghats|Eastern Ghats|Nilgiris|Shivalik|Karakoram|Pir Panjal,medium,60,Ranges and ridges across the Indian subcontinent
+258,Monuments in India,T,Taj Mahal|Thanjavur Temple|Tirupati Temple|Tower of Victory|Tomb of Akbar,medium,60,Historic structures and landmarks of India
+259,Viceroys of India,*,Lord Mountbatten|Lord Curzon|Lord Dalhousie|Lord Ripon|Lord Lytton|Lord Wellesley|Lord Lansdowne|Lord Chelmsford|Lord Irwin|Lord Reading,medium,60,British rulers who governed colonial India
+260,Bollywood actors,S,Shah Rukh Khan|Salman Khan|Sanjay Dutt|Sunny Deol|Saif Ali Khan|Shahid Kapoor|Sushant Singh Rajput|Sunil Shetty|Sidharth Malhotra,medium,60,Leading men of Hindi cinema
+261,Bollywood actors,A,Amitabh Bachchan|Aamir Khan|Akshay Kumar|Ajay Devgn|Arjun Kapoor|Abhishek Bachchan|Anil Kapoor|Ayushmann Khurrana|Arshad Warsi,medium,60,Stars of Hindi film industry
+262,Film directors in India,*,Sanjay Leela Bhansali|Rajkumar Hirani|Zoya Akhtar|Mani Ratnam|Priyadarshan|Anurag Kashyap|Karan Johar|Farah Khan|S S Rajamouli|Shyam Benegal,medium,60,Celebrated directors from Indian cinema
+263,Famous Indian dishes,B,Biryani|Butter chicken|Bhel puri|Baingan bharta|Barfi|Bombay sandwich|Bhatura|Butter naan,medium,60,Delicious food from across India
+264,Famous Indian dishes,D,Dhokla|Dal makhani|Dosa|Dal tadka|Dahi puri|Dahi vada|Dum biryani|Dabeli,medium,60,Popular Indian recipes and street food
+265,Things you see in a kitchen,S,Spoon|Spatula|Sieve|Salt|Strainer|Sink|Stove|Sugar|Skillet,medium,60,Common items found in any kitchen
+266,Things you see in a kitchen,P,Pan|Pot|Plate|Peeler|Pepper|Pressure cooker|Pickle,medium,60,Everyday kitchen essentials
+267,Things you see inside a car,S,Seatbelt|Steering wheel|Speedometer|Speaker|Sun visor|Seat|Side mirror,medium,60,Parts and objects found in a vehicle
+268,Things you see in a restaurant,M,Menu|Manager|Music|Mat|Mirror|Mustard,medium,60,Common things spotted when dining out
+269,Things you see in a restaurant,W,Waiter|Water|Wine|Window|Washroom|Wall art,medium,60,Look around your favourite restaurant
+270,Chocolates,D,Dairy Milk|Dark chocolate|Dove|Digestive|Dairymilk Silk,medium,60,Chocolate brands and varieties
+271,Chocolates,K,Kit Kat|Kinder Joy|Kinder Bueno|Kinder Chocolate|Kandos,medium,60,Sweet chocolate treats and brands
+272,Rivers in Kerala,P,Periyar|Pamba|Ponnani|Puthenthodu|Palakkad river,medium,60,Rivers flowing through God's Own Country
+273,Rivers in Kerala,C,Chalakudy|Chaliyar|Chandragiri|Chittar,medium,60,Waterways of Kerala
+274,Dams in Kerala,*,Idukki|Mullaperiyar|Banasura Sagar|Peechi|Malampuzha|Neyyar|Kallada|Sholayar|Karapuzha|Walayar,medium,60,Major dams and reservoirs in Kerala
+275,Places in Kerala,M,Munnar|Malappuram|Mysore|Marari|Malabar|Mannarkkad|Mahe,medium,60,Tourist destinations in Kerala
+276,Places in Kerala,K,Kovalam|Kochi|Kozhikode|Kollam|Kannur|Kasaragod|Kottayam|Kumbalangi|Kumarakom,medium,60,Well-known places in God's Own Country
+277,Districts of Kerala,*,Thiruvananthapuram|Kollam|Pathanamthitta|Alappuzha|Kottayam|Idukki|Ernakulam|Thrissur|Palakkad|Malappuram|Kozhikode|Wayanad|Kannur|Kasaragod,medium,60,All 14 districts of Kerala
+278,Countries in the world,B,Brazil|Belgium|Bangladesh|Bahrain|Bolivia|Bulgaria|Bhutan|Botswana|Brunei|Burkina Faso|Belarus,medium,60,Nations around the globe
+279,Countries in the world,C,Canada|China|Cuba|Chile|Colombia|Croatia|Cambodia|Cyprus|Congo|Czech Republic,medium,60,Countries from every continent
+280,World capital cities,P,Paris|Pretoria|Prague|Phnom Penh|Panama City|Port Louis|Port Moresby|Podgorica|Paramaribo|Pyongyang,medium,60,Capitals of nations around the world
+281,World capital cities,A,Ankara|Accra|Amman|Abu Dhabi|Astana|Addis Ababa|Algiers|Amsterdam|Asuncion|Antananarivo,medium,60,Where world governments are based
+282,Hollywood actors,T,Tom Hanks|Tom Cruise|Tom Holland|Tobey Maguire|Timothee Chalamet|Taron Egerton|Terrence Howard|Tyler Perry,medium,60,Famous faces from Hollywood
+283,Hollywood actors,R,Ryan Reynolds|Robert Downey Jr|Russell Crowe|Ryan Gosling|Rooney Mara|Robin Williams|Richard Gere|Ray Liotta,medium,60,Stars of the silver screen
+284,Malayalam actors,*,Mohanlal|Mammootty|Fahadh Faasil|Dulquer Salmaan|Tovino Thomas|Nivin Pauly|Prithviraj Sukumaran|Jayasurya|Asif Ali|Unni Mukundan,medium,60,Stars of Malayalam cinema
+285,Famous world monuments,C,Colosseum|Christ the Redeemer|Chichen Itza|Chartres Cathedral|Cleopatra Needle|Cologne Cathedral,medium,60,Iconic landmarks recognised worldwide
+286,Famous world monuments,E,Eiffel Tower|Empire State Building|Epidaurus Theatre|Edinburgh Castle|El Castillo,medium,60,World-famous structures and sites
+287,Languages of the world,S,Spanish|Swahili|Swedish|Sindhi|Sinhala|Serbian|Slovak|Somali|Samoan,medium,60,Tongues spoken around the globe
+288,Languages of the world,P,Portuguese|Persian|Polish|Punjabi|Pashto|Pidgin,medium,60,Languages spoken by millions worldwide
+289,Hill stations in India,K,Kodaikanal|Kasauli|Kufri|Kodagu|Kalimpong|Kasol,medium,60,Misty mountain getaways in India
+290,Cities in India,P,Pune|Patna|Prayagraj|Panaji|Puri|Pondicherry|Palakkad|Pathankot|Porbandar,medium,60,Urban centres across India
+291,Cities in India,V,Varanasi|Visakhapatnam|Vadodara|Vijayawada|Vellore|Vizag,medium,60,Cities big and small across India
+292,Monuments in India,R,Red Fort|Rashtrapati Bhavan|Rajabai Tower|Rani ki Vav|Rock Fort,medium,60,Historic Indian landmarks
+293,Tourist spots in India,G,Goa|Golden Temple|Gateway of India|Gulmarg|Golconda Fort|Gangotri|Gyaraspur,medium,60,Places every traveller wants to visit in India
+294,Rivers in India,K,Krishna|Kaveri|Ken|Kosi|Kabini|Kshipra|Koyna,medium,60,Important rivers flowing through India
+295,Capital cities in India,P,Patna|Panaji|Port Blair|Prayagraj,medium,60,State and UT capitals of India
+296,Famous Indian dishes,S,Samosa|Saag paneer|Shahi paneer|Sevpuri|Sheekh kebab|Sooji halwa|Sindhi curry,medium,60,Iconic Indian food items
+297,Things you see inside a car,D,Dashboard|Door|Driver seat|Dial|Defogger,medium,60,Inside a moving vehicle
+298,Chocolates,M,Milkybar|Mars|Munch|Milka|M&Ms|Maltesers|Milk chocolate,medium,60,Chocolate brands and bars you love
+299,Countries in the world,N,Nepal|Nigeria|Norway|Netherlands|Nicaragua|Niger|Namibia|New Zealand|North Korea,medium,60,Nations from around the world
+300,Places in India,V,Varanasi|Varkala|Vizag|Vadodara|Vrindavan|Vellore|Visakhapatnam,medium,60,Famous cities and towns across India
+301,Cities in India,H,Hyderabad|Haridwar|Howrah|Hubli|Haldwani|Hassan|Hisar,medium,60,Bustling cities across India
+302,Rivers in India,B,Brahmaputra|Beas|Betwa|Brahmani|Baitarani|Bhima,medium,60,Rivers flowing through the Indian subcontinent
+303,Bollywood actors,R,Ranbir Kapoor|Ranveer Singh|Rajkummar Rao|Rishi Kapoor|Rekha|Rani Mukerji|Raveena Tandon|Richa Chadha,medium,60,Stars of Hindi cinema
+304,Bollywood actors,K,Kareena Kapoor|Katrina Kaif|Kartik Aaryan|Kajol|Karisma Kapoor|Kriti Sanon|Kiara Advani|Kumar Sanu,medium,60,Popular Bollywood personalities
+305,Things you see in a kitchen,B,Blender|Bowl|Bottle|Board|Basket|Butter|Broom|Baking tray,medium,60,Everyday items found in a kitchen
+306,Things you see in a kitchen,T,Toaster|Tongs|Tray|Towel|Timer|Tin|Thermometer,medium,60,Common kitchen items and tools
+307,Things you see inside a car,M,Mirror|Map|Meter|Music system|Mat,medium,60,Objects you find inside a vehicle
+308,Things you see inside a car,W,Wheel|Window|Wiper|Wire,medium,60,Parts or items visible inside a car
+309,Things you see in a restaurant,C,Chair|Candle|Cutlery|Cup|Chef|Counter|Curtain|Coaster,medium,60,Common sights when you dine out
+310,Chocolates,T,Toblerone|Twix|Toffifee|Truffle|Twirl,medium,60,Chocolate brands and types
+311,Chocolates,B,Bounty|Bournville|Boost|Butterfinger|Brookside,medium,60,Popular chocolate bars and brands
+312,Famous Indian dishes,R,Rasam|Rajma|Rasgulla|Rava dosa|Roti|Raita|Rasmalai|Rumali roti,medium,60,Beloved food from across India
+313,Famous Indian dishes,P,Pav bhaji|Paneer tikka|Pulao|Pongal|Poha|Pakora|Payasam|Puttu,medium,60,Popular Indian street food and meals
+314,Rivers in Kerala,K,Kallada|Kabani|Karamana|Kayamkulam,medium,60,Kerala rivers flowing to the sea
+315,Places in Kerala,T,Thrissur|Thiruvananthapuram|Thekkady|Thrissur|Thalassery|Tirur,medium,60,Tourist spots and cities in Kerala
+316,Places in Kerala,V,Varkala|Vyttila|Vagamon|Valiathura,medium,60,Beautiful destinations across Kerala
+317,Countries in the world,A,Australia|Argentina|Austria|Algeria|Angola|Albania|Armenia|Afghanistan,medium,60,Nations from around the globe
+318,Countries in the world,M,Mexico|Morocco|Malaysia|Madagascar|Mongolia|Mozambique|Myanmar|Malta,medium,60,Countries from various continents
+319,World capital cities,B,Bangkok|Beijing|Berlin|Bogota|Baku|Brasilia|Brussels|Beirut,medium,60,Capital cities of countries worldwide
+320,World capital cities,K,Kathmandu|Kabul|Kampala|Kuwait City|Kinshasa|Kiev,medium,60,Capitals of nations around the world
+321,Hollywood actors,B,Brad Pitt|Bruce Willis|Ben Affleck|Benedict Cumberbatch|Brendan Fraser|Billy Crystal|Bob Odenkirk,medium,60,Famous faces of Hollywood
+322,Hollywood actors,C,Cate Blanchett|Chris Evans|Chris Hemsworth|Charlize Theron|Christian Bale|Clint Eastwood|Chadwick Boseman,medium,60,Stars of international cinema
+323,Famous world monuments,A,Acropolis|Angkor Wat|Arc de Triomphe|Alhambra,medium,60,Iconic structures and landmarks worldwide
+324,Famous world monuments,P,Parthenon|Petra|Pantheon|Pyramid of Giza|Pompeii,medium,60,World-famous historical monuments
+325,Languages of the world,A,Arabic|Armenian|Amharic|Albanian|Azerbaijani|Afrikaans,medium,60,Languages spoken around the world
+326,Languages of the world,G,German|Greek|Gujarati|Galician|Georgian,medium,60,Languages from different parts of the world
+327,Cities in India,C,Chennai|Chandigarh|Coimbatore|Cuttack|Calicut|Cochin,medium,60,Major cities spread across India
+328,Hill stations in India,C,Coorg|Coonoor|Chikmagalur|Chakrata,medium,60,Scenic mountain escapes in India
+329,Hill stations in India,S,Shimla|Shillong|Sikkim|Sonamarg|Saputara,medium,60,Cool hill retreats in India
+330,Rivers in India,M,Mahanadi|Mahi|Mandovi|Mahananda|Mutha,medium,60,Rivers crossing Indian states
+331,Rivers in India,N,Narmada|Netravati|Nila|Nashik,medium,60,Well-known rivers of India
+332,Places in India,R,Rajasthan|Rishikesh|Rann of Kutch|Rameswaram|Rohtang,medium,60,Famous destinations and regions in India
+333,Famous Indian dishes,K,Kadala curry|Kozhikodan halwa|Kebab|Kheer|Kulfi|Kachori|Korma,medium,60,Popular dishes and sweets from Indian cuisine
+334,Places in India,M,Mumbai|Mysuru|Mathura|Madurai|Munnar|Mahabalipuram|Manali|Mussoorie|Mandu,medium,60,Famous destinations across India
+335,Hill stations in India,D,Darjeeling|Dalhousie|Dharamsala|Deolali|Daringbadi,medium,60,Cool mountain escapes starting with D
+336,Cities in India,A,Agra|Ahmedabad|Amritsar|Aurangabad|Allahabad|Ajmer|Aligarh|Asansol,medium,60,Indian cities starting with A
+337,Rivers in India,S,Sutlej|Sabarmati|Sone|Sharda|Sindh|Shipra|Subarnarekha,medium,60,Indian rivers starting with S
+338,Monuments in India,H,Hawa Mahal|Hampi|Humayun Tomb|Halebidu,medium,60,Famous Indian monuments starting with H
+339,Bollywood actors,D,Deepika Padukone|Dharmendra|Dev Anand|Divya Khosla|Disha Patani|Dimple Kapadia,medium,60,Bollywood stars whose names start with D
+340,Things you see in a kitchen,G,Grater|Gas stove|Grinder|Garlic press|Griddle|Glass jar|Gravy boat,medium,60,Common kitchen items starting with G
+341,Things you see inside a car,G,Gearshift|Glove box|GPS|Gas pedal|Gear lever,medium,60,Car interior items starting with G
+342,Things you see in a restaurant,N,Napkin|Naan|Noodles|Newspaper rack|Name tag,medium,60,Items or foods found in a restaurant starting with N
+343,Chocolates,S,Snickers|Silk|Snack bar|Starbar|Skor|Schogetten,medium,60,Chocolate brands and types starting with S
+344,Famous Indian dishes,C,Chaat|Chole|Chicken tikka|Curry|Cutlet|Chapati|Curd rice|Chutney,medium,60,Popular Indian foods starting with C
+345,Places in Kerala,A,Alleppey|Athirappilly|Aluva|Angamaly|Ashtamudi|Aralam,medium,60,Beautiful spots in Kerala starting with A
+346,Places in Kerala,P,Palakkad|Periyar|Ponnani|Pathanamthitta|Pala|Payyambalam|Peermade,medium,60,Kerala destinations starting with P
+347,World capital cities,M,Madrid|Manila|Muscat|Maputo|Maseru|Montevideo|Moroni|Mogadishu,medium,60,Capital cities of the world starting with M
+348,Hollywood actors,L,Leonardo DiCaprio|Liam Neeson|Laurence Fishburne|Luke Wilson|Leslie Mann|Lupita Nyongo,medium,60,Famous Hollywood stars starting with L
+349,Famous world monuments,T,Taj Mahal|Tower Bridge|Trevi Fountain|Temple of Zeus,medium,60,Iconic landmarks around the world starting with T
+350,Languages of the world,M,Mandarin|Malay|Malayalam|Marathi|Macedonian|Malagasy|Maltese|Mongolian,medium,60,World languages starting with M
+351,Rivers in India,G,Ganges|Godavari|Ghaghara|Gomti|Gandak|Ghaggar|Ganga|Girna|Ghod,medium,60,Sacred and mighty rivers of the subcontinent
+352,Chief Ministers of India,*,Narendra Modi|Arvind Kejriwal|Mamata Banerjee|Yogi Adityanath|Nitish Kumar|Pinarayi Vijayan|Siddaramaiah|Hemant Soren|Bhupesh Baghel|Shivraj Chouhan,medium,60,Past and present Chief Ministers across Indian states
+353,Hill stations in India,M,Munnar|Mahabaleshwar|Manali|Mussoorie|Matheran|Mount Abu|Mukteshwar|Masinagudi,medium,60,Cool retreats in the mountains
+354,States in India,M,Maharashtra|Madhya Pradesh|Manipur|Meghalaya|Mizoram,medium,60,Indian states starting with M
+355,Countries in the world,C,Canada|China|Chile|Colombia|Croatia|Cuba|Cambodia|Cameroon|Congo|Chad|Cyprus|Comoros,medium,60,Nations of the world starting with C
+356,Hollywood actors,*,Tom Hanks|Leonardo DiCaprio|Brad Pitt|Denzel Washington|Will Smith|Morgan Freeman|Johnny Depp|Robert Downey Jr|Meryl Streep|Scarlett Johansson,medium,60,Famous faces from Hollywood films
+357,Districts of Kerala,T,Thiruvananthapuram|Thrissur|Thalassery|Tirur,medium,60,Districts in Kerala starting with T
+358,Monuments in India,*,Taj Mahal|Red Fort|Qutub Minar|India Gate|Hawa Mahal|Mysore Palace|Victoria Memorial|Charminar|Gateway of India|Konark Temple,medium,60,Iconic historical structures across India
+359,Famous Indian dishes,B,Biryani|Butter chicken|Bhel puri|Baingan bharta|Bhatura|Barfi|Basundi|Banana chips|Bonda,medium,60,Beloved Indian foods and street eats
+360,Rivers in Kerala,*,Periyar|Pamba|Bharathapuzha|Chaliyar|Kabani|Meenachil|Manimala|Achankovil|Kallada|Vamanapuram,medium,60,Rivers flowing through God's Own Country
+361,Bollywood actors,S,Shah Rukh Khan|Salman Khan|Saif Ali Khan|Sanjay Dutt|Sunny Deol|Shahid Kapoor|Sidharth Malhotra|Suniel Shetty|Sonu Sood,medium,60,Stars of Hindi cinema
+362,World capital cities,B,Berlin|Beijing|Bangkok|Baghdad|Baku|Brasilia|Brussels|Bucharest|Budapest|Buenos Aires|Bishkek|Bogota,medium,60,Capital cities of nations around the world
+363,Places in Kerala,K,Kovalam|Kumarakom|Kochi|Kozhikode|Kannur|Kollam|Kasaragod|Kalpetta|Kothamangalam,medium,60,Beautiful destinations in Kerala
+364,Mountain ranges in India,*,Himalayas|Western Ghats|Eastern Ghats|Aravalli|Vindhyas|Satpura|Nilgiris|Shivaliks|Karakoram,medium,60,Great mountain and hill ranges of India
+365,Languages of the world,S,Spanish|Swahili|Swedish|Sindhi|Sinhala|Serbian|Slovak|Somali|Slovenian|Samoan,medium,60,Languages spoken around the globe
+366,Dams in Kerala,*,Idukki Dam|Mullaperiyar Dam|Banasura Sagar|Peechi Dam|Malampuzha Dam|Kallada Dam|Neyyar Dam|Sholayar Dam|Kakki Dam,medium,60,Major dams and reservoirs of Kerala
+367,Capital cities in India,B,Bengaluru|Bhopal|Bhubaneswar|Bilaspur|Bangalore,medium,60,State capitals of India starting with B
+368,Things you see in a kitchen,S,Spoon|Spatula|Sieve|Sink|Stove|Salt|Sugar|Strainer|Saucepan|Shelves,medium,60,Everyday items found in a kitchen
+369,Malayalam actors,*,Mohanlal|Mammootty|Fahadh Faasil|Dulquer Salmaan|Tovino Thomas|Prithviraj Sukumaran|Nivin Pauly|Jayaram|Dileep|Suresh Gopi,medium,60,Stars of Malayalam cinema
+370,Countries in the world,A,Australia|Argentina|Algeria|Angola|Armenia|Azerbaijan|Austria|Albania|Andorra|Afghanistan,medium,60,Countries starting with A from every continent
+371,Chocolates,K,KitKat|Kinder Joy|Kinder Bueno|Krackel|Kopiko,medium,60,Sweet chocolate brands and treats
+372,Tourist spots in India,J,Jaipur|Jodhpur|Jaisalmer|Jim Corbett|Jog Falls|Jagannath Temple|Juhu Beach,medium,60,Must-visit destinations across India
+373,Film directors in India,*,Satyajit Ray|Mani Ratnam|Rajkumar Hirani|Karan Johar|Shankar|Priyadarshan|Adoor Gopalakrishnan|Sanjay Leela Bhansali|Shyam Benegal|Vetrimaaran,medium,60,Celebrated directors from Indian cinema
+374,Famous world monuments,*,Eiffel Tower|Colosseum|Stonehenge|Parthenon|Pyramids of Giza|Machu Picchu|Angkor Wat|Petra|Statue of Liberty|Big Ben,medium,60,Iconic landmarks from around the world
+375,Cities in India,P,Pune|Patna|Prayagraj|Pondicherry|Panaji|Patiala|Pathankot|Palakkad|Pollachi,medium,60,Cities spread across the length of India
+376,Things you see inside a car,S,Steering wheel|Seat|Seatbelt|Speedometer|Sunroof|Speaker|Sunshade|Switch,medium,60,Parts and items found inside a vehicle
+377,Districts of Kerala,K,Kozhikode|Kollam|Kottayam|Kasaragod|Kannur|Kochi|Kalpetta,medium,60,Districts of Kerala starting with K
+378,Bollywood actors,A,Amitabh Bachchan|Aamir Khan|Akshay Kumar|Ajay Devgn|Anil Kapoor|Arjun Kapoor|Abhishek Bachchan|Arshad Warsi|Ayushmann Khurrana,medium,60,Leading men of Bollywood
+379,Things you see in a restaurant,M,Menu|Manager|Mirror|Music|Mat|Mop|Marble table|Microwave,medium,60,Things you'd spot when dining out
+380,Hill stations in India,D,Darjeeling|Dalhousie|Dharamshala|Dehra Dun|Doddabetta|Devikulam,medium,60,Refreshing highland getaways in India
+381,Rivers in India,K,Krishna|Kaveri|Ken|Kosi|Kabini|Kal Nadi|Koyna|Kundalika,medium,60,Flowing waters of India starting with K
+382,World capital cities,M,Madrid|Manila|Maputo|Maseru|Mbabane|Mexico City|Minsk|Mogadishu|Monaco|Monrovia|Montevideo|Moscow,medium,60,Capitals of the world beginning with M
+383,Famous Indian dishes,D,Dal makhani|Dosa|Dhokla|Dabeli|Dal baati|Dahi puri|Dahi vada|Dalma,medium,60,Delicious dishes from across India
+384,Viceroys of India,*,Lord Mountbatten|Lord Curzon|Lord Dalhousie|Lord Canning|Lord Ripon|Lord Lansdowne|Lord Minto|Lord Hardinge|Lord Chelmsford|Lord Irwin,medium,60,British rulers who governed colonial India
+385,Chocolates,D,Dairy Milk|Dark chocolate|Digestive|Dots|Double Decker,medium,60,Chocolate brands and sweet treats
+386,Languages of the world,F,French|Finnish|Farsi|Fijian|Filipino|Flemish|Fula,medium,60,Languages spoken across continents
+387,Things you see in a kitchen,P,Pan|Plate|Pot|Peeler|Pestle|Pepper|Pantry|Pressure cooker,medium,60,Common kitchen items starting with P
+388,Hollywood actors,C,Cate Blanchett|Chris Evans|Christian Bale|Charlize Theron|Clint Eastwood|Colin Farrell|Chadwick Boseman|Cameron Diaz|Cuba Gooding Jr,medium,60,Famous Hollywood stars beginning with C
+389,Tourist spots in India,V,Varanasi|Vrindavan|Vizag|Valley of Flowers|Varkala|Vadodara,medium,60,Visiting-worthy places in India starting with V
+390,Capital cities in India,P,Panaji|Patna|Prayagraj|Port Blair,medium,60,State and UT capitals of India starting with P
+391,Countries in the world,S,Spain|Sweden|Switzerland|Sudan|Syria|Somalia|Serbia|Slovakia|Slovenia|Senegal|Singapore|Sri Lanka,medium,60,Countries around the world starting with S
+392,Things you see inside a car,D,Dashboard|Door|Driver seat|Display screen|Dial,medium,60,What you find when you sit inside a car
+393,Monuments in India,R,Red Fort|Rani ki Vav|Raigad Fort|Rock Garden|Ranthambore Fort|Rajabai Tower,medium,60,Historic monuments across India beginning with R
+394,Things you see in a restaurant,T,Table|Tray|Towel|Tablecloth|Teapot|Toothpick|Till|Tongs,medium,60,Things commonly spotted in a dining place
+395,Bollywood actors,R,Ranbir Kapoor|Ranveer Singh|Rajkummar Rao|Rishi Kapoor|Rekha|Rani Mukerji|Rohit Shetty|Ritesh Deshmukh,medium,60,Memorable names from Hindi film industry
+396,Famous Indian dishes,P,Paneer tikka|Pav bhaji|Poha|Paani puri|Pongal|Pesarattu|Phirni|Puri|Pulao,medium,60,Popular Indian foods starting with P
+397,Malayalam actors,S,Soubin Shahir|Sreenivasan|Shobana|Suresh Gopi|Siddique|Salim Kumar|Sharafudheen|Shine Tom Chacko,medium,60,Popular faces of Malayalam cinema starting with S
+398,Rivers in India,M,Mahanadi|Mahananda|Mahi|Mandovi|Manjira|Manas|Meghna|Malaprabha,medium,60,Flowing through the heart of India
+399,Hill stations in India,K,Kodaikanal|Kasauli|Kufri|Kalimpong|Kotagiri|Khajjiar|Kurseong,medium,60,Misty mountain escapes across India
+400,Capital cities in India,D,Dispur|Dehradun|Daman|Dharamshala|Diu,medium,60,State and UT capitals of India
+401,Cities in India,B,Bengaluru|Bhopal|Bhubaneswar|Bareilly|Bikaner|Belgaum|Bokaro|Bharuch|Bilaspur|Berhampur,medium,60,Towns and cities spread across India
+402,Tourist spots in India,A,Agra|Ajmer|Amritsar|Andaman|Aurangabad|Alleppey|Auli|Ajanta|Alibaug,medium,60,Famous destinations across India
+403,Bollywood actors,K,Kareena Kapoor|Kajol|Katrina Kaif|Karisma Kapoor|Konkona Sen|Kumar Sanu|Kartik Aaryan|Kiara Advani|Kunal Khemu,medium,60,Stars of Hindi cinema
+404,Famous Indian dishes,C,Chaat|Chole|Chapati|Curry|Cutlet|Chutney|Chicken tikka|Curd rice,medium,60,Beloved flavours from Indian kitchens and streets
+405,Famous Indian dishes,R,Rajma|Roti|Rasgulla|Rasam|Raita|Rassogolla|Rabri|Rezala,medium,60,Delicious Indian food starting with R
+406,Things you see in a kitchen,T,Tongs|Tawa|Toaster|Timer|Thermometer|Tray|Tumbler|Turmeric,medium,60,Common items found in a kitchen
+407,Things you see inside a car,M,Mirror|Mat|Meter|Music system|Manual|Map|Muffler,medium,60,Look around inside any car
+408,Things you see in a restaurant,N,Napkin|Noodles|Notepad|Newspaper|Naan,medium,60,Spot these at your favourite eatery
+409,Chocolates,M,Milkybar|Munch|Mars|Maltesers|Milka|Milky Way|Mousse,medium,60,Sweet chocolate brands and types
+410,Places in Kerala,M,Munnar|Malappuram|Mannarkkad|Mavelikkara|Marari|Mattancherry|Munroe Island|Marayoor,medium,60,Beautiful spots across Kerala
+411,Bollywood actors,*,Shah Rukh Khan|Salman Khan|Aamir Khan|Amitabh Bachchan|Hrithik Roshan|Ranbir Kapoor|Akshay Kumar|Ranveer Singh|Shahid Kapoor|Ajay Devgn,medium,60,
+412,Indian freedom fighters,*,Mahatma Gandhi|Bhagat Singh|Subhas Bose|Bal Tilak|Lala Lajpat Rai|Jawaharlal Nehru|Rani Lakshmibai|Chandrashekhar Azad|Sarojini Naidu|Mangal Pandey,medium,60,
+413,Famous monuments worldwide,C,Colosseum|Chichen Itza|Corcovado|Cradle of Humankind|Chartres Cathedral|Charminar|Cliff of Moher|Chand Baori|Capitoline Hill|Carnac Stones,medium,60,
+414,Spices used in Indian cooking,C,Cumin|Coriander|Cardamom|Cloves|Cinnamon|Cayenne|Curry leaves|Carom seeds|Chili powder|Cubeb pepper,medium,60,
+415,Olympic sports,S,Sailing|Shooting|Skateboarding|Skiing|Ski jumping|Slalom|Softball|Speed skating|Swimming|Surfing,medium,60,
+416,Famous Kerala dishes,P,Puttu|Payasam|Pathiri|Parotta|Pazham Pori|Pulissery|Prawn Curry|Palada Pradhaman|Pidi|Pepper Chicken,medium,60,
+417,Wildlife sanctuaries in Kerala,P,Parambikulam|Peechi-Vazhani|Periyar|Peppara|Pathiramanal|Palode|Ponmudi|Pakshipathalam|Parambikkulam|Puthuvype,medium,60,
+418,Mountain ranges in India,S,Sahyadri|Satpura Range|Shivalik Hills|Siwalik Range|Singalila Ridge|Sirohi Range|Sandhan Valley|Shevaroy Hills|Spiti Range|Saser Kangri,medium,60,
+419,Indian prime ministers,*,Jawaharlal Nehru|Indira Gandhi|Rajiv Gandhi|Manmohan Singh|Atal Bihari Vajpayee|Narendra Modi|Lal Bahadur Shastri|Morarji Desai|Chandra Shekhar|Deve Gowda,medium,60,
+420,Dams in Kerala,I,Idamalayar Dam|Idukki Dam|Ithikkara Dam|Iruttukkanam Dam|Isanapuram Dam|Idamalyar Reservoir|Iruttukanam Weir|Idukki Arch Dam|Inchakkad Dam|Ilaveezhapoonchira Dam,medium,60,
+421,Bollywood movies,D,Dilwale|Devdas|Dil Chahta Hai|Dangal|Dhoom|Drishyam|Don|Dabangg|Dil Se|Dostana,medium,60,
+422,Indian scientists,S,Satyendra Nath Bose|Subrahmanyan Chandrasekhar|Srinivasa Ramanujan|Salim Ali|Shanti Swarup Bhatnagar|Sisir Kumar Mitra|Satyabrata Nandi|Subramaniam Chandrasekhar|Shreeram Abhyankar|Sujata Bhatt,medium,60,
+423,Olympic sports,B,Boxing|Basketball|Badminton|Baseball|Bobsled|Biathlon|Breakdancing|Beach Volleyball|Bmx Racing|Boat Racing,medium,60,
+424,Indian sportspeople,S,Sania Mirza|Sunil Gavaskar|Sachin Tendulkar|Saina Nehwal|Sourav Ganguly|Shikhar Dhawan|Sreesanth|Suresh Raina|Sandeep Singh|Somdev Devvarman,medium,60,
+425,Musical instruments,S,Sitar|Saxophone|Snare drum|Sousaphone|Synthesizer|Sackbut|Shamisen|Steel drum|Soprano saxophone|Spinet,medium,60,
+426,Cities in India,N,Nagpur|Nashik|Noida|Navi Mumbai|Nanded|Nagaon|Nizamabad|Navsari|Nagercoil|Nadiad,medium,60,
+427,Famous monuments worldwide,T,Taj Mahal|Tower Bridge|Tikal|Trevi Fountain|Tulum|Trafalgar Square|Temple Zeus|Topkapi Palace|Thyssen Museum|Tian Tan,medium,60,
+428,Spices used in Indian cooking,T,Turmeric|Tamarind|Tejpatta|Thymol seeds|Timur|Trikatu|Talispatra|Teri methi|Tirphal|Trachyspermum,medium,60,
+429,Bollywood movies,K,Kaabil|Krrish|Kick|Kesari|Kabir Singh|Kaminey|Kahaani,medium,60,
+430,Mountain ranges in India,K,Karakoram|Kailash Range|Kameng Hills|Kullu Range|Kodaikanal Hills|Kaimur Range|Khasi Hills|Kumaon Himalayas|Kardung Range|Kargil Range,medium,60,
+431,Famous Kerala dishes,K,Karimeen|Kallummakkaya|Kadala Curry|Kozhikodan Halwa|Kappa|Kozhi Curry|Kumarakom Fish|Kalan|Kootu Curry|Kanji,medium,60,

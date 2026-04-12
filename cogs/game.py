@@ -17,7 +17,8 @@ import discord
 from discord.ext import commands
 
 from game.leaderboard import get_overall_leaderboard, record_game_results
-from game.questions import get_random_questions
+from game.questions import get_random_questions, resolve_pool_key, get_daily_pool_key
+from game.server_progress import mark_questions_asked, pool_progress
 from game.session import GameSession
 
 log = logging.getLogger("sigmocatclash.game")
@@ -31,7 +32,7 @@ COL_ERROR    = 0xED4245   # Red
 
 # ── Decorative constants ───────────────────────────────────────────────────────
 MEDALS = ["🥇", "🥈", "🥉"]
-DIFF_EMOJIS = {"easy": "🟢", "medium": "🟡", "hard": "🔴"}
+DIFF_EMOJIS = {"easy": "🟢", "medium": "🟡", "hard": "🔴", "all": "🌈", "daily": "📅"}
 FIRSTS = ["⚡", "🔥", "💥", "✨", "🎯"]  # cycling first-answer indicators
 
 
@@ -87,11 +88,12 @@ class SigmoCatClash(commands.Cog):
         rounds: discord.Option(int, "Number of rounds (1–10)", min_value=1, max_value=10) = 5,
         difficulty: discord.Option(
             str,
-            "Question difficulty",
-            choices=["easy", "medium", "hard", "all"],
+            "Question difficulty (daily = today's themed pack)",
+            choices=["easy", "medium", "hard", "all", "daily"],
         ) = "all",
     ) -> None:
         channel_id = ctx.channel_id
+        guild_id   = ctx.guild_id
 
         # Guard: game already running
         if channel_id in self._sessions and self._sessions[channel_id].is_active:
@@ -111,7 +113,9 @@ class SigmoCatClash(commands.Cog):
                 )
                 return
 
-        questions = get_random_questions(rounds, difficulty)
+        pool_key = resolve_pool_key(difficulty)
+
+        questions = get_random_questions(rounds, difficulty, guild_id=guild_id)
         if not questions:
             await ctx.respond(
                 "❌ No questions found! Make sure `data/questions/` has CSV files.",
@@ -122,8 +126,30 @@ class SigmoCatClash(commands.Cog):
         actual_rounds = min(rounds, len(questions))
         questions = questions[:actual_rounds]
 
-        session = GameSession(channel_id, ctx.author.id, actual_rounds)
+        session = GameSession(
+            channel_id, ctx.author.id, actual_rounds,
+            guild_id=guild_id, pool_key=pool_key,
+        )
         self._sessions[channel_id] = session
+
+        # Show pool progress for server-tracked pools
+        progress_line = ""
+        if guild_id:
+            total_in_pool = len(get_random_questions(9999, difficulty))  # full unfiltered pool
+            asked_count, total_count = pool_progress(guild_id, pool_key, total_in_pool)
+            remaining = total_count - asked_count
+            if total_count > 0:
+                progress_line = (
+                    f"\n📚 **Pool progress:** {asked_count}/{total_count} questions played"
+                    f" — {remaining} fresh remaining"
+                )
+                if asked_count == 0:
+                    progress_line += " *(pool just reset!)*"
+
+        # Daily theme label
+        daily_label = ""
+        if difficulty == "daily":
+            daily_label = f"\n📅 **Today's pool:** {pool_key.capitalize()} questions"
 
         # Announce game start
         embed = discord.Embed(
@@ -131,13 +157,16 @@ class SigmoCatClash(commands.Cog):
             description=(
                 "**Race to name things in the category before time runs out!**\n\n"
                 f"📋 **Rounds:** {actual_rounds}\n"
-                f"🎯 **Difficulty:** {difficulty.capitalize()}\n"
-                f"⏱️ **Time per round:** 60 seconds\n\n"
+                f"🎯 **Difficulty:** {difficulty.capitalize()}"
+                f"{daily_label}\n"
+                f"⏱️ **Time per round:** 60 seconds"
+                f"{progress_line}\n\n"
                 "**How to play:**\n"
-                "> A **category** and **letter** are posted each round.\n"
-                "> Type things from that category starting with that letter.\n"
+                "> A **category** and **letter** (or *Any Letter* ✨) are posted each round.\n"
+                "> Type things from that category (starting with the letter if given).\n"
                 "> Use **commas** for multiple answers: `Bowl, Bread, Butter`\n"
-                "> **First** to claim an answer scores the point — no repeats!\n\n"
+                "> **First** to claim an answer scores the point — no repeats!\n"
+                "> ⚡ Speed bonus for first scorer  •  🔥 Streak bonus from 3rd answer\n\n"
                 "🚀 **First round starts in 5 seconds…**"
             ),
             color=COL_START,
@@ -168,7 +197,6 @@ class SigmoCatClash(commands.Cog):
             return
 
         session.stop()
-        # _run_game's finally block will pop the session
         embed = discord.Embed(
             title="🛑 Game Stopped",
             description=f"Game stopped by {ctx.author.mention}.",
@@ -203,16 +231,22 @@ class SigmoCatClash(commands.Cog):
                 "**Category Clash — Rapid Fire Edition**\n\n"
                 "**Each round:**\n"
                 "1️⃣  A **category** (e.g. *Things in a kitchen*) and a **letter** (e.g. *B*) appear.\n"
-                "2️⃣  Type words from that category starting with that letter in chat.\n"
+                "     Some rounds show **Any Letter ✨** — type any matching item!\n"
+                "2️⃣  Type words from that category (starting with the given letter) in chat.\n"
                 "3️⃣  Use **commas** for multiple answers at once: `Bowl, Bread, Butter`\n"
                 "4️⃣  **First** to claim a valid answer gets **+1 point** — no one else can take it!\n"
                 "5️⃣  Answers must be real items in the category (typos are OK — fuzzy matching is on!).\n"
                 "6️⃣  You have **60 seconds** — be quick!\n\n"
-                "**Scoring:**\n"
-                "• +1 pt per unique valid answer you claim first\n"
-                "• ✅ Reaction = claimed! Points added.\n"
-                "• 🔁 Reaction = already taken by someone else\n"
-                "• ❌ Reaction = not a valid answer for this category\n\n"
+                "**Scoring bonuses:**\n"
+                "⚡ **Speed bonus** — +1 pt to the very first scorer of each round\n"
+                "🔥 **Streak bonus** — +1 pt for your 3rd+ consecutive valid answer in a round\n"
+                "   (invalid answers reset your streak; duplicates don't)\n\n"
+                "**Difficulty modes:**\n"
+                "`easy` / `medium` / `hard` / `all` — classic difficulty pools\n"
+                "`daily` — today's themed pack (India, Kerala, World…)\n\n"
+                "**Reactions:**\n"
+                "• ✅ = scored!  • ⚡ = speed bonus!  • 🔥 = streak!\n"
+                "• 🔁 = already taken  • ❌ = not a valid answer\n\n"
                 "**Commands:**\n"
                 "`/play [rounds] [difficulty]` — Start a game\n"
                 "`/scores` — Check live game scores\n"
@@ -293,8 +327,9 @@ class SigmoCatClash(commands.Cog):
         scored_new = False
         got_duplicate = False
         got_invalid = False
+        got_streak = False
+        got_speed = False
 
-        # Deduplicate within this single message before submission
         seen_this_msg: set[str] = set()
         for part in parts:
             normalised = part.lower()
@@ -306,22 +341,31 @@ class SigmoCatClash(commands.Cog):
 
             if result.is_valid and not result.is_duplicate and result.points > 0:
                 scored_new = True
+                if result.streak_bonus:
+                    got_streak = True
+                if result.speed_bonus:
+                    got_speed = True
             elif result.is_duplicate:
                 got_duplicate = True
             elif not result.is_valid:
                 got_invalid = True
 
-        # React to confirm receipt — one reaction only per message
+        # React to confirm receipt
         try:
             if scored_new:
                 await message.add_reaction("✅")
+                if got_speed:
+                    await message.add_reaction("⚡")
+                if got_streak:
+                    await message.add_reaction("🔥")
             elif got_duplicate and not scored_new:
                 await message.add_reaction("🔁")
             elif got_invalid and not scored_new and not got_duplicate:
-                # Only react with ❌ if EVERY part was invalid (bad letter / too short)
-                # so normal chat during a game doesn't get spammed with ❌
-                letter = (session.current_question or {}).get("letter", "")
-                any_starts = any(p.lower().startswith(letter.lower()) for p in parts if letter)
+                q_letter = (session.current_question or {}).get("letter", "")
+                if q_letter == "*":
+                    any_starts = any(len(p.strip()) >= 3 for p in parts)
+                else:
+                    any_starts = any(p.lower().startswith(q_letter.lower()) for p in parts if q_letter)
                 if any_starts:
                     await message.add_reaction("❌")
         except (discord.HTTPException, discord.Forbidden):
@@ -335,6 +379,7 @@ class SigmoCatClash(commands.Cog):
         session: GameSession,
         questions: list[dict],
     ) -> None:
+        asked_ids: list[str] = []
         try:
             await asyncio.sleep(5)  # Pre-game countdown
 
@@ -342,9 +387,12 @@ class SigmoCatClash(commands.Cog):
                 if not session.is_active:
                     break
                 await self._run_round(channel, session, question)
+                # Track this question as asked for the server
+                qid = question.get("id", "")
+                if qid:
+                    asked_ids.append(qid)
                 if not session.is_active:
                     break
-                # Gap between rounds (skip after last)
                 if i < len(questions) - 1:
                     await asyncio.sleep(5)
 
@@ -360,6 +408,12 @@ class SigmoCatClash(commands.Cog):
             except Exception:
                 pass
         finally:
+            # Persist all asked question IDs for this server at once
+            if session.guild_id and asked_ids:
+                try:
+                    mark_questions_asked(session.guild_id, asked_ids, session.pool_key)
+                except Exception:
+                    log.exception("Failed to persist server progress.")
             session.is_active = False
             self._sessions.pop(channel.id, None)
 
@@ -381,14 +435,18 @@ class SigmoCatClash(commands.Cog):
         hint       = question.get("hint", "")
         diff_emoji = DIFF_EMOJIS.get(difficulty, "🟡")
 
+        any_letter    = letter == "*"
+        letter_display    = "**Any Letter ✨**" if any_letter else f"# {letter}"
+        letter_field_name = "🔤  Letter" if any_letter else "🔤  Starting Letter"
+
         # ── Question embed ─────────────────────────────────────────────────────
         embed = discord.Embed(
             title=f"Round {session.current_round} of {session.total_rounds}  •  {emoji} Category Clash",
             color=COL_QUESTION,
         )
-        embed.add_field(name="📂  Category", value=f"## {category}", inline=False)
-        embed.add_field(name="🔤  Starting Letter", value=f"# {letter}", inline=True)
-        embed.add_field(name="⏱️  Time Limit",      value=f"**{time_limit}s**", inline=True)
+        embed.add_field(name="📂  Category",       value=f"## {category}", inline=False)
+        embed.add_field(name=letter_field_name,    value=letter_display,   inline=True)
+        embed.add_field(name="⏱️  Time Limit",     value=f"**{time_limit}s**", inline=True)
         embed.add_field(name=f"{diff_emoji}  Difficulty", value=difficulty.capitalize(), inline=True)
         if hint:
             embed.add_field(name="💡  Hint", value=hint, inline=False)
@@ -406,6 +464,7 @@ class SigmoCatClash(commands.Cog):
         # ── Timer ──────────────────────────────────────────────────────────────
         half = time_limit // 2
         remaining = time_limit - half
+        letter_reminder = "Any Letter" if any_letter else letter
 
         await asyncio.sleep(half)
         if not session.is_active:
@@ -413,7 +472,7 @@ class SigmoCatClash(commands.Cog):
 
         try:
             await channel.send(
-                f"⏰  **{remaining} seconds left!**  Category: **{category}**  |  Letter: **{letter}**",
+                f"⏰  **{remaining} seconds left!**  Category: **{category}**  |  Letter: **{letter_reminder}**",
                 delete_after=float(remaining),
             )
         except (discord.HTTPException, discord.Forbidden):
@@ -443,15 +502,21 @@ class SigmoCatClash(commands.Cog):
         session: GameSession,
         question: dict,
     ) -> None:
-        summary   = session.get_round_summary()
-        player_valid: dict[str, list[str]] = summary["player_valid"]
-        duplicates = summary["duplicates"]
+        summary          = session.get_round_summary()
+        player_valid     = summary["player_valid"]
+        player_points    = summary["player_points"]
+        player_max_streak = summary["player_max_streak"]
+        player_speed     = summary["player_speed"]
+        duplicates       = summary["duplicates"]
+
+        q_letter     = question.get("letter", "")
+        letter_label = "Any Letter" if q_letter == "*" else q_letter
 
         embed = discord.Embed(
             title=f"⏱️  Time's Up!  —  Round {session.current_round} Results",
             description=(
                 f"**Category:** {question['category']}  |  "
-                f"**Letter:** {question['letter']}"
+                f"**Letter:** {letter_label}"
             ),
             color=COL_RESULTS,
         )
@@ -459,12 +524,24 @@ class SigmoCatClash(commands.Cog):
         # ── Valid answers ──────────────────────────────────────────────────────
         if player_valid:
             lines = []
-            # Sort by number of answers (most productive player first)
-            for player, answers in sorted(player_valid.items(), key=lambda x: len(x[1]), reverse=True):
-                pts = len(answers)
-                answer_str = ", ".join(answers)
+            for player, answers in sorted(
+                player_valid.items(),
+                key=lambda x: player_points.get(x[0], 0),
+                reverse=True,
+            ):
+                pts = player_points.get(player, len(answers))
                 suffix = "pt" if pts == 1 else "pts"
-                lines.append(f"✅  **{player}** — {answer_str}  *(+{pts} {suffix})*")
+                answer_str = ", ".join(answers)
+
+                tags: list[str] = []
+                if player in player_speed:
+                    tags.append("⚡ Speed")
+                streak = player_max_streak.get(player, 0)
+                if streak >= 3:
+                    tags.append(f"🔥 ×{streak} streak")
+                tag_str = "  " + "  ".join(tags) if tags else ""
+
+                lines.append(f"✅  **{player}** — {answer_str}  *(+{pts} {suffix})*{tag_str}")
             embed.add_field(
                 name="🎯  Claimed Answers",
                 value=_truncate("\n".join(lines)),
@@ -498,7 +575,7 @@ class SigmoCatClash(commands.Cog):
         if lb:
             is_last = session.current_round >= session.total_rounds
             lb_title = (
-                f"📊  Final Standings" if is_last
+                "📊  Final Standings" if is_last
                 else f"📊  Standings — after Round {session.current_round}"
             )
             embed.add_field(
@@ -518,7 +595,6 @@ class SigmoCatClash(commands.Cog):
     # ──────────────────────────────────────────────────────────────────────────
 
     async def _post_final(self, channel: discord.TextChannel, session: GameSession) -> None:
-        # Persist scores to the overall leaderboard before displaying
         player_scores = {
             pid: (session.player_names.get(pid, "Unknown"), score)
             for pid, score in session.scores.items()
@@ -545,7 +621,6 @@ class SigmoCatClash(commands.Cog):
                 + _leaderboard_text(lb)
             )
 
-        # Truncate if leaderboard is very long
         if len(embed.description) > 4096:
             embed.description = embed.description[:4090] + "\n..."
 

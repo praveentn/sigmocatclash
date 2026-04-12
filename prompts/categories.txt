@@ -1,0 +1,39 @@
+You are designing questions for a rapid-fire word game called Category Clash.
+Generate exactly {count} unique category + letter combinations for difficulty: {difficulty}.
+
+Difficulty guide:
+  easy   = everyday topics (animals, food, sports, clothes, colors, jobs)
+  medium = broader knowledge (movies, countries, music, science, cooking, travel)
+  hard   = expert topics (chemistry, classical music, philosophy, architecture, anatomy)
+
+LETTER RULES — read carefully:
+
+1. PROPER NOUN categories (actor names, politician names, directors, historical figures,
+   brand names, specific people) — ALWAYS use "*" as the letter.
+   Reason: players can name anyone from the category, not just those starting with one letter.
+
+   Examples that MUST use "*":
+     - "Hollywood actors"          -> "*"
+     - "Malayalam actors"          -> "*"
+     - "Bollywood actors"          -> "*"
+     - "Film directors"            -> "*"
+     - "Chief Ministers of India"  -> "*"
+     - "Viceroys of India"         -> "*"
+     - "Indian cricketers"         -> "*"
+     - "Cartoon characters"        -> "*"
+
+2. PLACE / GEOGRAPHY categories — choose a letter that has AT LEAST 8 well-known answers.
+   Safe letters for capitals/cities: B, C, K, M, N, P, R, S, T
+   AVOID for capitals/cities: F, G, O, Q, U, W, X, Y, Z  (too few answers)
+
+   Examples:
+     - "World capital cities" + "B" -> Budapest, Brussels, Bangkok, Bogota, Berlin, Bern, Brasilia, Belgrade (good)
+     - "World capital cities" + "F" -> Funafuti, Freetown (BAD - only 2, don't do this)
+
+3. GENERAL categories (animals, food, objects, sports) — choose any letter with 8+ common answers.
+   Avoid X, Q, Z unless difficulty is hard.
+
+4. Return ONLY a valid JSON array of objects, no explanation, no markdown.
+   Format: [{{"category": "Things in a kitchen", "letter": "B"}}, ...]
+
+JSON array:

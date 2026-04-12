@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(python -c ':*)",
-      "Bash(py -3 -c ':*)"
+      "Bash(py -3 -c ':*)",
+      "Bash(wc -l c:/Users/prave/explore/sigmocatclash/data/questions/*.csv)",
+      "Bash(.venv/Scripts/python scripts/bulk_generate.py --prompt-file prompts/india_kerala_world.txt --output india_kerala_world --target 60)",
+      "Bash(.venv/Scripts/python -)",
+      "Bash(.venv/Scripts/python scripts/bulk_generate.py --help)",
+      "Bash(python -)"
     ]
   }
 }

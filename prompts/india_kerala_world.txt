@@ -1,0 +1,85 @@
+You are writing trivia questions for SigmoCatClash — a fast-paced Discord word game.
+Players are shown a category and either a starting letter OR "Any Letter" (they can type any matching answer).
+
+Generate exactly {count} UNIQUE questions drawn from these themes: India, Kerala, and World.
+
+Focus on these categories (rotate across them, don't repeat the same category twice):
+  India:
+    - States in India
+    - Places in India / Tourist spots in India
+    - Hill stations in India
+    - Capital cities in India (state capitals)
+    - Cities in India
+    - Rivers in India
+    - Mountain ranges in India
+    - Monuments in India
+    - Viceroys of India
+    - Chief Ministers of India (past and present)
+    - Bollywood actors
+    - Film directors in India
+    - Things you see in a kitchen
+    - Things you see inside a car
+    - Things you see in a restaurant
+    - Chocolates (brands and types)
+    - Famous Indian dishes / street food
+
+  Kerala:
+    - Rivers in Kerala
+    - Dams in Kerala
+    - Places in Kerala / Tourist spots in Kerala
+    - Districts of Kerala
+
+  World:
+    - Countries in the world
+    - World capital cities
+    - Hollywood actors
+    - Malayalam actors
+    - Famous world monuments
+    - Languages of the world
+
+Rules for each question:
+  1. "category"   — clear, specific topic (e.g. "Rivers in India", "Hill stations in India")
+  2. "letter"     — EITHER:
+                    - A single capital letter (choose one where 8+ common answers exist), OR
+                    - Use "*" for ANY letter — use this when restricting by letter would yield
+                      too few well-known answers (e.g. "Chief Ministers of India", "Viceroys of India",
+                      "Malayalam actors", "Film directors in India")
+  3. "answers"    — array of 8–15 items.
+                    - If letter is a specific letter: ALL answers MUST start with that letter.
+                    - If letter is "*": include the most well-known items regardless of starting letter.
+                    - Only include answers that most people would recognise.
+                    - WORD LENGTH: answers must be 1–2 words. Use 3 words only when unavoidable
+                      (e.g. "Andaman and Nicobar" is acceptable; prefer shorter forms like "Goa", "Kerala").
+                      NEVER include 4+ word answers.
+  4. "hint"       — short helpful clue, or "" if obvious
+  5. "time_limit" — 60 for almost all questions
+
+Avoid these category+letter combinations (already exist):
+{avoid_block}
+
+Return ONLY a valid JSON array — no markdown, no explanation, no code fences.
+
+[
+  {{
+    "category": "Rivers in India",
+    "letter": "G",
+    "answers": ["Ganges", "Godavari", "Ghaghara", "Gomti", "Gandak", "Ghaggar"],
+    "hint": "Sacred and mighty rivers of the subcontinent",
+    "time_limit": 60
+  }},
+  {{
+    "category": "Chief Ministers of India",
+    "letter": "*",
+    "answers": ["Narendra Modi", "Arvind Kejriwal", "Mamata Banerjee", "Yogi Adityanath", "Nitish Kumar", "Pinarayi Vijayan", "Siddaramaiah", "Hemant Soren"],
+    "hint": "Past and present Chief Ministers across Indian states",
+    "time_limit": 60
+  }},
+  {{
+    "category": "Hill stations in India",
+    "letter": "M",
+    "answers": ["Munnar", "Mahabaleshwar", "Manali", "Mussoorie", "Matheran", "Mount Abu"],
+    "hint": "Cool retreats in the mountains",
+    "time_limit": 60
+  }},
+  ...
+]

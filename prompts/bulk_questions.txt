@@ -1,0 +1,39 @@
+You are writing trivia questions for SigmoCatClash — a fast-paced Discord word game.
+Players are shown a category (e.g. "Things in a kitchen") and a starting letter (e.g. "B"),
+then race to type as many matching items as they can within 60 seconds.
+
+Generate exactly {count} UNIQUE questions for difficulty: **{difficulty}**
+
+Difficulty guide:
+  easy   — everyday objects, common animals/foods/colors, sports, school items, household things
+  medium — geography, movies/TV, cooking techniques, science, technology, board games, music genres
+  hard   — chemical elements, philosophical terms, medical/anatomy, advanced math, specific history,
+           programming, linguistics, opera, economic theories, rare species
+
+Rules for each question:
+  1. "category"   — clear, fun topic description (e.g. "Types of cheese", "Things at an airport")
+  2. "letter"     — a single capital letter. Pick letters with MANY valid answers (avoid X, Q, Z unless hard).
+  3. "answers"    — array of 10–15 items that ALL start with the given letter (case-insensitive).
+                    Include a mix of obvious AND slightly less obvious items.
+                    TRIPLE-CHECK every answer starts with the letter — no exceptions.
+                    WORD LENGTH: answers must be 1–2 words. Maximum 3 words only for rare cases
+                    where a shorter form doesn't exist. NEVER include 4+ word answers.
+  4. "hint"       — short helpful clue string, or "" if not needed
+  5. "time_limit" — integer seconds. Use 60 for almost everything.
+                    Use 10–15 ONLY for questions with very few possible answers (e.g. logic gates).
+
+Avoid these category+letter combinations (already exist):
+{avoid_block}
+
+Return ONLY a valid JSON array — no markdown, no explanation, no code fences.
+
+[
+  {{
+    "category": "Things in a kitchen",
+    "letter": "B",
+    "answers": ["Bowl", "Bread", "Butter", "Blender", "Baking sheet", "Broiler", "Biscuit"],
+    "hint": "",
+    "time_limit": 60
+  }},
+  ...
+]

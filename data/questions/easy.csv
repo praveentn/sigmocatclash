@@ -149,3 +149,193 @@ id,category,letter,answers,difficulty,time_limit,hint
 148,Dance styles,H,Hip hop|Hula|Highland dance|Hora,easy,60,Ways people dance around the world
 149,Desserts and sweet treats,P,Pie|Pudding|Panna cotta|Praline|Pavlova|Peach cobbler|Profiterole|Peppermint candy,easy,60,Sweet foods and treats
 150,Things you wear,T,T-shirt|Tuxedo|Tights|Tie|Trousers|Trainers|Turban|Tank top|Tutu|Trench coat|Tracksuit,easy,60,Clothing and accessories
+151,Rivers in India,G,Ganges|Godavari|Ghaghara|Gomti|Gandak|Ghaggar|Ganga|Girna,easy,60,Sacred and mighty rivers of the subcontinent
+152,Chief Ministers of India,*,Narendra Modi|Arvind Kejriwal|Mamata Banerjee|Yogi Adityanath|Nitish Kumar|Pinarayi Vijayan|Siddaramaiah|Hemant Soren|Bhupesh Baghel|Ashok Gehlot,easy,60,Past and present Chief Ministers across Indian states
+153,Hill stations in India,M,Munnar|Mahabaleshwar|Manali|Mussoorie|Matheran|Mount Abu|Mahabalipuram|Mcleodganj,easy,60,Cool retreats in the mountains
+154,States in India,A,Andhra Pradesh|Arunachal Pradesh|Assam|Andaman,easy,60,Indian states beginning with A
+155,States in India,M,Maharashtra|Madhya Pradesh|Manipur|Meghalaya|Mizoram,easy,60,Indian states beginning with M
+156,Places in India,V,Varanasi|Visakhapatnam|Vadodara|Vellore|Vrindavan|Vijayawada|Varkala,easy,60,Famous cities and tourist spots in India
+157,Capital cities in India,B,Bengaluru|Bhopal|Bhubaneswar|Bhopal|Bangalore,easy,60,State capitals of India
+158,Capital cities in India,P,Patna|Panaji|Port Blair|Panjim,easy,60,State capitals of India starting with P
+159,Cities in India,H,Hyderabad|Howrah|Haridwar|Hubli|Hoshiarpur|Hassan|Hisar|Haldwani,easy,60,Well-known Indian cities
+160,Mountain ranges in India,*,Himalayas|Western Ghats|Eastern Ghats|Vindhya|Satpura|Aravalli|Karakoram|Nilgiris|Shivalik|Zagros,easy,60,Great mountain ranges found in India
+161,Monuments in India,T,Taj Mahal|Tanjavur Temple|Tirupati|Tower of Silence|Tughlaqabad,easy,60,Famous historical monuments of India
+162,Monuments in India,R,Red Fort|Rashtrapati Bhavan|Rock Fort|Rani ki Vav|Ranthambore Fort,easy,60,Iconic monuments and forts of India
+163,Viceroys of India,*,Lord Mountbatten|Lord Curzon|Lord Wavell|Lord Linlithgow|Lord Irwin|Lord Ripon|Lord Dalhousie|Lord Canning|Lord Chelmsford|Lord Hardinge,easy,60,British Viceroys who ruled over India
+164,Bollywood actors,S,Shah Rukh Khan|Salman Khan|Saif Ali Khan|Sanjay Dutt|Sunny Deol|Shahid Kapoor|Sidharth Malhotra|Suniel Shetty,easy,60,Famous male actors of Hindi cinema
+165,Bollywood actors,A,Amitabh Bachchan|Aamir Khan|Ajay Devgn|Akshay Kumar|Arjun Kapoor|Anil Kapoor|Abhishek Bachchan|Ayushmann Khurrana,easy,60,Iconic and popular Bollywood stars
+166,Film directors in India,*,Mani Ratnam|Rajkumar Hirani|Sanjay Bhansali|Farah Khan|Karan Johar|SS Rajamouli|Priyadarshan|Shankar|Zoya Akhtar|Anurag Kashyap,easy,60,Celebrated directors of Indian cinema
+167,Famous Indian dishes,B,Biryani|Butter chicken|Bhel puri|Baingan bharta|Bisibelebath|Bonda|Bread pakora,easy,60,Delicious Indian foods and street snacks
+168,Famous Indian dishes,D,Dosa|Dal makhani|Dhokla|Dal baati|Dahi vada|Dabeli|Dahi puri,easy,60,Popular Indian foods starting with D
+169,Famous Indian dishes,P,Pani puri|Paneer tikka|Poha|Paratha|Pav bhaji|Puttu|Pesarattu|Prawn curry,easy,60,Tasty Indian dishes and street food starting with P
+170,Things you see in a kitchen,M,Mixer|Microwave|Masher|Measuring cup|Mop|Mortar,easy,60,Common items found in a kitchen
+171,Things you see in a kitchen,T,Tawa|Toaster|Tongs|Tupperware|Turmeric|Timer|Teapot|Towel,easy,60,Everyday items in the kitchen
+172,Things you see inside a car,S,Seat|Seatbelt|Stereo|Speedometer|Sunroof|Side mirror|Steering wheel,easy,60,Parts and items found inside a car
+173,Things you see inside a car,D,Dashboard|Door|Dial|Dome light|Driver seat|Defogger,easy,60,Components you notice inside a vehicle
+174,Things you see in a restaurant,M,Menu|Manager|Mortar|Mop|Mat|Mirror|Music,easy,60,Things commonly spotted at a restaurant
+175,Things you see in a restaurant,W,Waiter|Water|Wine list|Window|Wall art|Washroom,easy,60,Items and people seen at a restaurant
+176,Chocolates,K,Kit Kat|Kinder Joy|Kinder Bueno|Kinder Bar,easy,60,Chocolate brands and products starting with K
+177,Chocolates,D,Dairy Milk|Dark chocolate|Dove|Dairyfine,easy,60,Popular chocolate brands and types
+178,Chocolates,T,Toblerone|Twix|Toffifee|Twirl|Temptations,easy,60,Well-known chocolate brands starting with T
+179,Rivers in Kerala,P,Periyar|Pamba|Ponnani|Palar|Pallippuzha,easy,60,Rivers flowing through God's Own Country
+180,Dams in Kerala,*,Idukki Dam|Banasura Sagar|Mullaperiyar|Kallada Dam|Peechi Dam|Malampuzha Dam|Sholayar Dam|Neyyar Dam|Periyar Dam,easy,60,Major dams built in Kerala
+181,Places in Kerala,A,Alleppey|Alappuzha|Athirappilly|Aluva|Angamaly|Attappady,easy,60,Tourist spots and cities in Kerala starting with A
+182,Places in Kerala,K,Kovalam|Kozhikode|Kochi|Kannur|Kottayam|Kasaragod|Kollam|Kumarakom|Kodanad,easy,60,Famous places in Kerala starting with K
+183,Districts of Kerala,*,Thiruvananthapuram|Kollam|Pathanamthitta|Alappuzha|Kottayam|Idukki|Ernakulam|Thrissur|Palakkad|Malappuram|Kozhikode|Wayanad|Kannur|Kasaragod,easy,60,All 14 districts of Kerala
+184,Countries in the world,N,Nepal|Nigeria|Norway|Netherlands|New Zealand|Nicaragua|Namibia|Niger|North Korea,easy,60,Countries from around the globe starting with N
+185,Countries in the world,P,Pakistan|Peru|Philippines|Poland|Portugal|Panama|Papua New Guinea|Paraguay,easy,60,Nations of the world starting with P
+186,Countries in the world,I,India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Iceland,easy,60,Countries of the world beginning with I
+187,World capital cities,B,Beijing|Berlin|Brasilia|Brussels|Budapest|Bogota|Bangkok|Baku|Bern,easy,60,Capitals of countries around the world starting with B
+188,World capital cities,M,Madrid|Manila|Mogadishu|Montevideo|Moscow|Muscat|Mexico City|Malabo,easy,60,World capitals starting with M
+189,Hollywood actors,T,Tom Hanks|Tom Cruise|Tobey Maguire|Tilda Swinton|Timothee Chalamet|Tom Hardy|Tommy Lee Jones,easy,60,Famous Hollywood stars beginning with T
+190,Hollywood actors,J,Johnny Depp|Jennifer Aniston|Julia Roberts|Jim Carrey|Joaquin Phoenix|Jennifer Lawrence|Jude Law|Jamie Foxx,easy,60,Well-known Hollywood celebrities starting with J
+191,Malayalam actors,*,Mohanlal|Mammootty|Dulquer Salmaan|Fahadh Faasil|Tovino Thomas|Nivin Pauly|Prithviraj Sukumaran|Jayaram|Dileep|Asif Ali,easy,60,Stars of Malayalam cinema
+192,Famous world monuments,C,Colosseum|Chichen Itza|Christ the Redeemer|Colossus of Rhodes|Cologne Cathedral,easy,60,Iconic landmarks around the world starting with C
+193,Famous world monuments,E,Eiffel Tower|Eifel Castle|Empire State Building|Effingham Monument,easy,60,World-famous landmarks starting with E
+194,Languages of the world,S,Spanish|Swahili|Swedish|Serbian|Sinhalese|Somali|Slovak|Slovenian|Sindhi,easy,60,Languages spoken around the world starting with S
+195,Languages of the world,M,Malayalam|Mandarin|Malay|Marathi|Mongolian|Maltese|Macedonian|Malagasy,easy,60,World languages starting with M
+196,Languages of the world,T,Tamil|Telugu|Turkish|Tagalog|Thai|Tibetan|Tajik|Tigrinya,easy,60,Languages from around the world starting with T
+197,Hill stations in India,C,Coorg|Coonoor|Chikmagalur|Cherrapunji|Chakrata,easy,60,Popular hill retreats in India starting with C
+198,Rivers in India,K,Krishna|Kaveri|Ken|Kosi|Kabini|Kunti|Koyna|Kali,easy,60,Flowing waters across the Indian subcontinent
+199,Places in India,J,Jaipur|Jodhpur|Jaisalmer|Jammu|Jhansi|Jamshedpur|Junagadh|Jagdalpur,easy,60,Cities and towns across India
+200,Hill stations in India,D,Darjeeling|Dalhousie|Dehra Dun|Dharmshala|Devikulam|Dooars,easy,60,Cool retreats nestled in Indian hills
+201,Capital cities in India,D,Dehradun|Dispur|Dharamshala|Daman|Delhi,easy,60,State and union territory capitals of India
+202,Cities in India,P,Pune|Patna|Pondicherry|Puri|Panaji|Patiala|Palakkad|Porbandar,easy,60,Urban centres spread across India
+203,Monuments in India,A,Agra Fort|Ajanta Caves|Amer Fort|Alai Darwaza|Agra Palace,easy,60,Famous architectural marvels of India
+204,Bollywood actors,R,Ranbir Kapoor|Ranveer Singh|Rajkummar Rao|Rishi Kapoor|Raj Kapoor|Rekha|Rani Mukerji|Ritesh Deshmukh,easy,60,Stars of Hindi cinema
+205,Bollywood actors,K,Kareena Kapoor|Kartik Aaryan|Karisma Kapoor|Kajol|Katrina Kaif|Kumar Sanu|Kabir Bedi|Kriti Sanon,easy,60,Famous faces from Bollywood
+206,Famous Indian dishes,S,Samosa|Sambar|Sevpuri|Shahi paneer|Sheekh kebab|Sabudana khichdi|Sandesh|Shrikhand,easy,60,Beloved flavours from Indian cuisine
+207,Famous Indian dishes,R,Rasmalai|Rogan josh|Rasam|Rasgulla|Rajma|Rava dosa|Raita|Roti,easy,60,Popular dishes enjoyed across India
+208,Things you see in a kitchen,K,Knife|Kettle|Kadai|Karahi|Kitchen towel|Kneading board,easy,60,Everyday items found in an Indian kitchen
+209,Things you see in a kitchen,B,Bowl|Blender|Bottle|Broom|Basket|Butter dish|Baking tray,easy,60,Common objects spotted in a kitchen
+210,Things you see inside a car,M,Mirror|Mat|Meter|Music system|Map,easy,60,Objects you find when you step inside a vehicle
+211,Things you see inside a car,W,Wheel|Windshield|Window|Wiper|Wire,easy,60,Parts and items inside or on a car
+212,Things you see in a restaurant,S,Spoon|Salt shaker|Straw|Serviette|Soup bowl|Saucer|Seat|Signboard,easy,60,Items commonly found in a dining establishment
+213,Things you see in a restaurant,F,Fork|Food tray|Flower vase|Fish tank|Fan|Fire exit,easy,60,Things visible inside a restaurant
+214,Chocolates,M,Milkybar|Mars|Munch|Milka|Maltesers|Melody|Mango bite,easy,60,Chocolates and sweet candy brands
+215,Chocolates,C,Cadbury|Crunch|Crispy|Celebrations|Choco Pie|Coffee Bite|Choclair,easy,60,Popular chocolate brands and types
+216,Rivers in Kerala,K,Kabani|Kallada|Karamana|Kuttiyadi|Kaliyar|Kadalundi,easy,60,Waterways that run through God's Own Country
+217,Places in Kerala,M,Munnar|Malappuram|Mahe|Muvattupuzha|Manjeri|Maradu|Mavelikkara,easy,60,Towns and tourist spots in Kerala
+218,Places in Kerala,T,Thrissur|Thiruvananthapuram|Thrippunithura|Thalassery|Thodupuzha|Tirur,easy,60,Destinations in God's Own Country
+219,Countries in the world,B,Brazil|Belgium|Bolivia|Botswana|Bahrain|Bangladesh|Barbados|Belize|Bhutan|Bulgaria,easy,60,Nations from around the globe
+220,Countries in the world,C,Canada|China|Cuba|Chile|Croatia|Colombia|Cambodia|Cameroon|Cyprus|Comoros,easy,60,Countries starting with the third letter of the alphabet
+221,Countries in the world,M,Mexico|Morocco|Malaysia|Madagascar|Maldives|Malta|Mozambique|Mongolia|Montenegro|Myanmar,easy,60,Nations from multiple continents
+222,World capital cities,T,Tokyo|Tehran|Tashkent|Tallinn|Tbilisi|Thimphu|Tripoli|Tunis|Taipei,easy,60,Capital cities of countries around the world
+223,World capital cities,K,Kabul|Kathmandu|Kampala|Kuala Lumpur|Kuwait City|Kingstown|Kigali|Kingston,easy,60,Capitals of nations across the globe
+224,World capital cities,A,Ankara|Amsterdam|Accra|Amman|Astana|Apia|Ashgabat|Abuja|Abu Dhabi,easy,60,National capitals beginning with A
+225,Hollywood actors,B,Brad Pitt|Ben Affleck|Bruce Willis|Billy Crystal|Blake Lively|Brie Larson|Bryan Cranston|Brendan Fraser,easy,60,Stars of the big screen from Hollywood
+226,Hollywood actors,C,Cate Blanchett|Chris Evans|Charlize Theron|Christian Bale|Chadwick Boseman|Clint Eastwood|Cameron Diaz|Cuba Gooding,easy,60,Famous faces from Western cinema
+227,Hollywood actors,M,Meryl Streep|Morgan Freeman|Matt Damon|Margot Robbie|Mel Gibson|Michael Fassbender|Mark Ruffalo|Mila Kunis,easy,60,Celebrated actors from American films
+228,Famous world monuments,T,Taj Mahal|Tower Bridge|Trevi Fountain|Temple of Zeus|Tiananmen Square,easy,60,Iconic structures recognised around the world
+229,Famous world monuments,A,Acropolis|Angkor Wat|Arc de Triomphe|Alhambra|Abu Simbel,easy,60,World-famous historical landmarks
+230,Famous world monuments,P,Parthenon|Petra|Pyramids|Pantheon|Palace of Versailles,easy,60,Globally renowned monuments and heritage sites
+231,Languages of the world,A,Arabic|Armenian|Amharic|Assamese|Azerbaijani|Afrikaans|Albanian,easy,60,Spoken languages from across the globe
+232,Languages of the world,G,German|Greek|Gujarati|Georgian|Galician|Guarani,easy,60,Languages spoken by millions worldwide
+233,Places in India,R,Rishikesh|Rajkot|Raipur|Ranchi|Rameswaram|Roorkee|Rohtak|Ratnagiri,easy,60,Notable places and cities across India
+234,Hill stations in India,K,Kodaikanal|Kufri|Kurseong|Kotagiri|Kasol|Khajjiar,easy,60,Scenic hill retreats across India
+235,Places in India,A,Agra|Amritsar|Ahmedabad|Allahabad|Ajmer|Aurangabad|Aligarh|Almora|Andaman,easy,60,Popular cities and destinations across India
+236,Capital cities in India,R,Raipur|Ranchi|Rishikesh|Raj Bhavan,easy,60,Capitals of Indian states
+237,Cities in India,B,Bengaluru|Bhopal|Bhubaneswar|Bikaner|Bareilly|Baroda|Bilaspur|Bhatinda|Belgaum,easy,60,Major urban centres across India
+238,Rivers in India,M,Mahanadi|Mahi|Mandovi|Mapusa|Meenachil|Moyar|Mutha,easy,60,Rivers flowing through the Indian subcontinent
+239,Bollywood actors,D,Deepika Padukone|Dharmendra|Dev Anand|Diljit Dosanjh|Dia Mirza|Divya Khosla|Dimple Kapadia,easy,60,Stars of Hindi cinema
+240,Things you see in a kitchen,S,Spatula|Saucepan|Strainer|Spoon|Skillet|Steamer|Sink|Spice rack|Scale,easy,60,Common items found in a kitchen
+241,Things you see inside a car,G,Gear|Glove box|GPS|Glass|Grille,easy,60,Items you find inside or on a car
+242,Things you see in a restaurant,C,Chair|Cutlery|Chef|Counter|Candle|Curtain|Cashier|Condiments,easy,60,Things you come across at a restaurant
+243,Chocolates,B,Bounty|Boost|Bournville|Butterfinger|Bournvita,easy,60,Popular chocolate brands and bars
+244,Famous Indian dishes,K,Kadai Paneer|Khichdi|Korma|Kulfi|Kachori|Kofte|Kheer|Keema,easy,60,Beloved dishes from Indian cuisine
+245,Countries in the world,S,Spain|Sweden|Switzerland|Serbia|Slovakia|Slovenia|Sudan|Syria|Senegal|Somalia|Sri Lanka|Singapore,easy,60,Nations from around the globe
+246,World capital cities,L,London|Lisbon|Lima|Ljubljana|Libreville|Lilongwe|Luanda|Lusaka|Luxembourg,easy,60,Capital cities from countries around the world
+247,Hollywood actors,L,Leonardo DiCaprio|Liam Neeson|Lawrence Fishburne|Laura Dern|Lupita Nyongo|Lindsay Lohan,easy,60,Stars of Hollywood films
+248,Famous world monuments,B,Big Ben|Burj Khalifa|Buckingham Palace|Brandenburg Gate|Basilica|Borobudur|Blue Mosque,easy,60,Iconic landmarks and monuments from around the world
+249,Rivers in Kerala,B,Bharathapuzha|Bheema|Bhavani|Banasura,easy,60,Flowing waters of God's Own Country
+250,Countries in the World,A,Australia|Argentina|Austria|Algeria|Angola|Albania|Afghanistan|Armenia|Azerbaijan,easy,60,Nations spread across every continent
+251,Places in India,M,Mumbai|Mysore|Mathura|Madurai|Mahabalipuram|Munnar|Mahabaleshwar|Mandu,easy,60,Famous cities and tourist spots in India
+252,Cities in India,C,Chennai|Coimbatore|Chandigarh|Cuttack|Cochin|Calicut,easy,60,Major Indian cities starting with C
+253,Rivers in India,N,Narmada|Netravati|Nagavali|Noyyal|Narmadapuram,easy,60,Indian rivers starting with N
+254,Rivers in India,B,Brahmaputra|Betwa|Beas|Bharathapuzha|Baitarani|Bhima|Brahmani,easy,60,Rivers of India starting with B
+255,Monuments in India,G,Gateway of India|Golconda Fort|Gwalior Fort|Golkonda,easy,60,Monuments starting with G
+256,Bollywood actors,P,Priyanka Chopra|Parineeti Chopra|Prachi Desai|Pankaj Tripathi|Preity Zinta|Paresh Rawal,easy,60,Bollywood actors starting with P
+257,Things you see in a kitchen,F,Fork|Frying pan|Filter|Flask|Funnel|Flour|Freezer,easy,60,Kitchen items starting with F
+258,Things you see in a kitchen,W,Wok|Whisk|Water jug|Wooden spoon,easy,60,Kitchen items starting with W
+259,Things you see inside a car,H,Horn|Headlight|Handbrake|Handle|Hood,easy,60,Car parts and interior items starting with H
+260,Things you see in a restaurant,T,Table|Tablecloth|Tray|Teapot|Toothpick|Teacup|Tissues,easy,60,Things you typically find in a restaurant starting with T
+261,Chocolates,F,Ferrero Rocher|Fuse|Flake|Freddo|Five Star,easy,60,Chocolate brands and bars starting with F
+262,Famous Indian dishes,C,Chole Bhature|Chaat|Chicken Tikka|Curry|Chapati|Cutlet|Chutney,easy,60,Popular Indian dishes starting with C
+263,Famous Indian dishes,V,Vada Pav|Vada|Vindaloo|Vermicelli|Veg Biryani,easy,60,Indian food starting with V
+264,Places in Kerala,V,Varkala|Veli|Vaikom|Vadakara,easy,60,Places in Kerala starting with V
+265,Countries in the world,F,France|Finland|Fiji|Faroe Islands,easy,60,Countries starting with F
+266,Countries in the world,G,Germany|Ghana|Greece|Guatemala|Gabon|Gambia|Georgia,easy,60,Countries starting with G
+267,Countries in the world,T,Thailand|Turkey|Tunisia|Tanzania|Tajikistan|Tonga|Trinidad,easy,60,Countries starting with T
+268,World capital cities,P,Paris|Prague|Panama City|Port Louis|Pretoria,easy,60,World capitals starting with P
+269,World capital cities,D,Dhaka|Delhi|Dublin|Doha|Dili|Dushanbe,easy,60,World capitals starting with D
+270,World capital cities,R,Rome|Riyadh|Reykjavik|Rabat|Riga,easy,60,World capitals starting with R
+271,Hollywood actors,D,Denzel Washington|Dwayne Johnson|DiCaprio|Dave Bautista|Daniel Craig|Drew Barrymore,easy,60,Hollywood actors starting with D
+272,Hollywood actors,R,Robert Downey|Ryan Reynolds|Russell Crowe|Robin Williams|Reese Witherspoon|Ryan Gosling,easy,60,Hollywood actors starting with R
+273,Famous world monuments,G,Great Wall|Golden Gate|Guggenheim|Great Sphinx,easy,60,World monuments starting with G
+274,Languages of the world,F,French|Finnish|Farsi|Flemish,easy,60,World languages starting with F
+275,Languages of the world,P,Portuguese|Persian|Punjabi|Polish|Pashto,easy,60,World languages starting with P
+276,Languages of the world,H,Hindi|Hungarian|Hebrew|Hausa|Haitian,easy,60,World languages starting with H
+277,Hill stations in India,S,Shimla|Shillong|Srinagar|Sikkim,easy,60,Hill stations starting with S
+278,Places in India,B,Bengaluru|Bhopal|Bodh Gaya|Bhubaneswar|Badrinath|Bikaner|Bharatpur|Bundi,easy,60,Famous places across India
+279,Places in India,N,Nainital|Nashik|Nagpur|Noida|Nanded|Nathdwara|Nagercoil,easy,60,Famous places across India
+280,Hill stations in India,L,Lansdowne|Lonavala|Lachung|Landour,easy,60,Cool retreats in the mountains
+281,Cities in India,M,Mumbai|Madurai|Mysuru|Mangaluru|Meerut|Moradabad|Muzaffarpur,easy,60,Cities across India
+282,Cities in India,V,Varanasi|Vadodara|Visakhapatnam|Vijayawada|Vellore,easy,60,Cities across India
+283,Rivers in India,S,Sabarmati|Sutlej|Sone|Sharavathi|Shipra|Subarnarekha,easy,60,Rivers flowing through India
+284,Rivers in India,C,Cauvery|Chambal|Chenab|Churni,easy,60,Rivers flowing through India
+285,Bollywood actors,V,Varun Dhawan|Vidya Balan|Vicky Kaushal|Vinod Khanna|Vivek Oberoi,easy,60,Stars of Hindi cinema
+286,Things you see in a kitchen,L,Ladle|Lemon squeezer|Lid|Lunchbox,easy,60,Common kitchen items
+287,Things you see in a kitchen,R,Refrigerator|Rolling pin|Rack|Rice cooker,easy,60,Common kitchen items
+288,Things you see inside a car,B,Boot|Brake|Belt|Bonnet,easy,60,Items found inside or on a car
+289,Things you see inside a car,A,Airbag|Accelerator|Armrest|Ashtray,easy,60,Items found inside a car
+290,Famous Indian dishes,A,Aloo tikki|Appam|Avial|Aloo paratha|Achaar,easy,60,Beloved dishes and street food of India
+291,Places in Kerala,P,Palakkad|Ponmudi|Poovar|Peermade,easy,60,Tourist spots and places in Kerala
+292,Countries in the world,E,Egypt|Ethiopia|Ecuador|Estonia|Eritrea|El Salvador,easy,60,Nations of the world
+293,Countries in the world,K,Kenya|Kuwait|Kazakhstan|Kyrgyzstan|Kiribati,easy,60,Nations of the world
+294,Countries in the world,L,Lebanon|Libya|Latvia|Laos|Lesotho|Lithuania|Luxembourg,easy,60,Nations of the world
+295,Countries in the world,R,Russia|Romania|Rwanda|Reunion,easy,60,Nations of the world
+296,World capital cities,N,Nairobi|Nassau|Nicosia|Nukualofa|Ngerulmud,easy,60,Capitals of countries around the world
+297,World capital cities,S,Seoul|Stockholm|Santiago|Sofia|Suva|Sarajevo,easy,60,Capitals of countries around the world
+298,World capital cities,C,Cairo|Canberra|Caracas|Copenhagen|Colombo,easy,60,Capitals of countries around the world
+299,Hollywood actors,A,Angelina Jolie|Adam Sandler|Anne Hathaway|Al Pacino|Arnold Schwarzenegger|Antonio Banderas,easy,60,Stars of Hollywood films
+300,Hollywood actors,K,Keanu Reeves|Kevin Hart|Kate Winslet|Keira Knightley|Kirk Douglas,easy,60,Stars of Hollywood films
+301,Famous world monuments,S,Stonehenge|Sphinx|Statue of Liberty|Sydney Opera House|St Basils Cathedral,easy,60,Iconic monuments from around the world
+302,Languages of the world,C,Chinese|Czech|Croatian|Catalan|Cantonese,easy,60,Languages spoken around the world
+303,Languages of the world,K,Korean|Kannada|Khmer|Kurdish|Konkani,easy,60,Languages spoken around the world
+304,Places in India,G,Goa|Gulmarg|Golconda|Gangotri|Gir Forest|Gwalior,easy,60,Famous destinations across India
+305,Places in India,H,Haridwar|Hampi|Hyderabad|Havelock|Hospet|Hoshiarpur,easy,60,Iconic Indian places worth visiting
+306,Places in India,D,Darjeeling|Diu|Dwarka|Dehradun|Dalhousie|Dadar,easy,60,Popular spots spread across India
+307,Cities in India,A,Agra|Ahmedabad|Amritsar|Allahabad|Aurangabad|Aligarh,easy,60,Bustling cities of India starting with A
+308,Cities in India,N,Nagpur|Noida|Nashik|Nanded|Navi Mumbai,easy,60,Indian cities starting with N
+309,Cities in India,S,Surat|Shimla|Shillong|Siliguri|Salem|Solapur,easy,60,Indian cities from north to south
+310,Rivers in India,T,Tapti|Teesta|Tungabhadra|Tapi,easy,60,Rivers of peninsular and northeastern India
+311,Bollywood actors,H,Hrithik Roshan|Hema Malini|Hema Malini|Helen,easy,60,Bollywood stars starting with H
+312,Bollywood actors,N,Naseeruddin Shah|Nana Patekar|Nawazuddin Siddiqui|Neha Sharma|Nargis,easy,60,Celebrated Bollywood actors starting with N
+313,Bollywood actors,M,Madhuri Dixit|Manoj Bajpayee|Mithun Chakraborty|Manisha Koirala|Mallika Sherawat,easy,60,Iconic Bollywood stars starting with M
+314,Things you see in a restaurant,B,Bill|Bread|Bowl|Booth|Butter,easy,60,Common restaurant items starting with B
+315,Countries in the world,U,Uganda|Ukraine|Uruguay|United Kingdom|United States,easy,60,Countries starting with U from around the globe
+316,World capital cities,W,Warsaw|Washington DC|Wellington|Windhoek,easy,60,World capitals starting with W
+317,Hollywood actors,E,Eddie Murphy|Emma Stone|Eva Mendes|Ethan Hawke,easy,60,Hollywood stars starting with E
+318,Languages of the world,B,Bengali|Bulgarian|Burmese|Bosnian|Belarusian,easy,60,Languages spoken around the world starting with B
+319,Languages of the world,D,Dutch|Danish|Dari|Divehi,easy,60,World languages starting with D
+320,Bollywood actors,*,Shah Rukh Khan|Salman Khan|Aamir Khan|Amitabh Bachchan|Hrithik Roshan|Ranbir Kapoor|Akshay Kumar|Ranveer Singh|Shahid Kapoor|Ajay Devgn,easy,60,
+321,Districts of Kerala,K,Kannur|Kasaragod|Kollam|Kottayam|Kozhikode|Kochi|Konni|Kunnamkulam|Kodungallur|Kayamkulam,easy,60,
+322,Hollywood actors,*,Tom Hanks|Brad Pitt|Leonardo DiCaprio|Johnny Depp|Will Smith|Denzel Washington|Morgan Freeman|Tom Cruise|Robert Downey Jr|Keanu Reeves,easy,60,
+323,Olympic sports,S,Swimming|Sailing|Shooting|Soccer|Softball|Skateboarding|Surfing|Skeet shooting|Synchronized swimming|Ski jumping,easy,60,
+324,Indian freedom fighters,*,Mahatma Gandhi|Jawaharlal Nehru|Bhagat Singh|Subhas Bose|Bal Tilak|Lala Lajpat Rai|Sarojini Naidu|Rani Lakshmibai|Gopal Gokhale|Mangal Pandey,easy,60,
+325,Famous Kerala dishes,P,Puttu|Payasam|Parotta|Pathiri|Pazham Pori|Prawn Curry|Palappam|Pickle|Porotta|Pidi,easy,60,
+326,Dams in Kerala,I,Idamalayar Dam|Idukki Dam|Ithikkara Dam|Iris Dam|Inchampallam Dam|Iruttukkanam Dam|Idamalayar Reservoir|Imbichi Dam|Iraniyal Dam|Injapara Dam,easy,60,
+327,Spices used in Indian cooking,C,Cumin|Coriander|Cardamom|Cloves|Cinnamon|Cayenne|Curry leaves|Chili powder|Carom seeds|Cassia,easy,60,
+328,Indian prime ministers,*,Nehru|Indira Gandhi|Rajiv Gandhi|Manmohan Singh|Vajpayee|Narendra Modi|Lal Shastri|Morarji Desai|Charan Singh|Deve Gowda,easy,60,
+329,Wildlife sanctuaries in Kerala,P,Parambikulam|Peppara|Periyar|Ponmudi|Pathiramanal|Peermade|Palode|Pambla|Parambikkulam|Pullut,easy,60,
+330,Bollywood movies,D,Dilwale|Devdas|Dil|Dangal|Drishyam|Dhoom|Dabangg|Don|Dil Chahta Hai|Duplicate,easy,60,
+331,Capital cities of Indian states,P,Patna|Panaji|Port Blair|Puducherry|Prayagraj|Pune|Panji|Pasighat|Pelling|Porvorim,easy,60,
+332,Famous monuments worldwide,C,Colosseum|Christ the Redeemer|Chichen Itza|Cologne Cathedral|Castillo|Cleopatra's Needle|Crazy Horse|Chartres Cathedral|Charminar|Clifton Bridge,easy,60,
+333,Indian scientists,S,Satyendra Nath Bose|Subrahmanyan Chandrasekhar|Srinivasa Ramanujan|Salim Ali|Shanti Swarup Bhatnagar|Samuel Mathai|Sisir Mitra|Shreeram Abhyankar|Soumya Swaminathan|Sunita Williams,easy,60,
+334,Mountain ranges in India,H,Himalayas|Hindu Kush|Hindukush|Himachal ranges|Highwaves|Harihara|Hampta range|Hanu hills|Haramukh|Hemkund range,easy,60,
+335,Olympic sports,B,Boxing|Basketball|Baseball|Badminton|Bobsled|Biathlon|Breakdancing|Beach Volleyball|Boxing|Bicycle Racing,easy,60,
+336,Districts of Kerala,M,Malappuram|Mannarghat|Munnar|Muvattupuzha|Manjeri|Mananthavady|Malappuram District|Mattannur|Mavelikkara|Mylom,easy,60,
+337,Spices used in Indian cooking,T,Turmeric|Tamarind|Thyme|Tej patta|Trikatu|Timur|Tamarind powder|Tymol seeds|Tukmaria|Talimkhana,easy,60,
+338,Bollywood movies,K,Krrish|Kick|Kaabil|Kesari|Kaminey|Kartik|Khiladi,easy,60,
+339,Famous monuments worldwide,T,Taj Mahal|Tower Bridge|Trevi Fountain|Tulum|Tikal|Temple of Artemis|Tiwanaku|Trinity College|Topkapi Palace|Torre Agbar,easy,60,
+340,Indian sportspeople,S,Sachin Tendulkar|Sania Mirza|Sunil Gavaskar|Saina Nehwal|Sourav Ganguly|Suresh Raina|Shikhar Dhawan|Sindhu PV|Somdev Devvarman|Sushil Kumar,easy,60,

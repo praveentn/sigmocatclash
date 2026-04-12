@@ -1,0 +1,10 @@
+{
+  "_comment": "Maps day (lowercase) to a difficulty: easy | medium | hard | all. 'all' uses every question.",
+  "monday":    "medium",
+  "tuesday":   "all",
+  "wednesday": "medium",
+  "thursday":  "all",
+  "friday":    "hard",
+  "saturday":  "all",
+  "sunday":    "all"
+}

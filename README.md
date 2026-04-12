@@ -34,6 +34,42 @@ python scripts/generate_questions.py --interactive
 python scripts/generate_questions.py --provider anthropic --category "Famous scientists" --letter D --difficulty medium
 ```
 
+Commands to run
+Mode 1 — Bulk (fastest, everything in one API call per batch):
+```
+# Add 50 more to easy + medium (currently at 150/310), skip hard (already 300):
+python scripts/bulk_generate.py --target 200
+
+# India/Kerala/World themed questions into medium:
+python scripts/bulk_generate.py --target 370 --diff medium --prompt-file prompts/india_kerala_world.txt
+```
+
+Mode 2 — Auto with saved categories (what you asked for):
+
+```
+# Step 1: generate 50 new categories per difficulty, then 10 answers each
+# Saves categories to data/categories.json automatically
+python scripts/bulk_generate.py --auto --categories-per-diff 50 --answers-per-cat 10
+
+# Later: regenerate/extend answers using those same saved categories
+python scripts/bulk_generate.py --auto --use-saved --answers-per-cat 12
+
+# Just save categories now, generate questions later
+python scripts/bulk_generate.py --auto --save-categories-only --categories-per-diff 50
+# ... then when ready:
+python scripts/bulk_generate.py --auto --use-saved --answers-per-cat 10
+```
+
+The saved categories file is data/categories.json — it accumulates over time and deduplicates automatically. Each run with --auto (without --use-saved) generates new categories and appends them to the file.
+
+Mode 3
+
+```
+python scripts/bulk_generate.py --auto --categories-prompt prompts/categories_india_kerala_world.txt --categories-per-diff 50 --answers-per-cat 10
+
+```
+
+
 ## Tech Stack
 
 - [py-cord](https://github.com/Pycord-Development/pycord) — Discord API wrapper

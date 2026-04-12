@@ -1,0 +1,14 @@
+Generate exactly {count} items that belong to the category "{category}" \
+and start with the letter "{letter}".
+
+Rules:
+- Every item MUST start with the letter {letter} (case-insensitive)
+- Items should be real, commonly recognised things
+- Difficulty level: {difficulty}  \
+(easy = everyday items, medium = moderately known, hard = specific/expert)
+- WORD LENGTH: each answer must be 1–2 words. Use 3 words only when no shorter form exists.
+  NEVER include answers that are 4 or more words long.
+- No explanations, no numbering — return ONLY a valid JSON array of strings
+- Example output format: ["Bowl", "Bread", "Butter"]
+
+JSON array:
