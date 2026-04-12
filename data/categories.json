@@ -388,5 +388,370 @@
     "category": "Countries in the world",
     "letter": "S",
     "difficulty": "hard"
+  },
+  {
+    "category": "Places in India",
+    "letter": "B",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian history",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cricket",
+    "letter": "B",
+    "difficulty": "easy"
+  },
+  {
+    "category": "IPL",
+    "letter": "C",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian legends",
+    "letter": "T",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian general knowledge",
+    "letter": "N",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian philosophy",
+    "letter": "V",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Famous Kerala dishes",
+    "letter": "S",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Tourist spots in Kerala",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Famous people in Kerala",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Footballers",
+    "letter": "R",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cricketers",
+    "letter": "S",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Places in India",
+    "letter": "J",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian sportspeople",
+    "letter": "P",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cricket",
+    "letter": "T",
+    "difficulty": "easy"
+  },
+  {
+    "category": "IPL",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian general knowledge",
+    "letter": "D",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian history",
+    "letter": "A",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian philosophy",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Rivers in Kerala",
+    "letter": "B",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Tourist spots in Kerala",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Famous people in Kerala",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Dams in Kerala",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Wildlife sanctuaries in Kerala",
+    "letter": "S",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Footballers",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cricketers",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Badminton",
+    "letter": "S",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Tennis",
+    "letter": "N",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Chess",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cities in India",
+    "letter": "P",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Rivers in India",
+    "letter": "N",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Mountain ranges in India",
+    "letter": "A",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Monuments in India",
+    "letter": "Q",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Bollywood movies",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Famous Indian dishes",
+    "letter": "C",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Spices used in Indian cooking",
+    "letter": "K",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian sportspeople",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian scientists",
+    "letter": "J",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cricket",
+    "letter": "D",
+    "difficulty": "easy"
+  },
+  {
+    "category": "IPL",
+    "letter": "R",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian legends",
+    "letter": "R",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian general knowledge",
+    "letter": "R",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Indian history",
+    "letter": "S",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Rivers in Kerala",
+    "letter": "M",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Places in Kerala",
+    "letter": "V",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Tourist spots in Kerala",
+    "letter": "A",
+    "difficulty": "easy"
+  },
+  {
+    "category": "Cities in India",
+    "letter": "K",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Indian philosophy and spirituality",
+    "letter": "V",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Badminton players",
+    "letter": "L",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Tennis players",
+    "letter": "N",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Chess players",
+    "letter": "K",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Places in India",
+    "letter": "H",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Cities in India",
+    "letter": "S",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Famous Indian dishes",
+    "letter": "D",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Indian general knowledge",
+    "letter": "P",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Indian philosophy and spirituality",
+    "letter": "K",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Tourist spots in Kerala",
+    "letter": "T",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Famous people in Kerala",
+    "letter": "S",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Cricketers",
+    "letter": "R",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Tennis players",
+    "letter": "F",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Chess players",
+    "letter": "A",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Spices used in Indian cooking",
+    "letter": "M",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Cricket",
+    "letter": "C",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Wildlife sanctuaries in Kerala",
+    "letter": "C",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Footballers",
+    "letter": "N",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Badminton players",
+    "letter": "S",
+    "difficulty": "medium"
+  },
+  {
+    "category": "Tennis players",
+    "letter": "S",
+    "difficulty": "hard"
+  },
+  {
+    "category": "Dams in Kerala",
+    "letter": "B",
+    "difficulty": "hard"
+  },
+  {
+    "category": "Indian history",
+    "letter": "B",
+    "difficulty": "hard"
+  },
+  {
+    "category": "States in India",
+    "letter": "K",
+    "difficulty": "hard"
+  },
+  {
+    "category": "Indian legends",
+    "letter": "S",
+    "difficulty": "hard"
+  },
+  {
+    "category": "Hill stations in India",
+    "letter": "D",
+    "difficulty": "hard"
+  },
+  {
+    "category": "Places in India",
+    "letter": "T",
+    "difficulty": "hard"
   }
 ]

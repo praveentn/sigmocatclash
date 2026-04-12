@@ -11,15 +11,22 @@ Focus categories (rotate across these — do not repeat the same category twice)
     Rivers in India, Mountain ranges in India, Monuments in India,
     Bollywood movies, Famous Indian dishes, Indian sportspeople,
     Indian scientists, Spices used in Indian cooking
+    Indian history, Cricket, IPL, Famous sportspeople
+    Indian legends, sports, singers, musicians, artists
+    Indian general knowledge
+    Indian philosophy, spirituality
 
   Kerala:
     Rivers in Kerala, Dams in Kerala, Places in Kerala, Districts of Kerala,
     Famous Kerala dishes, Wildlife sanctuaries in Kerala
+    Tourist spots in Kerala
+    Famous people in Kerala, artists, singers, kathakali, actors
 
   World:
     Countries in the world, World capital cities,
     Famous monuments worldwide, Languages of the world,
     Olympic sports, Musical instruments
+    Footballers, cricketers, badminton, tennis, chess
 
   People (ALWAYS use "*" for these):
     Bollywood actors, Hollywood actors, Malayalam actors,

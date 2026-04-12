@@ -1,10 +1,10 @@
 {
   "_comment": "Maps day (lowercase) to a difficulty: easy | medium | hard | all. 'all' uses every question.",
-  "monday":    "medium",
-  "tuesday":   "all",
-  "wednesday": "medium",
-  "thursday":  "all",
-  "friday":    "hard",
+  "monday":    "easy",
+  "tuesday":   "medium",
+  "wednesday": "hard",
+  "thursday":  "india_kerala_world",
+  "friday":    "india_kerala_world",
   "saturday":  "all",
-  "sunday":    "all"
+  "sunday":    "india_kerala_world"
 }
