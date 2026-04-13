@@ -55,9 +55,17 @@ intents.message_content = True   # Privileged — enable in Discord Dev Portal �
 
 bot = discord.Bot(intents=intents, debug_guilds=_debug_guilds)
 
-# Load game cog
-bot.load_extension("cogs.game")
-log.info("Game cog loaded.")
+# Load game cog — wrapped so a bad import doesn't silently wipe all slash commands
+_COGS = ["cogs.game"]
+for _cog in _COGS:
+    try:
+        bot.load_extension(_cog)
+        log.info("Loaded cog: %s", _cog)
+    except Exception as _exc:
+        # Log and exit: if the cog fails, sync_commands() would push an empty
+        # command list and every slash command would vanish from Discord.
+        log.critical("FAILED to load cog %s: %s — aborting startup.", _cog, _exc, exc_info=True)
+        sys.exit(1)
 
 # ── Web server (health check + status page) ────────────────────────────────────
 
@@ -151,6 +159,52 @@ async def on_ready() -> None:
     else:
         log.info("  Mode         : global commands (~1 hr propagation)")
     log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+
+    # ── Slash command sync ────────────────────────────────────────────────────
+    # py-cord auto-syncs on connect, but calling it here gives us:
+    #   • a guaranteed second attempt after the bot is fully ready
+    #   • a visible log entry that confirms *which* commands were pushed
+    #   • an error log if the sync itself fails (e.g. Discord rate-limit on cold start)
+    try:
+        await bot.sync_commands()
+        synced = [c.name for c in bot.pending_application_commands]
+        log.info(
+            "Slash commands synced (%s): %s",
+            f"guild {GUILD_ID}" if _debug_guilds else "global",
+            synced if synced else "⚠ EMPTY — check cog load above!",
+        )
+    except Exception as exc:
+        log.error("sync_commands() FAILED: %s", exc, exc_info=True)
+
+    # ── Stale guild-command cleanup ───────────────────────────────────────────
+    # When switching from guild-scoped mode (DISCORD_GUILD_ID was set) to global
+    # mode, Discord keeps the old guild-specific registrations alive. They show
+    # up as duplicate / ghost commands in the server's / menu until cleared.
+    # This block checks every guild the bot is in and wipes any guild-scoped
+    # registrations so only the global commands remain.  It is a no-op on all
+    # subsequent restarts once the stale entries are gone.
+    if not _debug_guilds:
+        cleaned_guilds = 0
+        for guild in bot.guilds:
+            try:
+                existing = await bot.http.get_guild_commands(bot.user.id, guild.id)
+                if existing:
+                    await bot.http.bulk_upsert_guild_commands(bot.user.id, guild.id, [])
+                    log.info(
+                        "  Cleared %d stale guild-scoped command(s) from guild %d (%s).",
+                        len(existing), guild.id, guild.name,
+                    )
+                    cleaned_guilds += 1
+            except Exception as exc:
+                log.warning(
+                    "  Could not clear guild commands for %d (%s): %s",
+                    guild.id, guild.name, exc,
+                )
+        if cleaned_guilds:
+            log.info("Guild-command cleanup done — cleared %d guild(s).", cleaned_guilds)
+        else:
+            log.info("No stale guild commands found — nothing to clean up.")
+
     await bot.change_presence(activity=discord.Game(name="/play to start Category Clash!"))
 
 
