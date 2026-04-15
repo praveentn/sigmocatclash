@@ -102,9 +102,10 @@ class GameSession:
         self.accepting_answers = False
 
         # Persistent across rounds
-        self.scores: dict[int, int] = {}          # player_id -> cumulative score
-        self.player_names: dict[int, str] = {}    # player_id -> display_name
-        self.total_unique_answers = 0             # game-wide stat
+        self.scores: dict[int, int] = {}              # player_id -> cumulative score
+        self.player_names: dict[int, str] = {}        # player_id -> display_name
+        self.player_total_answers: dict[int, int] = {} # player_id -> valid answers claimed
+        self.total_unique_answers = 0                 # game-wide stat
 
         # Per-round state — reset in start_round()
         self.current_question: Optional[dict] = None
@@ -205,6 +206,7 @@ class GameSession:
             points = 1 + (1 if speed_bonus else 0) + (1 if streak_bonus else 0)
             self.claimed_answers.add(canonical)
             self.scores[player_id] = self.scores.get(player_id, 0) + points
+            self.player_total_answers[player_id] = self.player_total_answers.get(player_id, 0) + 1
             self.total_unique_answers += 1
         else:
             streak_count = self.player_streak.get(player_id, 0)
