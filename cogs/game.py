@@ -7,6 +7,14 @@ Flow per game:
 Each round:
   post question embed  →  accept text answers  →  half-time warning
   →  3-2-1 countdown  →  end_round  →  post results embed  →  5-sec gap
+
+Security properties:
+  • All leaderboard / stats operations are scoped to ctx.guild_id — no cross-server
+    data leakage.
+  • Guild-only guard on every command that writes or reads server-scoped data.
+  • Winner identification uses player_id (not display name) to avoid name collisions.
+  • Answer text is length-capped before fuzzy matching (session.py enforces ≤200 chars).
+  • Command cooldowns prevent spam on read-heavy commands.
 """
 
 import asyncio
@@ -24,7 +32,7 @@ from game.leaderboard import (
     get_streak_leaderboard,
     record_game_results,
 )
-from game.questions import get_random_questions, resolve_pool_key, get_daily_pool_key
+from game.questions import get_random_questions, resolve_pool_key
 from game.server_progress import mark_questions_asked, pool_progress
 from game.session import GameSession
 
@@ -41,7 +49,9 @@ COL_STATS    = 0x9B59B6   # Purple — for stats/profile
 # ── Decorative constants ───────────────────────────────────────────────────────
 MEDALS = ["🥇", "🥈", "🥉"]
 DIFF_EMOJIS = {"easy": "🟢", "medium": "🟡", "hard": "🔴", "all": "🌈", "daily": "📅"}
-FIRSTS = ["⚡", "🔥", "💥", "✨", "🎯"]  # cycling first-answer indicators
+
+# Sentinel used when we need the full pool size unfiltered by server progress.
+_ALL_QUESTIONS_LIMIT = 9999
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -67,7 +77,7 @@ def _leaderboard_text(leaderboard: list[tuple[str, int]], max_entries: int = 8) 
 
 
 def _rank_badge(total_score: int) -> str:
-    """Return a compact rank badge like '💎 Master'."""
+    """Return a compact rank badge e.g. '💎 Master'."""
     name, emoji, _ = get_rank(total_score)
     return f"{emoji} {name}"
 
@@ -82,6 +92,9 @@ def _missing_permissions(channel: discord.TextChannel, me: discord.Member) -> li
     if not perms.add_reactions:
         missing.append("Add Reactions")
     return missing
+
+
+_GUILD_ONLY_MSG = "❌ This command can only be used inside a server."
 
 
 # ── Cog ────────────────────────────────────────────────────────────────────────
@@ -106,10 +119,18 @@ class SigmoCatClash(commands.Cog):
             choices=["easy", "medium", "hard", "all", "daily"],
         ) = "all",
     ) -> None:
+        # ── Guild-only guard ───────────────────────────────────────────────────
+        if not ctx.guild_id:
+            await ctx.respond(_GUILD_ONLY_MSG, ephemeral=True)
+            return
+
         channel_id = ctx.channel_id
         guild_id   = ctx.guild_id
 
-        # Guard: game already running
+        # Defensive clamp — Discord enforces min/max, but be explicit
+        rounds = max(1, min(rounds, 10))
+
+        # Guard: game already running in this channel
         if channel_id in self._sessions and self._sessions[channel_id].is_active:
             await ctx.respond(
                 "⚠️ A game is already running here! Use `/stop` to end it first.",
@@ -122,13 +143,13 @@ class SigmoCatClash(commands.Cog):
             missing = _missing_permissions(ctx.channel, ctx.guild.me)
             if missing:
                 await ctx.respond(
-                    f"❌ I'm missing permissions: **{', '.join(missing)}**\nPlease grant these and try again.",
+                    f"❌ I'm missing permissions: **{', '.join(missing)}**\n"
+                    "Please grant these and try again.",
                     ephemeral=True,
                 )
                 return
 
         pool_key = resolve_pool_key(difficulty)
-
         questions = get_random_questions(rounds, difficulty, guild_id=guild_id)
         if not questions:
             await ctx.respond(
@@ -146,26 +167,23 @@ class SigmoCatClash(commands.Cog):
         )
         self._sessions[channel_id] = session
 
-        # Show pool progress for server-tracked pools
+        # Pool progress display (uses total pool size, unfiltered by server history)
         progress_line = ""
-        if guild_id:
-            total_in_pool = len(get_random_questions(9999, difficulty))  # full unfiltered pool
-            asked_count, total_count = pool_progress(guild_id, pool_key, total_in_pool)
-            remaining = total_count - asked_count
-            if total_count > 0:
-                progress_line = (
-                    f"\n📚 **Pool progress:** {asked_count}/{total_count} questions played"
-                    f" — {remaining} fresh remaining"
-                )
-                if asked_count == 0:
-                    progress_line += " *(pool just reset!)*"
+        total_in_pool = len(get_random_questions(_ALL_QUESTIONS_LIMIT, difficulty))
+        asked_count, total_count = pool_progress(guild_id, pool_key, total_in_pool)
+        remaining = total_count - asked_count
+        if total_count > 0:
+            progress_line = (
+                f"\n📚 **Pool progress:** {asked_count}/{total_count} questions played"
+                f" — {remaining} fresh remaining"
+            )
+            if asked_count == 0:
+                progress_line += " *(pool just reset!)*"
 
-        # Daily theme label
         daily_label = ""
         if difficulty == "daily":
             daily_label = f"\n📅 **Today's pool:** {pool_key.capitalize()} questions"
 
-        # Announce game start
         embed = discord.Embed(
             title="🐱⚡  SIGMOCATCLASH — Category Clash!",
             description=(
@@ -188,7 +206,6 @@ class SigmoCatClash(commands.Cog):
         embed.set_footer(text=f"Game started by {ctx.author.display_name}  •  Good luck!")
         await ctx.respond(embed=embed)
 
-        # Kick off the game loop as a background task
         task = asyncio.create_task(
             self._run_game(ctx.channel, session, questions),
             name=f"game-{channel_id}",
@@ -205,9 +222,15 @@ class SigmoCatClash(commands.Cog):
             return
 
         is_host = ctx.author.id == session.host_id
-        is_mod = isinstance(ctx.author, discord.Member) and ctx.author.guild_permissions.manage_channels
+        # ctx.author is a Member inside guilds; isinstance guard prevents AttributeError in DMs
+        is_mod = (
+            isinstance(ctx.author, discord.Member)
+            and ctx.author.guild_permissions.manage_channels
+        )
         if not (is_host or is_mod):
-            await ctx.respond("⚠️ Only the game host or a moderator can stop the game.", ephemeral=True)
+            await ctx.respond(
+                "⚠️ Only the game host or a moderator can stop the game.", ephemeral=True
+            )
             return
 
         session.stop()
@@ -221,6 +244,7 @@ class SigmoCatClash(commands.Cog):
     # ──────────────────────────────────────────────────────────────────────────
 
     @commands.slash_command(name="scores", description="📊 Show the current game scores")
+    @commands.cooldown(1, 5, commands.BucketType.user)
     async def scores(self, ctx: discord.ApplicationContext) -> None:
         session = self._sessions.get(ctx.channel_id)
         if not session or not session.is_active:
@@ -238,6 +262,7 @@ class SigmoCatClash(commands.Cog):
     # ──────────────────────────────────────────────────────────────────────────
 
     @commands.slash_command(name="rules", description="📖 How to play SigmoCatClash")
+    @commands.cooldown(1, 15, commands.BucketType.user)
     async def rules(self, ctx: discord.ApplicationContext) -> None:
         embed = discord.Embed(
             title="📖  SigmoCatClash — How to Play",
@@ -249,7 +274,7 @@ class SigmoCatClash(commands.Cog):
                 "2️⃣  Type words from that category (starting with the given letter) in chat.\n"
                 "3️⃣  Use **commas** for multiple answers at once: `Bowl, Bread, Butter`\n"
                 "4️⃣  **First** to claim a valid answer gets **+1 point** — no one else can take it!\n"
-                "5️⃣  Answers must be real items in the category (typos are OK — fuzzy matching is on!).\n"
+                "5️⃣  Answers must be real items in the category (typos OK — fuzzy matching is on!).\n"
                 "6️⃣  You have **60 seconds** — be quick!\n\n"
                 "**Scoring bonuses:**\n"
                 "⚡ **Speed bonus** — +1 pt to the very first scorer of each round\n"
@@ -267,7 +292,7 @@ class SigmoCatClash(commands.Cog):
                 "**Commands:**\n"
                 "`/play [rounds] [difficulty]` — Start a game\n"
                 "`/scores` — Check live game scores\n"
-                "`/leaderboard [view]` — Top players by score or daily streak\n"
+                "`/leaderboard [view]` — Top players by score, daily streak, or wins\n"
                 "`/mystats [user]` — Your all-time stats, rank & achievements\n"
                 "`/stop` — End game (host / mods only)\n"
                 "`/rules` — Show this message"
@@ -278,7 +303,8 @@ class SigmoCatClash(commands.Cog):
 
     # ──────────────────────────────────────────────────────────────────────────
 
-    @commands.slash_command(name="leaderboard", description="🏆 Show the all-time leaderboard")
+    @commands.slash_command(name="leaderboard", description="🏆 Show the all-time leaderboard for this server")
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def leaderboard(
         self,
         ctx: discord.ApplicationContext,
@@ -288,9 +314,15 @@ class SigmoCatClash(commands.Cog):
             choices=["scores", "streaks", "wins"],
         ) = "scores",
     ) -> None:
+        if not ctx.guild_id:
+            await ctx.respond(_GUILD_ONLY_MSG, ephemeral=True)
+            return
 
+        guild_id = ctx.guild_id
+
+        # ── Streaks view ───────────────────────────────────────────────────────
         if view == "streaks":
-            entries = get_streak_leaderboard(top_n=15)
+            entries = get_streak_leaderboard(top_n=15, guild_id=guild_id)
             if not entries:
                 embed = discord.Embed(
                     title="🔥  SigmoCatClash — Daily Streak Leaderboard",
@@ -303,11 +335,10 @@ class SigmoCatClash(commands.Cog):
             lines = []
             for i, entry in enumerate(entries):
                 medal = MEDALS[i] if i < 3 else f"**#{i + 1}**"
-                name = entry.get("name", "Unknown")
-                streak = entry.get("current_streak", 0)
+                name    = entry.get("name", "Unknown")
+                streak  = entry.get("current_streak", 0)
                 longest = entry.get("longest_streak", 0)
-                total_score = entry.get("total_score", 0)
-                badge = _rank_badge(total_score)
+                badge   = _rank_badge(entry.get("total_score", 0))
                 lines.append(
                     f"{medal} **{name}** — 🔥 **{streak}-day** streak"
                     f"  *(longest: {longest}d  •  {badge})*"
@@ -322,9 +353,10 @@ class SigmoCatClash(commands.Cog):
             await ctx.respond(embed=embed)
             return
 
+        # ── Wins view ──────────────────────────────────────────────────────────
         if view == "wins":
-            all_entries = get_overall_leaderboard(top_n=15)
-            entries = sorted(all_entries, key=lambda x: x.get("wins", 0), reverse=True)
+            all_entries = get_overall_leaderboard(top_n=100, guild_id=guild_id)
+            entries = sorted(all_entries, key=lambda x: x.get("wins", 0), reverse=True)[:15]
             if not entries or entries[0].get("wins", 0) == 0:
                 embed = discord.Embed(
                     title="🥇  SigmoCatClash — Most Wins",
@@ -342,15 +374,15 @@ class SigmoCatClash(commands.Cog):
                 if wins != prev_wins:
                     rank = i + 1
                     prev_wins = wins
-                medal = MEDALS[rank - 1] if rank <= 3 else f"**#{rank}**"
-                name = entry.get("name", "Unknown")
-                games = entry.get("games_played", 0)
-                total_score = entry.get("total_score", 0)
-                badge = _rank_badge(total_score)
+                medal    = MEDALS[rank - 1] if rank <= 3 else f"**#{rank}**"
+                name     = entry.get("name", "Unknown")
+                games    = entry.get("games_played", 0)
+                badge    = _rank_badge(entry.get("total_score", 0))
                 win_rate = f"{wins / games * 100:.0f}%" if games > 0 else "—"
+                suffix   = "win" if wins == 1 else "wins"
                 lines.append(
-                    f"{medal} **{name}** — **{wins}** win{'s' if wins != 1 else ''}"
-                    f"  *({win_rate} win rate  •  {badge})*"
+                    f"{medal} **{name}** — **{wins}** {suffix}"
+                    f"  *({win_rate} rate  •  {badge})*"
                 )
 
             embed = discord.Embed(
@@ -362,9 +394,8 @@ class SigmoCatClash(commands.Cog):
             await ctx.respond(embed=embed)
             return
 
-        # Default: scores view
-        entries = get_overall_leaderboard(top_n=15)
-
+        # ── Scores view (default) ──────────────────────────────────────────────
+        entries = get_overall_leaderboard(top_n=15, guild_id=guild_id)
         if not entries:
             embed = discord.Embed(
                 title="🏆  SigmoCatClash — All-Time Leaderboard",
@@ -382,14 +413,14 @@ class SigmoCatClash(commands.Cog):
             if score != prev_score:
                 rank = i + 1
                 prev_score = score
-            medal = MEDALS[rank - 1] if rank <= 3 else f"**#{rank}**"
-            name = entry.get("name", "Unknown")
-            games = entry.get("games_played", 0)
-            best = entry.get("best_score", 0)
-            streak = entry.get("current_streak", 0)
-            badge = _rank_badge(score)
-            suffix = "pt" if score == 1 else "pts"
-            game_str = "game" if games == 1 else "games"
+            medal      = MEDALS[rank - 1] if rank <= 3 else f"**#{rank}**"
+            name       = entry.get("name", "Unknown")
+            games      = entry.get("games_played", 0)
+            best       = entry.get("best_score", 0)
+            streak     = entry.get("current_streak", 0)
+            badge      = _rank_badge(score)
+            suffix     = "pt" if score == 1 else "pts"
+            game_str   = "game" if games == 1 else "games"
             streak_str = f"  🔥×{streak}" if streak >= 2 else ""
             lines.append(
                 f"{medal} **{name}** — {score} {suffix}  [{badge}]{streak_str}\n"
@@ -402,26 +433,41 @@ class SigmoCatClash(commands.Cog):
             color=COL_FINAL,
         )
         embed.set_footer(
-            text="Scores accumulate across all games  •  /leaderboard streaks  •  /leaderboard wins"
+            text="Scores accumulate across all games  •  "
+                 "/leaderboard streaks  •  /leaderboard wins"
         )
         await ctx.respond(embed=embed)
 
     # ──────────────────────────────────────────────────────────────────────────
 
-    @commands.slash_command(name="mystats", description="📊 View your all-time stats, rank & achievements")
+    @commands.slash_command(
+        name="mystats",
+        description="📊 View your all-time stats, rank & achievements for this server",
+    )
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def mystats(
         self,
         ctx: discord.ApplicationContext,
-        user: discord.Option(discord.Member, "Player to look up (leave blank for yourself)", required=False) = None,
+        user: discord.Option(
+            discord.Member,
+            "Player to look up (leave blank for yourself)",
+            required=False,
+        ) = None,
     ) -> None:
-        target = user or ctx.author
-        stats = get_player_stats(target.id)
+        if not ctx.guild_id:
+            await ctx.respond(_GUILD_ONLY_MSG, ephemeral=True)
+            return
+
+        guild_id = ctx.guild_id
+        target   = user or ctx.author
+        stats    = get_player_stats(target.id, guild_id=guild_id)
 
         if not stats:
-            if target.id == ctx.author.id:
-                msg = "You haven't played any games yet! Start one with `/play`."
-            else:
-                msg = f"**{target.display_name}** hasn't played any games yet."
+            msg = (
+                "You haven't played any games in this server yet! Start one with `/play`."
+                if target.id == ctx.author.id
+                else f"**{target.display_name}** hasn't played any games in this server yet."
+            )
             await ctx.respond(msg, ephemeral=True)
             return
 
@@ -436,33 +482,35 @@ class SigmoCatClash(commands.Cog):
 
         rank_name, rank_emoji, next_thresh = get_rank(total_score)
         win_rate  = f"{wins / games_played * 100:.0f}%" if games_played > 0 else "—"
-        avg_score = f"{total_score / games_played:.1f}" if games_played > 0 else "—"
+        avg_score = f"{total_score / games_played:.1f}"  if games_played > 0 else "—"
 
         embed = discord.Embed(
-            title=f"📊  {target.display_name}'s Stats",
+            title=f"📊  {target.display_name}'s Server Stats",
             color=COL_STATS,
         )
 
-        # Rank badge + progress
+        # Rank badge + progress to next tier
         rank_line = f"**{rank_emoji} {rank_name}**"
         if next_thresh > 0:
-            pts_to_next = next_thresh - total_score
-            rank_line += f"  *(+{pts_to_next} pts to next rank)*"
+            rank_line += f"  *(+{next_thresh - total_score} pts to next rank)*"
         else:
-            rank_line += "  *(max rank!)*"
+            rank_line += "  *(max rank — Legend!)*"
         embed.add_field(name="🏅 Rank", value=rank_line, inline=False)
 
         # Core stats grid
-        embed.add_field(name="⭐ Total Score",   value=f"**{total_score}** pts",         inline=True)
-        embed.add_field(name="🎮 Games Played",  value=f"**{games_played}**",             inline=True)
-        embed.add_field(name="🏆 Wins",          value=f"**{wins}** ({win_rate})",        inline=True)
-        embed.add_field(name="🔝 Best Game",     value=f"**{best_score}** pts",           inline=True)
-        embed.add_field(name="📝 Avg/Game",      value=f"**{avg_score}** pts",            inline=True)
-        embed.add_field(name="✅ Total Answers", value=f"**{total_ans}**",                inline=True)
+        embed.add_field(name="⭐ Total Score",   value=f"**{total_score}** pts",  inline=True)
+        embed.add_field(name="🎮 Games Played",  value=f"**{games_played}**",     inline=True)
+        embed.add_field(name="🏆 Wins",          value=f"**{wins}** ({win_rate})", inline=True)
+        embed.add_field(name="🔝 Best Game",     value=f"**{best_score}** pts",   inline=True)
+        embed.add_field(name="📝 Avg/Game",      value=f"**{avg_score}** pts",    inline=True)
+        embed.add_field(name="✅ Answers Given", value=f"**{total_ans}**",        inline=True)
 
-        # Daily streak
+        # Daily streak with scaling fire
         streak_fire = "🔥" * min(c_streak // 3 + 1, 3) if c_streak >= 1 else ""
-        streak_cur  = f"**{c_streak}** day{'s' if c_streak != 1 else ''} {streak_fire}" if c_streak >= 1 else "**0** (play today!)"
+        streak_cur  = (
+            f"**{c_streak}** day{'s' if c_streak != 1 else ''} {streak_fire}"
+            if c_streak >= 1 else "**0** (play today to start!)"
+        )
         embed.add_field(
             name="🔥 Daily Streak",
             value=f"Current: {streak_cur}\nLongest: **{l_streak}** days",
@@ -470,18 +518,17 @@ class SigmoCatClash(commands.Cog):
         )
 
         # Achievements
-        if achievements:
-            ach_parts = []
-            for ach_id in achievements:
-                ach = ACHIEVEMENTS.get(ach_id)
-                if ach:
-                    ach_parts.append(f"{ach['emoji']} {ach['name']}")
-            if ach_parts:
-                embed.add_field(
-                    name=f"🏅 Achievements ({len(ach_parts)})",
-                    value=_truncate("  ·  ".join(ach_parts), 512),
-                    inline=False,
-                )
+        ach_parts = [
+            f"{ACHIEVEMENTS[aid]['emoji']} {ACHIEVEMENTS[aid]['name']}"
+            for aid in achievements
+            if aid in ACHIEVEMENTS
+        ]
+        if ach_parts:
+            embed.add_field(
+                name=f"🏅 Achievements ({len(ach_parts)})",
+                value=_truncate("  ·  ".join(ach_parts), 512),
+                inline=False,
+            )
         else:
             embed.add_field(
                 name="🏅 Achievements",
@@ -489,14 +536,16 @@ class SigmoCatClash(commands.Cog):
                 inline=False,
             )
 
-        embed.set_footer(text="Use /play to start a game  •  /leaderboard to compare with others")
+        embed.set_footer(
+            text="Stats are server-specific  •  /leaderboard to compare with others"
+        )
         await ctx.respond(embed=embed)
 
     # ── Message listener ───────────────────────────────────────────────────────
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message) -> None:
-        # Ignore bots and DMs
+        # Ignore bots and DMs — games only run in guild channels
         if message.author.bot or not message.guild:
             return
 
@@ -508,19 +557,19 @@ class SigmoCatClash(commands.Cog):
         if not raw:
             return
 
-        # Parse comma-separated answers; cap at 6 per message to curb spam
+        # Cap at 6 comma-separated answers per message to curb spam
         parts = [p.strip() for p in raw.split(",") if p.strip()][:6]
         if not parts:
             return
 
-        player_id = message.author.id
+        player_id   = message.author.id
         player_name = message.author.display_name
 
-        scored_new = False
-        got_duplicate = False
+        scored_new  = False
+        got_dup     = False
         got_invalid = False
-        got_streak = False
-        got_speed = False
+        got_streak  = False
+        got_speed   = False
 
         seen_this_msg: set[str] = set()
         for part in parts:
@@ -538,11 +587,10 @@ class SigmoCatClash(commands.Cog):
                 if result.speed_bonus:
                     got_speed = True
             elif result.is_duplicate:
-                got_duplicate = True
+                got_dup = True
             elif not result.is_valid:
                 got_invalid = True
 
-        # React to confirm receipt
         try:
             if scored_new:
                 await message.add_reaction("✅")
@@ -550,14 +598,18 @@ class SigmoCatClash(commands.Cog):
                     await message.add_reaction("⚡")
                 if got_streak:
                     await message.add_reaction("🔥")
-            elif got_duplicate and not scored_new:
+            elif got_dup and not scored_new:
                 await message.add_reaction("🔁")
-            elif got_invalid and not scored_new and not got_duplicate:
-                q_letter = (session.current_question or {}).get("letter", "")
-                if q_letter == "*":
-                    any_starts = any(len(p.strip()) >= 3 for p in parts)
-                else:
-                    any_starts = any(p.lower().startswith(q_letter.lower()) for p in parts if q_letter)
+            elif got_invalid and not scored_new and not got_dup:
+                q_letter   = (session.current_question or {}).get("letter", "")
+                any_starts = (
+                    any(len(p.strip()) >= 3 for p in parts)
+                    if q_letter == "*"
+                    else any(
+                        p.lower().startswith(q_letter.lower())
+                        for p in parts if q_letter
+                    )
+                )
                 if any_starts:
                     await message.add_reaction("❌")
         except (discord.HTTPException, discord.Forbidden):
@@ -579,7 +631,6 @@ class SigmoCatClash(commands.Cog):
                 if not session.is_active:
                     break
                 await self._run_round(channel, session, question)
-                # Track this question as asked for the server
                 qid = question.get("id", "")
                 if qid:
                     asked_ids.append(qid)
@@ -600,7 +651,6 @@ class SigmoCatClash(commands.Cog):
             except Exception:
                 pass
         finally:
-            # Persist all asked question IDs for this server at once
             if session.guild_id and asked_ids:
                 try:
                     mark_questions_asked(session.guild_id, asked_ids, session.pool_key)
@@ -627,18 +677,17 @@ class SigmoCatClash(commands.Cog):
         hint       = question.get("hint", "")
         diff_emoji = DIFF_EMOJIS.get(difficulty, "🟡")
 
-        any_letter    = letter == "*"
+        any_letter        = letter == "*"
         letter_display    = "**Any Letter ✨**" if any_letter else f"# {letter}"
         letter_field_name = "🔤  Letter" if any_letter else "🔤  Starting Letter"
 
-        # ── Question embed ─────────────────────────────────────────────────────
         embed = discord.Embed(
             title=f"Round {session.current_round} of {session.total_rounds}  •  {emoji} Category Clash",
             color=COL_QUESTION,
         )
-        embed.add_field(name="📂  Category",       value=f"## {category}", inline=False)
-        embed.add_field(name=letter_field_name,    value=letter_display,   inline=True)
-        embed.add_field(name="⏱️  Time Limit",     value=f"**{time_limit}s**", inline=True)
+        embed.add_field(name="📂  Category",              value=f"## {category}", inline=False)
+        embed.add_field(name=letter_field_name,           value=letter_display,   inline=True)
+        embed.add_field(name="⏱️  Time Limit",            value=f"**{time_limit}s**", inline=True)
         embed.add_field(name=f"{diff_emoji}  Difficulty", value=difficulty.capitalize(), inline=True)
         if hint:
             embed.add_field(name="💡  Hint", value=hint, inline=False)
@@ -653,10 +702,9 @@ class SigmoCatClash(commands.Cog):
             session.end_round()
             return
 
-        # ── Timer ──────────────────────────────────────────────────────────────
-        half = time_limit // 2
-        remaining = time_limit - half
-        letter_reminder = "Any Letter" if any_letter else letter
+        half          = time_limit // 2
+        remaining     = time_limit - half
+        letter_remind = "Any Letter" if any_letter else letter
 
         await asyncio.sleep(half)
         if not session.is_active:
@@ -664,7 +712,8 @@ class SigmoCatClash(commands.Cog):
 
         try:
             await channel.send(
-                f"⏰  **{remaining} seconds left!**  Category: **{category}**  |  Letter: **{letter_reminder}**",
+                f"⏰  **{remaining} seconds left!**  "
+                f"Category: **{category}**  |  Letter: **{letter_remind}**",
                 delete_after=float(remaining),
             )
         except (discord.HTTPException, discord.Forbidden):
@@ -694,12 +743,12 @@ class SigmoCatClash(commands.Cog):
         session: GameSession,
         question: dict,
     ) -> None:
-        summary          = session.get_round_summary()
-        player_valid     = summary["player_valid"]
-        player_points    = summary["player_points"]
+        summary           = session.get_round_summary()
+        player_valid      = summary["player_valid"]
+        player_points     = summary["player_points"]
         player_max_streak = summary["player_max_streak"]
-        player_speed     = summary["player_speed"]
-        duplicates       = summary["duplicates"]
+        player_speed      = summary["player_speed"]
+        duplicates        = summary["duplicates"]
 
         q_letter     = question.get("letter", "")
         letter_label = "Any Letter" if q_letter == "*" else q_letter
@@ -713,7 +762,7 @@ class SigmoCatClash(commands.Cog):
             color=COL_RESULTS,
         )
 
-        # ── Valid answers ──────────────────────────────────────────────────────
+        # Valid answers
         if player_valid:
             lines = []
             for player, answers in sorted(
@@ -721,10 +770,8 @@ class SigmoCatClash(commands.Cog):
                 key=lambda x: player_points.get(x[0], 0),
                 reverse=True,
             ):
-                pts = player_points.get(player, len(answers))
+                pts    = player_points.get(player, len(answers))
                 suffix = "pt" if pts == 1 else "pts"
-                answer_str = ", ".join(answers)
-
                 tags: list[str] = []
                 if player in player_speed:
                     tags.append("⚡ Speed")
@@ -732,8 +779,9 @@ class SigmoCatClash(commands.Cog):
                 if streak >= 3:
                     tags.append(f"🔥 ×{streak} streak")
                 tag_str = "  " + "  ".join(tags) if tags else ""
-
-                lines.append(f"✅  **{player}** — {answer_str}  *(+{pts} {suffix})*{tag_str}")
+                lines.append(
+                    f"✅  **{player}** — {', '.join(answers)}  *(+{pts} {suffix})*{tag_str}"
+                )
             embed.add_field(
                 name="🎯  Claimed Answers",
                 value=_truncate("\n".join(lines)),
@@ -746,23 +794,25 @@ class SigmoCatClash(commands.Cog):
                 inline=False,
             )
 
-        # ── Duplicates note ────────────────────────────────────────────────────
+        # Duplicates
         if duplicates:
-            dup_players = sorted({a.player_name for a in duplicates})
-            dup_text = "Already taken: " + ", ".join(f"**{n}**" for n in dup_players[:10])
-            embed.add_field(name="🔁  Collisions", value=_truncate(dup_text), inline=False)
-
-        # ── Example answers from CSV (educational / fun) ───────────────────────
-        expected = question.get("answers", [])[:10]
-        if expected:
-            examples = "  •  ".join(expected)
+            dup_names = sorted({a.player_name for a in duplicates})
             embed.add_field(
-                name="💡  Example Answers",
-                value=_truncate(examples),
+                name="🔁  Collisions",
+                value=_truncate("Already taken: " + ", ".join(f"**{n}**" for n in dup_names[:10])),
                 inline=False,
             )
 
-        # ── Running leaderboard (top 6) ────────────────────────────────────────
+        # Example answers from CSV
+        expected = question.get("answers", [])[:10]
+        if expected:
+            embed.add_field(
+                name="💡  Example Answers",
+                value=_truncate("  •  ".join(expected)),
+                inline=False,
+            )
+
+        # Running leaderboard (top 6) with close-race tension on last round
         lb = session.get_leaderboard()
         if lb:
             is_last = session.current_round >= session.total_rounds
@@ -770,7 +820,6 @@ class SigmoCatClash(commands.Cog):
                 "📊  Final Standings" if is_last
                 else f"📊  Standings — after Round {session.current_round}"
             )
-            # Close-race tension alert on last round
             tension = ""
             if is_last and len(lb) >= 2 and lb[0][1] > 0:
                 gap = lb[0][1] - lb[1][1]
@@ -785,7 +834,9 @@ class SigmoCatClash(commands.Cog):
             )
 
         if session.current_round < session.total_rounds:
-            embed.set_footer(text=f"Next round in 5 seconds…  Round {session.current_round + 1}/{session.total_rounds}")
+            embed.set_footer(
+                text=f"Next round in 5 seconds…  Round {session.current_round + 1}/{session.total_rounds}"
+            )
 
         try:
             await channel.send(embed=embed)
@@ -795,99 +846,116 @@ class SigmoCatClash(commands.Cog):
     # ──────────────────────────────────────────────────────────────────────────
 
     async def _post_final(self, channel: discord.TextChannel, session: GameSession) -> None:
+        guild_id = session.guild_id  # may be None for DM games (shouldn't happen post-guard)
+
         player_scores = {
             pid: (session.player_names.get(pid, "Unknown"), score)
             for pid, score in session.scores.items()
         }
         player_answers = dict(session.player_total_answers)
 
-        # Persist scores and get newly earned achievements per player
-        new_achievements = record_game_results(player_scores, player_answers)
+        # Persist and get newly earned achievements — guild_id scopes all writes
+        new_achievements: dict[int, list[str]] = {}
+        if guild_id:
+            try:
+                new_achievements = record_game_results(
+                    player_scores, player_answers, guild_id=guild_id
+                )
+            except Exception:
+                log.exception("Failed to record game results for guild %s.", guild_id)
 
         lb = session.get_leaderboard()
 
         embed = discord.Embed(title="🏆  SIGMOCATCLASH — GAME OVER!", color=COL_FINAL)
 
+        # Determine winner by player_id to avoid display-name collision
+        winner_pid: Optional[int] = (
+            max(session.scores, key=session.scores.get) if session.scores else None
+        )
+        winner_stats = (
+            get_player_stats(winner_pid, guild_id=guild_id)
+            if winner_pid and guild_id else None
+        )
+
         if not lb:
             embed.description = "Nobody played! 😢  Invite your friends next time!"
         elif len(lb) == 1:
             name, score = lb[0]
-            stats = get_player_stats(list(session.scores.keys())[0])
-            rank_badge = _rank_badge(stats["total_score"]) if stats else ""
+            badge = f"  {_rank_badge(winner_stats['total_score'])}" if winner_stats else ""
             embed.description = (
-                f"🎉  **{name}** wins with **{score} {'pt' if score == 1 else 'pts'}**!"
-                f"  {rank_badge}\n"
+                f"🎉  **{name}** wins with **{score} {'pt' if score == 1 else 'pts'}**!{badge}\n"
                 "Solo run! Challenge your friends next time. 💪"
             )
         else:
             winner_name, winner_score = lb[0]
             suffix = "pt" if winner_score == 1 else "pts"
-            # Find winner's Discord ID for rank badge
-            winner_id = next(
-                (pid for pid, (n, _) in player_scores.items() if n == winner_name), None
-            )
-            winner_stats = get_player_stats(winner_id) if winner_id else None
-            rank_badge = _rank_badge(winner_stats["total_score"]) if winner_stats else ""
-
+            badge  = f"  {_rank_badge(winner_stats['total_score'])}" if winner_stats else ""
             embed.description = (
-                f"🎉  **{winner_name}** takes the crown with **{winner_score} {suffix}**!  👑  {rank_badge}\n\n"
+                f"🎉  **{winner_name}** takes the crown with **{winner_score} {suffix}**!"
+                f"  👑{badge}\n\n"
                 + _leaderboard_text(lb)
             )
 
-        if len(embed.description) > 4096:
-            embed.description = embed.description[:4090] + "\n..."
+        # Truncate description to Discord's 4096-char limit
+        if len(embed.description) > 4093:
+            embed.description = embed.description[:4090] + "..."
 
-        # ── Game stats ─────────────────────────────────────────────────────────
+        # Game stats
         embed.add_field(
             name="📈  Game Stats",
             value=(
                 f"**Rounds:** {session.current_round}\n"
                 f"**Players:** {len(session.scores)}\n"
-                f"**Total unique answers claimed:** {session.total_unique_answers}"
+                f"**Total unique answers:** {session.total_unique_answers}"
             ),
             inline=False,
         )
 
-        # ── Highlights: streaks, achievements, rank-ups, close-race ───────────
+        # Highlights: close race, per-player streak/rank-up/achievements
         highlight_lines: list[str] = []
 
-        # Close-game tension
         if len(lb) >= 2 and lb[0][1] > 0:
             gap = lb[0][1] - lb[1][1]
             if gap == 0:
-                highlight_lines.append("🤝 **Dead heat at the top!** Amazing game!")
+                highlight_lines.append("🤝 **Dead heat at the top!** Incredible game!")
             elif gap <= 2:
-                suffix = "pt" if gap == 1 else "pts"
-                highlight_lines.append(f"⚡ **RAZOR CLOSE!** Only {gap} {suffix} separated 1st and 2nd!")
+                s = "pt" if gap == 1 else "pts"
+                highlight_lines.append(f"⚡ **RAZOR CLOSE!** Only {gap} {s} between 1st and 2nd!")
 
-        # Per-player: streak fire, rank-ups, new achievements
-        for pid, (name, score) in sorted(player_scores.items(), key=lambda x: x[1][1], reverse=True):
-            stats = get_player_stats(pid)
+        for pid, (name, score) in sorted(
+            player_scores.items(), key=lambda x: x[1][1], reverse=True
+        ):
+            if not guild_id:
+                continue
+            stats = get_player_stats(pid, guild_id=guild_id)
             if not stats:
                 continue
 
-            # Daily streak fire (show if >= 2)
+            # Daily streak fire (only shown if >= 2 — "new" streak not highlighted)
             streak = stats.get("current_streak", 0)
             if streak >= 2:
                 fire = "🔥" * min(streak // 3 + 1, 3)
                 highlight_lines.append(f"{fire} **{name}** is on a **{streak}-day streak!**")
 
             # Rank-up notification
-            old_total = stats.get("total_score", 0) - score
-            old_rank, _, _ = get_rank(max(old_total, 0))
+            old_total = max(stats.get("total_score", 0) - score, 0)
+            old_rank, _, _ = get_rank(old_total)
             new_rank, new_emoji, next_thresh = get_rank(stats["total_score"])
             if old_rank != new_rank:
                 highlight_lines.append(f"⬆️ **{name}** ranked up to **{new_emoji} {new_rank}**!")
-            elif next_thresh > 0:
+            elif next_thresh > 0 and (next_thresh - stats["total_score"]) <= 15:
                 pts_away = next_thresh - stats["total_score"]
-                if pts_away <= 15:
-                    highlight_lines.append(f"✨ **{name}** is just **{pts_away} pts** from the next rank!")
+                highlight_lines.append(
+                    f"✨ **{name}** is just **{pts_away} pts** from the next rank!"
+                )
 
-            # New achievement unlocks
+            # Achievement unlocks
             for ach_id in new_achievements.get(pid, []):
                 ach = ACHIEVEMENTS.get(ach_id, {})
                 if ach:
-                    highlight_lines.append(f"🏅 **{name}** unlocked **{ach['emoji']} {ach['name']}** — _{ach['desc']}_")
+                    highlight_lines.append(
+                        f"🏅 **{name}** unlocked **{ach['emoji']} {ach['name']}** — _{ach['desc']}_"
+                    )
 
         if highlight_lines:
             embed.add_field(
@@ -897,7 +965,11 @@ class SigmoCatClash(commands.Cog):
             )
 
         embed.set_footer(
-            text="Play again with /play  •  /mystats for your profile  •  /leaderboard to climb the ranks  🐱⚡"
+            text=(
+                "Play again with /play  •  "
+                "/mystats for your server profile  •  "
+                "/leaderboard to climb the ranks  🐱⚡"
+            )
         )
 
         try:

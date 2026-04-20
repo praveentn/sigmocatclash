@@ -167,7 +167,7 @@ class GameSession:
                                      valid=False, duplicate=False, points=0)
 
         # ── Validation ────────────────────────────────────────────
-        if len(normalised) < 3:
+        if len(normalised) < 3 or len(normalised) > 200:
             return _invalid()
 
         if not any_letter and letter and not normalised.startswith(letter.lower()):
