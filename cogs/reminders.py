@@ -1,11 +1,13 @@
 """
-Daily reminder cog — sends one irresistible reminder per guild per day at 08:00 AM
-local time to every player who hasn't played today yet.
+Daily reminder cog — sends one reminder per guild per day at 08:00 AM local time
+to every player who hasn't played today yet.
 
-Admin commands:
-  /setreminder channel:#channel timezone:America/New_York
-  /disablereminder
-  /testreminder
+Admin commands (all under /remind, require Manage Server):
+  /remind channel #channel           — set the target channel
+  /remind timezone America/New_York  — set IANA timezone; confirms with current local time
+  /remind status                     — show current configuration
+  /remind test                       — fire a test reminder immediately
+  /remind off                        — disable reminders
 
 The background loop fires every minute and checks whether any configured guild
 has crossed the 08:00 AM threshold (up to 10:00 AM) without a reminder today.
@@ -47,6 +49,12 @@ _DAY_VIBES = {
 
 
 class RemindersCog(commands.Cog):
+    remind = discord.SlashCommandGroup(
+        "remind",
+        "Configure daily 08:00 AM game reminders for this server",
+        default_member_permissions=discord.Permissions(manage_guild=True),
+    )
+
     def __init__(self, bot: discord.Bot) -> None:
         self.bot = bot
         self._check_reminders.start()
@@ -139,7 +147,6 @@ class RemindersCog(commands.Cog):
             color=0xFF8C00,
         )
 
-        # Top 3 leaderboard
         if top_players:
             medals = ["🥇", "🥈", "🥉"]
             lb_lines = [
@@ -148,7 +155,6 @@ class RemindersCog(commands.Cog):
             ]
             embed.add_field(name="🏆 Server Champions", value="\n".join(lb_lines), inline=False)
 
-        # Streaks at risk (cap at 5 for readability)
         if at_risk:
             risk_lines = [
                 f"🔥 **{p['name']}** — {p.get('current_streak', 0)}-day streak vanishes without a game today!"
@@ -204,36 +210,13 @@ class RemindersCog(commands.Cog):
 
     # ── Admin slash commands ──────────────────────────────────────────────────
 
-    @commands.slash_command(
-        name="setreminder",
-        description="Configure daily 08:00 AM game reminders for this server (admin only).",
-    )
-    @commands.has_permissions(manage_guild=True)
+    @remind.command(name="channel", description="Set the channel where daily reminders are posted")
     @option("channel", discord.TextChannel, description="Channel to post reminders in")
-    @option(
-        "timezone",
-        str,
-        description="IANA timezone e.g. America/New_York · Asia/Kolkata · Europe/London",
-    )
-    async def set_reminder(
-        self,
-        ctx: discord.ApplicationContext,
-        channel: discord.TextChannel,
-        timezone: str,
+    async def remind_channel(
+        self, ctx: discord.ApplicationContext, channel: discord.TextChannel
     ) -> None:
         if not ctx.guild_id:
             await ctx.respond("❌ This command can only be used inside a server.", ephemeral=True)
-            return
-
-        try:
-            ZoneInfo(timezone)
-        except ZoneInfoNotFoundError:
-            await ctx.respond(
-                f"❌ Unknown timezone `{timezone}`.\n"
-                "Use an IANA name like `America/New_York`, `Asia/Kolkata`, or `Europe/London`.\n"
-                "Full list: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>",
-                ephemeral=True,
-            )
             return
 
         perms = channel.permissions_for(ctx.guild.me)
@@ -246,43 +229,101 @@ class RemindersCog(commands.Cog):
 
         settings = await get_guild_settings(ctx.guild_id) or {}
         settings["reminder_channel_id"] = channel.id
+        settings.setdefault("timezone", "UTC")
+        settings.setdefault("last_reminded_date", "")
+        await save_guild_settings(ctx.guild_id, settings)
+
+        tz_name = settings["timezone"]
+        tz_note = (
+            f" (timezone: `{tz_name}`)"
+            if tz_name != "UTC"
+            else " — use `/remind timezone` to set your local time zone"
+        )
+        await ctx.respond(
+            f"✅ Reminder channel set to {channel.mention}{tz_note}.\n"
+            "Daily reminders fire at **08:00 AM** local time.",
+            ephemeral=True,
+        )
+        log.info("Reminder channel set — guild %d  channel %d", ctx.guild_id, channel.id)
+
+    @remind.command(name="timezone", description="Set the timezone for daily reminders (IANA name)")
+    @option(
+        "timezone",
+        str,
+        description="IANA timezone e.g. America/New_York · Asia/Kolkata · Europe/London",
+    )
+    async def remind_timezone(self, ctx: discord.ApplicationContext, timezone: str) -> None:
+        if not ctx.guild_id:
+            await ctx.respond("❌ This command can only be used inside a server.", ephemeral=True)
+            return
+
+        try:
+            tz = ZoneInfo(timezone)
+        except ZoneInfoNotFoundError:
+            await ctx.respond(
+                f"❌ Unknown timezone `{timezone}`.\n"
+                "Use an IANA name like `America/New_York`, `Asia/Kolkata`, or `Europe/London`.\n"
+                "Full list: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>",
+                ephemeral=True,
+            )
+            return
+
+        local_now = datetime.now(tz)
+        local_time_str = local_now.strftime("%I:%M %p, %A %B %-d")
+
+        settings = await get_guild_settings(ctx.guild_id) or {}
         settings["timezone"] = timezone
         settings.setdefault("last_reminded_date", "")
         await save_guild_settings(ctx.guild_id, settings)
 
         await ctx.respond(
-            f"✅ Daily reminders configured!\n"
-            f"📣 **Channel:** {channel.mention}\n"
-            f"🕗 **Time:** 08:00 AM in `{timezone}`\n\n"
-            "Players who haven't played today will be tagged every morning.",
+            f"✅ Timezone set to `{timezone}`.\n"
+            f"🕐 Current local time: **{local_time_str}**\n"
+            "Reminders fire at **08:00 AM** in this timezone.",
             ephemeral=True,
         )
-        log.info("Reminder set — guild %d  channel %d  tz %s", ctx.guild_id, channel.id, timezone)
+        log.info("Reminder timezone set — guild %d  tz %s", ctx.guild_id, timezone)
 
-    @commands.slash_command(
-        name="disablereminder",
-        description="Turn off daily reminders for this server (admin only).",
-    )
-    @commands.has_permissions(manage_guild=True)
-    async def disable_reminder(self, ctx: discord.ApplicationContext) -> None:
+    @remind.command(name="status", description="Show the current reminder configuration for this server")
+    async def remind_status(self, ctx: discord.ApplicationContext) -> None:
         if not ctx.guild_id:
             await ctx.respond("❌ This command can only be used inside a server.", ephemeral=True)
             return
 
-        if await get_guild_settings(ctx.guild_id) is None:
-            await ctx.respond("ℹ️ No reminder is configured for this server.", ephemeral=True)
+        settings = await get_guild_settings(ctx.guild_id)
+
+        if not settings or not settings.get("reminder_channel_id"):
+            await ctx.respond(
+                "ℹ️ **Reminders are not configured.**\n"
+                "Use `/remind channel` to pick a channel, then `/remind timezone` to set local time.",
+                ephemeral=True,
+            )
             return
 
-        await remove_guild_settings(ctx.guild_id)
-        await ctx.respond("✅ Daily reminders disabled.", ephemeral=True)
-        log.info("Reminder disabled — guild %d", ctx.guild_id)
+        channel_id = settings["reminder_channel_id"]
+        channel = ctx.guild.get_channel(channel_id)
+        channel_str = channel.mention if channel else f"⚠️ channel not found (`{channel_id}`)"
 
-    @commands.slash_command(
-        name="testreminder",
-        description="Send a test reminder right now to see how it looks (admin only).",
-    )
-    @commands.has_permissions(manage_guild=True)
-    async def test_reminder(self, ctx: discord.ApplicationContext) -> None:
+        tz_name = settings.get("timezone", "UTC")
+        try:
+            local_now = datetime.now(ZoneInfo(tz_name))
+            time_str = local_now.strftime("%I:%M %p")
+        except ZoneInfoNotFoundError:
+            time_str = "unknown"
+
+        last = settings.get("last_reminded_date") or "never"
+
+        await ctx.respond(
+            f"**📋 Reminder Configuration**\n"
+            f"📣 Channel: {channel_str}\n"
+            f"🌍 Timezone: `{tz_name}` (current: **{time_str}**)\n"
+            f"⏰ Fires at: **08:00 AM** daily\n"
+            f"📅 Last reminded: **{last}**",
+            ephemeral=True,
+        )
+
+    @remind.command(name="test", description="Send a test reminder right now to see how it looks")
+    async def remind_test(self, ctx: discord.ApplicationContext) -> None:
         if not ctx.guild_id:
             await ctx.respond("❌ This command can only be used inside a server.", ephemeral=True)
             return
@@ -290,7 +331,7 @@ class RemindersCog(commands.Cog):
         settings = await get_guild_settings(ctx.guild_id)
         if not settings or not settings.get("reminder_channel_id"):
             await ctx.respond(
-                "❌ No reminder channel configured. Use `/setreminder` first.",
+                "❌ No reminder channel configured. Use `/remind channel` first.",
                 ephemeral=True,
             )
             return
@@ -308,6 +349,20 @@ class RemindersCog(commands.Cog):
 
         await ctx.respond("📤 Sending test reminder now…", ephemeral=True)
         await self._send_daily_reminder(channel, ctx.guild, ctx.guild_id, datetime.now(tz))
+
+    @remind.command(name="off", description="Disable daily reminders for this server")
+    async def remind_off(self, ctx: discord.ApplicationContext) -> None:
+        if not ctx.guild_id:
+            await ctx.respond("❌ This command can only be used inside a server.", ephemeral=True)
+            return
+
+        if await get_guild_settings(ctx.guild_id) is None:
+            await ctx.respond("ℹ️ No reminder is configured for this server.", ephemeral=True)
+            return
+
+        await remove_guild_settings(ctx.guild_id)
+        await ctx.respond("✅ Daily reminders disabled.", ephemeral=True)
+        log.info("Reminder disabled — guild %d", ctx.guild_id)
 
 
 def setup(bot: discord.Bot) -> None:
