@@ -1,0 +1,40 @@
+{
+  "guilds": {
+    "1096691415431516221": {
+      "players": {
+        "507468776451866624": {
+          "name": "sigmoid",
+          "total_score": 20,
+          "games_played": 5,
+          "best_score": 8,
+          "wins": 5,
+          "total_answers": 11,
+          "current_streak": 1,
+          "longest_streak": 2,
+          "last_played": "2026-04-25",
+          "achievements": [
+            "first_game",
+            "first_win",
+            "games_5",
+            "wins_5"
+          ]
+        },
+        "1166249556988657686": {
+          "name": "Anu",
+          "total_score": 25,
+          "games_played": 2,
+          "best_score": 15,
+          "wins": 2,
+          "total_answers": 15,
+          "current_streak": 1,
+          "longest_streak": 1,
+          "last_played": "2026-04-22",
+          "achievements": [
+            "first_game",
+            "first_win"
+          ]
+        }
+      }
+    }
+  }
+}

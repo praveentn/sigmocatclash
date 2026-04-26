@@ -139,29 +139,18 @@ def get_random_questions(
     count: int,
     difficulty: str = "all",
     exclude_ids: set[str] | None = None,
-    guild_id: int | None = None,
 ) -> list[dict]:
     """
-    Return up to `count` shuffled questions.
+    Return up to `count` shuffled questions, excluding any IDs in exclude_ids.
 
-    If guild_id is provided:
-    - Questions already asked in this server (for this pool) are excluded.
-    - If the entire pool has been played, it resets automatically and a full
-      pool is available again (questions start recycling from the beginning).
+    Callers that need per-guild deduplication should fetch asked IDs via
+    server_progress.get_asked_ids() and pass them as exclude_ids.
     """
     pool = load_questions(difficulty)
-    pool_key = resolve_pool_key(difficulty)
-
-    if guild_id is not None:
-        from game.server_progress import check_and_auto_reset, get_asked_ids
-        check_and_auto_reset(guild_id, pool_key, len(pool))
-        asked = get_asked_ids(guild_id, pool_key)
-        fresh = [q for q in pool if q["id"] not in asked]
-        pool = fresh if fresh else pool   # if somehow all exhausted, fallback to full pool
 
     if exclude_ids:
         filtered = [q for q in pool if q["id"] not in exclude_ids]
-        pool = filtered if filtered else pool
+        pool = filtered if filtered else pool  # fallback to full pool if all exhausted
 
     random.shuffle(pool)
     return pool[:count]

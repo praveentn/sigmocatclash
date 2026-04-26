@@ -33,7 +33,12 @@ from game.leaderboard import (
     record_game_results,
 )
 from game.questions import get_random_questions, resolve_pool_key
-from game.server_progress import mark_questions_asked, pool_progress
+from game.server_progress import (
+    check_and_auto_reset,
+    get_asked_ids,
+    mark_questions_asked,
+    pool_progress,
+)
 from game.session import GameSession
 
 log = logging.getLogger("sigmocatclash.game")
@@ -150,7 +155,13 @@ class SigmoCatClash(commands.Cog):
                 return
 
         pool_key = resolve_pool_key(difficulty)
-        questions = get_random_questions(rounds, difficulty, guild_id=guild_id)
+
+        # ── Async server-progress check (auto-reset if pool exhausted) ─────────
+        total_in_pool = len(get_random_questions(_ALL_QUESTIONS_LIMIT, difficulty))
+        await check_and_auto_reset(guild_id, pool_key, total_in_pool)
+        asked_ids = await get_asked_ids(guild_id, pool_key)
+
+        questions = get_random_questions(rounds, difficulty, exclude_ids=asked_ids)
         if not questions:
             await ctx.respond(
                 "❌ No questions found! Make sure `data/questions/` has CSV files.",
@@ -167,11 +178,10 @@ class SigmoCatClash(commands.Cog):
         )
         self._sessions[channel_id] = session
 
-        # Pool progress display (uses total pool size, unfiltered by server history)
-        progress_line = ""
-        total_in_pool = len(get_random_questions(_ALL_QUESTIONS_LIMIT, difficulty))
-        asked_count, total_count = pool_progress(guild_id, pool_key, total_in_pool)
+        # Pool progress display
+        asked_count, total_count = await pool_progress(guild_id, pool_key, total_in_pool)
         remaining = total_count - asked_count
+        progress_line = ""
         if total_count > 0:
             progress_line = (
                 f"\n📚 **Pool progress:** {asked_count}/{total_count} questions played"
@@ -322,7 +332,7 @@ class SigmoCatClash(commands.Cog):
 
         # ── Streaks view ───────────────────────────────────────────────────────
         if view == "streaks":
-            entries = get_streak_leaderboard(top_n=15, guild_id=guild_id)
+            entries = await get_streak_leaderboard(top_n=15, guild_id=guild_id)
             if not entries:
                 embed = discord.Embed(
                     title="🔥  SigmoCatClash — Daily Streak Leaderboard",
@@ -355,7 +365,7 @@ class SigmoCatClash(commands.Cog):
 
         # ── Wins view ──────────────────────────────────────────────────────────
         if view == "wins":
-            all_entries = get_overall_leaderboard(top_n=100, guild_id=guild_id)
+            all_entries = await get_overall_leaderboard(top_n=100, guild_id=guild_id)
             entries = sorted(all_entries, key=lambda x: x.get("wins", 0), reverse=True)[:15]
             if not entries or entries[0].get("wins", 0) == 0:
                 embed = discord.Embed(
@@ -395,7 +405,7 @@ class SigmoCatClash(commands.Cog):
             return
 
         # ── Scores view (default) ──────────────────────────────────────────────
-        entries = get_overall_leaderboard(top_n=15, guild_id=guild_id)
+        entries = await get_overall_leaderboard(top_n=15, guild_id=guild_id)
         if not entries:
             embed = discord.Embed(
                 title="🏆  SigmoCatClash — All-Time Leaderboard",
@@ -460,7 +470,7 @@ class SigmoCatClash(commands.Cog):
 
         guild_id = ctx.guild_id
         target   = user or ctx.author
-        stats    = get_player_stats(target.id, guild_id=guild_id)
+        stats    = await get_player_stats(target.id, guild_id=guild_id)
 
         if not stats:
             msg = (
@@ -653,7 +663,7 @@ class SigmoCatClash(commands.Cog):
         finally:
             if session.guild_id and asked_ids:
                 try:
-                    mark_questions_asked(session.guild_id, asked_ids, session.pool_key)
+                    await mark_questions_asked(session.guild_id, asked_ids, session.pool_key)
                 except Exception:
                     log.exception("Failed to persist server progress.")
             session.is_active = False
@@ -858,7 +868,7 @@ class SigmoCatClash(commands.Cog):
         new_achievements: dict[int, list[str]] = {}
         if guild_id:
             try:
-                new_achievements = record_game_results(
+                new_achievements = await record_game_results(
                     player_scores, player_answers, guild_id=guild_id
                 )
             except Exception:
@@ -873,7 +883,7 @@ class SigmoCatClash(commands.Cog):
             max(session.scores, key=session.scores.get) if session.scores else None
         )
         winner_stats = (
-            get_player_stats(winner_pid, guild_id=guild_id)
+            await get_player_stats(winner_pid, guild_id=guild_id)
             if winner_pid and guild_id else None
         )
 
@@ -927,7 +937,7 @@ class SigmoCatClash(commands.Cog):
         ):
             if not guild_id:
                 continue
-            stats = get_player_stats(pid, guild_id=guild_id)
+            stats = await get_player_stats(pid, guild_id=guild_id)
             if not stats:
                 continue
 

@@ -19,6 +19,8 @@ import discord
 from aiohttp import web
 from dotenv import load_dotenv
 
+import db
+
 load_dotenv()
 
 # ── Bootstrap ──────────────────────────────────────────────────────────────────
@@ -36,10 +38,11 @@ logging.basicConfig(
 log = logging.getLogger("sigmocatclash")
 
 # ── Config ─────────────────────────────────────────────────────────────────────
-TOKEN      = os.getenv("DISCORD_TOKEN", "").strip()
-GUILD_ID   = os.getenv("DISCORD_GUILD_ID", "").strip()
-PORT       = int(os.getenv("PORT", "8080"))
-START_TIME = time.time()
+TOKEN        = os.getenv("DISCORD_TOKEN", "").strip()
+GUILD_ID     = os.getenv("DISCORD_GUILD_ID", "").strip()
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+PORT         = int(os.getenv("PORT", "8080"))
+START_TIME   = time.time()
 
 _debug_guilds = [int(GUILD_ID)] if GUILD_ID.isdigit() else None
 
@@ -56,7 +59,7 @@ intents.message_content = True   # Privileged — enable in Discord Dev Portal �
 bot = discord.Bot(intents=intents, debug_guilds=_debug_guilds)
 
 # Load game cog — wrapped so a bad import doesn't silently wipe all slash commands
-_COGS = ["cogs.game"]
+_COGS = ["cogs.game", "cogs.reminders"]
 for _cog in _COGS:
     try:
         bot.load_extension(_cog)
@@ -225,8 +228,15 @@ async def on_application_command_error(ctx: discord.ApplicationContext, error) -
 # ── Entry point ────────────────────────────────────────────────────────────────
 
 async def main() -> None:
+    if not DATABASE_URL:
+        log.critical("DATABASE_URL is not set — cannot start without a database.")
+        sys.exit(1)
+    await db.init(DATABASE_URL)
     await _run_web_server()   # start health server first so Railway sees the port
-    await bot.start(TOKEN)
+    try:
+        await bot.start(TOKEN)
+    finally:
+        await db.close()
 
 
 if __name__ == "__main__":
