@@ -12,6 +12,7 @@ import asyncio
 import json
 import os
 import sys
+from datetime import date
 from pathlib import Path
 
 import asyncpg
@@ -70,8 +71,10 @@ async def migrate(dsn: str) -> None:
                 guild_id = int(guild_id_str)
                 for player_id_str, p in guild_obj.get("players", {}).items():
                     player_id = int(player_id_str)
-                    last_played = p.get("last_played") or None
-                    if last_played == "":
+                    lp_str = p.get("last_played") or ""
+                    try:
+                        last_played = date.fromisoformat(lp_str) if lp_str else None
+                    except ValueError:
                         last_played = None
                     achievements = p.get("achievements", [])
                     await conn.execute(
@@ -107,8 +110,10 @@ async def migrate(dsn: str) -> None:
             gs_rows = 0
             for guild_id_str, s in gs_data.items():
                 guild_id = int(guild_id_str)
-                last = s.get("last_reminded_date") or None
-                if last == "":
+                lrd_str = s.get("last_reminded_date") or ""
+                try:
+                    last = date.fromisoformat(lrd_str) if lrd_str else None
+                except ValueError:
                     last = None
                 await conn.execute(
                     """

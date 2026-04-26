@@ -6,8 +6,18 @@ Schema (managed by db.py):
 """
 
 import logging
+from datetime import date
 
 import db
+
+
+def _str_to_date(s: str | None):
+    if not s:
+        return None
+    try:
+        return date.fromisoformat(s)
+    except ValueError:
+        return None
 
 log = logging.getLogger("sigmocatclash.guild_settings")
 
@@ -30,9 +40,7 @@ async def get_guild_settings(guild_id: int) -> dict | None:
 
 async def save_guild_settings(guild_id: int, settings: dict) -> None:
     """Persist (or update) settings for a guild."""
-    last = settings.get("last_reminded_date") or None
-    if last == "":
-        last = None
+    last = _str_to_date(settings.get("last_reminded_date"))
     async with db.pool().acquire() as conn:
         await conn.execute(
             """

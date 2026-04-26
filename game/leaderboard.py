@@ -13,6 +13,16 @@ import logging
 from datetime import date
 from typing import Optional
 
+
+def _str_to_date(s: str | None):
+    """Convert an ISO date string to datetime.date, or None if blank/invalid."""
+    if not s:
+        return None
+    try:
+        return date.fromisoformat(s)
+    except ValueError:
+        return None
+
 import db
 from game.achievements import check_new_achievements
 
@@ -166,7 +176,7 @@ async def record_game_results(
                 entry["total_score"], entry["games_played"],
                 entry["best_score"], entry["wins"], entry["total_answers"],
                 entry["current_streak"], entry["longest_streak"],
-                entry["last_played"] or None,
+                _str_to_date(entry.get("last_played")),
                 entry.get("achievements", []),
             )
 
