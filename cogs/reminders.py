@@ -125,14 +125,12 @@ class RemindersCog(commands.Cog):
         local_now: datetime,
     ) -> None:
         today = local_now.date()
-        today_str = today.isoformat()
         yesterday_str = (today - timedelta(days=1)).isoformat()
 
         history_fact = get_today_history(local_now)
         top_players = await get_overall_leaderboard(top_n=3, guild_id=guild_id)
         all_players = await get_guild_players(guild_id=guild_id)
 
-        played_today_ids = {p["player_id"] for p in all_players if p.get("last_played") == today_str}
         at_risk = sorted(
             [p for p in all_players if p.get("current_streak", 0) > 0 and p.get("last_played") == yesterday_str],
             key=lambda p: p.get("current_streak", 0),
@@ -150,14 +148,14 @@ class RemindersCog(commands.Cog):
         if top_players:
             medals = ["🥇", "🥈", "🥉"]
             lb_lines = [
-                f"{medals[i]} **{p['name']}** — {p.get('total_score', 0):,} pts"
+                f"{medals[i]} <@{p['player_id']}> — {p.get('total_score', 0):,} pts"
                 for i, p in enumerate(top_players)
             ]
             embed.add_field(name="🏆 Server Champions", value="\n".join(lb_lines), inline=False)
 
         if at_risk:
             risk_lines = [
-                f"🔥 **{p['name']}** — {p.get('current_streak', 0)}-day streak vanishes without a game today!"
+                f"🔥 <@{p['player_id']}> — {p.get('current_streak', 0)}-day streak vanishes without a game today!"
                 for p in at_risk[:5]
             ]
             embed.add_field(
@@ -171,14 +169,13 @@ class RemindersCog(commands.Cog):
 
         await channel.send(embed=embed)
 
-        # Paginated @mentions — everyone who hasn't played today
-        players_to_ping = [p for p in all_players if p["player_id"] not in played_today_ids]
-        if players_to_ping:
-            await self._send_paginated_mentions(channel, players_to_ping)
+        # Paginated @mentions — all registered players for this server
+        if all_players:
+            await self._send_paginated_mentions(channel, all_players)
 
         log.info(
             "Daily reminder sent — guild %d (%s)  channel %d  pinged %d player(s)",
-            guild_id, guild.name, channel.id, len(players_to_ping),
+            guild_id, guild.name, channel.id, len(all_players),
         )
 
     @staticmethod
