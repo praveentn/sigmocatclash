@@ -1,6 +1,5 @@
 """
-Daily reminder cog — sends one reminder per guild per day at 08:00 AM local time
-to every player who hasn't played today yet.
+Daily reminder cog — sends one reminder per guild per day at 08:00 AM local time.
 
 Admin commands (all under /remind, require Manage Server):
   /remind channel #channel           — set the target channel
@@ -9,10 +8,17 @@ Admin commands (all under /remind, require Manage Server):
   /remind test                       — fire a test reminder immediately
   /remind off                        — disable reminders
 
+The reminder embed carries four persistent action buttons:
+  ▶️ Play Now · 🏆 Leaderboard · 📊 My Stats · 📜 Rules
+
+"Persistent" means timeout=None + explicit custom_id on every button, and the
+view is registered with bot.add_view() on startup so interactions still route
+correctly after a bot restart.
+
 The background loop fires every minute and checks whether any configured guild
 has crossed the 08:00 AM threshold (up to 10:00 AM) without a reminder today.
-The 2-hour window means a bot restart after 08:00 still sends the reminder rather
-than skipping the whole day.
+The 2-hour window means a bot restart after 08:00 still sends the reminder
+rather than skipping the whole day.
 """
 
 import logging
@@ -23,7 +29,12 @@ import discord
 from discord import option
 from discord.ext import commands, tasks
 
-from game.leaderboard import get_overall_leaderboard, get_guild_players
+from game.leaderboard import (
+    get_guild_players,
+    get_overall_leaderboard,
+    get_player_stats,
+    get_rank,
+)
 from utils.categoryhistory import get_today_history
 from utils.guild_settings import (
     get_all_guild_settings,
@@ -48,6 +59,181 @@ _DAY_VIBES = {
 }
 
 
+# ── Persistent reminder view ──────────────────────────────────────────────────
+
+class ReminderView(discord.ui.View):
+    """
+    Action buttons attached to the daily reminder embed.
+
+    timeout=None + per-button custom_id = persistent view.  Register once via
+    bot.add_view(ReminderView()) on startup so old reminder messages keep
+    working after a bot restart.  Each callback resolves guild context from
+    interaction.guild_id at call time, so the view stores no mutable state.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(timeout=None)
+
+    # ── internal helpers ──────────────────────────────────────────────────────
+
+    async def _game_cog(self, interaction: discord.Interaction):
+        """Return the SigmoCatClash cog, or respond with an error and return None."""
+        cog = interaction.client.get_cog("SigmoCatClash")
+        if cog is None:
+            await interaction.response.send_message(
+                "❌ Game is unavailable right now — try `/play` directly.", ephemeral=True,
+            )
+        return cog
+
+    # ── buttons ───────────────────────────────────────────────────────────────
+
+    @discord.ui.button(
+        label="▶️ Play Now",
+        style=discord.ButtonStyle.success,
+        custom_id="sigmo_reminder_play",
+    )
+    async def play_button(
+        self, button: discord.ui.Button, interaction: discord.Interaction
+    ) -> None:
+        cog = await self._game_cog(interaction)
+        if cog is None:
+            return
+        # launch_from_interaction owns the full interaction response lifecycle
+        await cog.launch_from_interaction(interaction)
+
+    @discord.ui.button(
+        label="🏆 Leaderboard",
+        style=discord.ButtonStyle.primary,
+        custom_id="sigmo_reminder_lb",
+    )
+    async def leaderboard_button(
+        self, button: discord.ui.Button, interaction: discord.Interaction
+    ) -> None:
+        guild_id = interaction.guild_id
+        if not guild_id:
+            await interaction.response.send_message("❌ Server only.", ephemeral=True)
+            return
+
+        try:
+            entries = await get_overall_leaderboard(top_n=10, guild_id=guild_id)
+        except Exception:
+            log.exception("Leaderboard button DB error — guild %s", guild_id)
+            await interaction.response.send_message(
+                "❌ Could not fetch leaderboard right now.", ephemeral=True,
+            )
+            return
+
+        if not entries:
+            description = "No games played yet on this server — be the first! 🎮"
+        else:
+            medals = ["🥇", "🥈", "🥉"]
+            lines = [
+                f"{medals[i] if i < 3 else f'**#{i + 1}**'}"
+                f" <@{p['player_id']}> — {p.get('total_score', 0):,} pts"
+                for i, p in enumerate(entries)
+            ]
+            description = "\n".join(lines)
+
+        embed = discord.Embed(
+            title="🏆 Server Leaderboard",
+            description=description,
+            color=0xFEE75C,
+        )
+        embed.set_footer(text="Use /leaderboard for streaks & wins views")
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+
+    @discord.ui.button(
+        label="📊 My Stats",
+        style=discord.ButtonStyle.secondary,
+        custom_id="sigmo_reminder_stats",
+    )
+    async def stats_button(
+        self, button: discord.ui.Button, interaction: discord.Interaction
+    ) -> None:
+        guild_id = interaction.guild_id
+        if not guild_id:
+            await interaction.response.send_message("❌ Server only.", ephemeral=True)
+            return
+
+        try:
+            stats = await get_player_stats(interaction.user.id, guild_id=guild_id)
+        except Exception:
+            log.exception("Stats button DB error — guild %s user %s", guild_id, interaction.user.id)
+            await interaction.response.send_message(
+                "❌ Could not fetch your stats right now.", ephemeral=True,
+            )
+            return
+
+        if not stats:
+            await interaction.response.send_message(
+                "You haven't played any games on this server yet — hit **▶️ Play Now** to start!",
+                ephemeral=True,
+            )
+            return
+
+        total_score  = stats.get("total_score", 0)
+        games_played = stats.get("games_played", 0)
+        wins         = stats.get("wins", 0)
+        best_score   = stats.get("best_score", 0)
+        c_streak     = stats.get("current_streak", 0)
+        rank_name, rank_emoji, next_thresh = get_rank(total_score)
+
+        win_rate  = f"{wins / games_played * 100:.0f}%" if games_played > 0 else "—"
+        rank_line = f"**{rank_emoji} {rank_name}**"
+        if next_thresh > 0:
+            rank_line += f"  *(+{next_thresh - total_score} pts to next rank)*"
+        else:
+            rank_line += "  *(max rank — Legend!)*"
+
+        streak_str = (
+            f"🔥 **{c_streak}-day streak**"
+            if c_streak >= 1
+            else "*No active streak — play today to start one!*"
+        )
+
+        embed = discord.Embed(
+            title=f"📊 {interaction.user.display_name}'s Stats",
+            color=0x9B59B6,
+        )
+        embed.add_field(name="🏅 Rank",         value=rank_line,                    inline=False)
+        embed.add_field(name="⭐ Total Score",   value=f"**{total_score:,}** pts",   inline=True)
+        embed.add_field(name="🎮 Games Played",  value=f"**{games_played}**",        inline=True)
+        embed.add_field(name="🏆 Wins",          value=f"**{wins}** ({win_rate})",   inline=True)
+        embed.add_field(name="🔝 Best Game",     value=f"**{best_score}** pts",      inline=True)
+        embed.add_field(name="🔥 Streak",        value=streak_str,                   inline=True)
+        embed.set_footer(text="Use /mystats for full details & achievements")
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+
+    @discord.ui.button(
+        label="📜 Rules",
+        style=discord.ButtonStyle.secondary,
+        custom_id="sigmo_reminder_rules",
+    )
+    async def rules_button(
+        self, button: discord.ui.Button, interaction: discord.Interaction
+    ) -> None:
+        embed = discord.Embed(
+            title="📖 SigmoCatClash — Quick Rules",
+            description=(
+                "**Each round:** A category + letter appear.\n"
+                "Type matching words in chat — **first to claim an answer scores a point!**\n\n"
+                "**Bonuses:**\n"
+                "⚡ Speed bonus — first scorer each round\n"
+                "🔥 Streak bonus — your 3rd+ consecutive valid answer in a round\n\n"
+                "**Reactions:** ✅ scored · ⚡ speed · 🔥 streak · 🔁 already taken · ❌ invalid\n\n"
+                "**Difficulty modes:** `easy` / `medium` / `hard` / `all` / `daily`\n\n"
+                "**Commands:**\n"
+                "`/play` — start a game  •  `/scores` — live scores\n"
+                "`/leaderboard` — server rankings  •  `/mystats` — your profile\n"
+                "`/stop` — end game (host / mods)  •  `/rules` — full rules"
+            ),
+            color=0x5865F2,
+        )
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+
+
+# ── Cog ───────────────────────────────────────────────────────────────────────
+
 class RemindersCog(commands.Cog):
     remind = discord.SlashCommandGroup(
         "remind",
@@ -57,6 +243,9 @@ class RemindersCog(commands.Cog):
 
     def __init__(self, bot: discord.Bot) -> None:
         self.bot = bot
+        # Register the persistent view so buttons on old reminder messages
+        # keep routing correctly after every bot restart.
+        bot.add_view(ReminderView())
         self._check_reminders.start()
 
     def cog_unload(self) -> None:
@@ -129,10 +318,17 @@ class RemindersCog(commands.Cog):
 
         history_fact = get_today_history(local_now)
         top_players = await get_overall_leaderboard(top_n=3, guild_id=guild_id)
+        # All players who have ever played at least one game on this server.
+        # get_guild_players does SELECT * FROM players WHERE guild_id=$1 — no
+        # date filter — so this is the full registered roster for the guild.
         all_players = await get_guild_players(guild_id=guild_id)
 
+        # Players whose active streak will break if they skip today
         at_risk = sorted(
-            [p for p in all_players if p.get("current_streak", 0) > 0 and p.get("last_played") == yesterday_str],
+            [
+                p for p in all_players
+                if p.get("current_streak", 0) > 0 and p.get("last_played") == yesterday_str
+            ],
             key=lambda p: p.get("current_streak", 0),
             reverse=True,
         )
@@ -167,9 +363,10 @@ class RemindersCog(commands.Cog):
         embed.add_field(name="💡 Today's Vibe", value=vibe, inline=False)
         embed.set_footer(text="Use /play to start a game  •  One game keeps your streak alive!")
 
-        await channel.send(embed=embed)
+        # Attach persistent action buttons to the embed message
+        await channel.send(embed=embed, view=ReminderView())
 
-        # Paginated @mentions — all registered players for this server
+        # Paginated @mentions — every player who has ever played on this server
         if all_players:
             await self._send_paginated_mentions(channel, all_players)
 
@@ -183,14 +380,14 @@ class RemindersCog(commands.Cog):
         channel: discord.TextChannel,
         players: list[dict],
     ) -> None:
-        """Send @mention messages chunked to stay under Discord's 2000-char limit."""
+        """Chunk @mentions so each message stays under Discord's 2000-char limit."""
         chunks: list[str] = []
         current: list[str] = []
         current_len = 0
 
         for p in players:
             mention = f"<@{p['player_id']}>"
-            # +1 for the space separator
+            # +1 for the space separator between mentions
             if current_len + len(mention) + 1 > 1900:
                 chunks.append(" ".join(current))
                 current = [mention]

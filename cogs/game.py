@@ -224,6 +224,113 @@ class SigmoCatClash(commands.Cog):
 
     # ──────────────────────────────────────────────────────────────────────────
 
+    async def launch_from_interaction(
+        self,
+        interaction: discord.Interaction,
+        rounds: int = 5,
+        difficulty: str = "all",
+    ) -> None:
+        """Start a game from a button interaction (e.g. daily reminder).
+
+        Uses defer() → followup pattern so Discord's 3-second acknowledgement
+        window is never exceeded, even if DB calls take time.
+        """
+        guild_id = interaction.guild_id
+        channel  = interaction.channel
+
+        if not guild_id or not isinstance(channel, discord.TextChannel):
+            await interaction.response.send_message(
+                "❌ Games can only be started in a server text channel.",
+                ephemeral=True,
+            )
+            return
+
+        channel_id = channel.id
+        rounds = max(1, min(rounds, 10))
+
+        if channel_id in self._sessions and self._sessions[channel_id].is_active:
+            await interaction.response.send_message(
+                "⚠️ A game is already running here! Use `/stop` to end it first.",
+                ephemeral=True,
+            )
+            return
+
+        missing = _missing_permissions(channel, interaction.guild.me)
+        if missing:
+            await interaction.response.send_message(
+                f"❌ I'm missing permissions: **{', '.join(missing)}**\n"
+                "Please grant these and try again.",
+                ephemeral=True,
+            )
+            return
+
+        # Acknowledge within Discord's 3-second window; DB work happens after.
+        await interaction.response.defer()
+
+        pool_key = resolve_pool_key(difficulty)
+        total_in_pool = len(get_random_questions(_ALL_QUESTIONS_LIMIT, difficulty))
+        await check_and_auto_reset(guild_id, pool_key, total_in_pool)
+        asked_ids = await get_asked_ids(guild_id, pool_key)
+
+        questions = get_random_questions(rounds, difficulty, exclude_ids=asked_ids)
+        if not questions:
+            await interaction.followup.send(
+                "❌ No questions found! Make sure `data/questions/` has CSV files.",
+                ephemeral=True,
+            )
+            return
+
+        actual_rounds = min(rounds, len(questions))
+        questions = questions[:actual_rounds]
+
+        initiator = interaction.user
+        session = GameSession(
+            channel_id, initiator.id, actual_rounds,
+            guild_id=guild_id, pool_key=pool_key,
+        )
+        self._sessions[channel_id] = session
+
+        asked_count, total_count = await pool_progress(guild_id, pool_key, total_in_pool)
+        remaining = total_count - asked_count
+        progress_line = ""
+        if total_count > 0:
+            progress_line = (
+                f"\n📚 **Pool progress:** {asked_count}/{total_count} questions played"
+                f" — {remaining} fresh remaining"
+            )
+            if asked_count == 0:
+                progress_line += " *(pool just reset!)*"
+
+        embed = discord.Embed(
+            title="🐱⚡  SIGMOCATCLASH — Category Clash!",
+            description=(
+                "**Race to name things in the category before time runs out!**\n\n"
+                f"📋 **Rounds:** {actual_rounds}\n"
+                f"🎯 **Difficulty:** {difficulty.capitalize()}\n"
+                f"⏱️ **Time per round:** 60 seconds"
+                f"{progress_line}\n\n"
+                "**How to play:**\n"
+                "> A **category** and **letter** (or *Any Letter* ✨) are posted each round.\n"
+                "> Type things from that category (starting with the letter if given).\n"
+                "> Use **commas** for multiple answers: `Bowl, Bread, Butter`\n"
+                "> **First** to claim an answer scores the point — no repeats!\n"
+                "> ⚡ Speed bonus for first scorer  •  🔥 Streak bonus from 3rd answer\n\n"
+                "🚀 **First round starts in 5 seconds…**"
+            ),
+            color=COL_START,
+        )
+        embed.set_footer(text=f"Game started by {initiator.display_name}  •  Good luck!")
+
+        await interaction.followup.send(embed=embed)
+
+        task = asyncio.create_task(
+            self._run_game(channel, session, questions),
+            name=f"game-{channel_id}",
+        )
+        session.game_task = task
+
+    # ──────────────────────────────────────────────────────────────────────────
+
     @commands.slash_command(name="stop", description="🛑 Stop the current game (host or mod only)")
     async def stop(self, ctx: discord.ApplicationContext) -> None:
         session = self._sessions.get(ctx.channel_id)
