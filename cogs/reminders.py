@@ -243,9 +243,6 @@ class RemindersCog(commands.Cog):
 
     def __init__(self, bot: discord.Bot) -> None:
         self.bot = bot
-        # Register the persistent view so buttons on old reminder messages
-        # keep routing correctly after every bot restart.
-        bot.add_view(ReminderView())
         self._check_reminders.start()
 
     def cog_unload(self) -> None:
@@ -267,6 +264,9 @@ class RemindersCog(commands.Cog):
     @_check_reminders.before_loop
     async def _before_check(self) -> None:
         await self.bot.wait_until_ready()
+        # Register here — not in __init__ — because View.__init__(timeout=None)
+        # requires a running event loop, which doesn't exist at cog load time.
+        self.bot.add_view(ReminderView())
 
     async def _maybe_remind(self, guild_id_str: str, settings: dict, now_utc: datetime) -> None:
         channel_id = settings.get("reminder_channel_id")
